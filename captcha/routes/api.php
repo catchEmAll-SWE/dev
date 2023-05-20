@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CatchEmAll;
+use App\Http\Controllers\API\V1\ImageService;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/v1/generate', [CatchEmAll::class, 'generate']);
+Route::get('/v1/getAvailableClasses', [ImageService::class, 'getCaptchaClasses']);

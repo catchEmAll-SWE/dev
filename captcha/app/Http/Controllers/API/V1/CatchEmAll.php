@@ -9,6 +9,6 @@ class CatchEmAll extends Controller
 {
     public function generate(Request $request)
     {
-        return "Hello World!";
+        
     }
 }
