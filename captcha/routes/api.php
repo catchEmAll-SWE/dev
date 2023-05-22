@@ -33,4 +33,7 @@ Route::get('v1/image/{id}', [ImageController::class, 'getImageId']);
 
 Route::get('v1/classes', [ImageController::class, 'getClasses']);
 Route::get('v1/captchaclasses/{numOfClasses}', [ImageController::class, 'getCaptchaClasses']);
-Route::get('/v1/image/{class}/{reliability}', [ImageController::class, 'getImagesOfClass']);
+Route::get('/v1/image/{class}/{numOfImages}', [ImageController::class, 'getImagesOfClass']);
+
+// Build captcha image routes
+Route::get('v1/buildcaptcha/{numOfClasses}/{numOfImagesForClass}', [CaptchaImgBuilder::class, 'buildCaptchaImg']);

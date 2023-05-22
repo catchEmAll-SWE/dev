@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API\V1;
 class ImageDetails{
     private int $num_of_classes;
     private array $imgs_for_class = [];
+    private array $reliability = [[]];
 
     public function __construct() {
         $this->num_of_classes = rand(2, 4);
         $this->imgs_for_class = $this->setNumberOfImagesForClass();
+        //$this->reliability = $this->setReliability();
     }
 
     
@@ -26,7 +28,15 @@ class ImageDetails{
         $imgs_for_class[$this->num_of_classes-1] += 9-$img_chosen;
         return $imgs_for_class;
     }
+    /*
+    private function setReliability(): array{
+        $reliability = [[]];
+        foreach($reliability as $reliability_for_img_class){
 
+        }
+        return $reliability;
+    }
+    */
     public function getNumberOfClasses(): int{
         return $this->num_of_classes;
     }
