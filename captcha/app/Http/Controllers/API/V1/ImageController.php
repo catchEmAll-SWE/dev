@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Models\Image;
 use App\Http\Resources\V1\ImageResource;
+use App\Http\Controllers\Controller;
 
 class ImageController extends Controller
 {
@@ -65,26 +66,13 @@ class ImageController extends Controller
         //
     }
     
-    private function getAllClasses() : array {
-        $array = Image::select('class')->distinct()->get()->toArray();
-        foreach($array as $key => $value){
-            $array[$key] = $value['class'];
-        }
-        return $array;
+    public function getClasses() {
+        return Image::select('class')->distinct()->pluck('class');
     }
 
-    public function getCaptchaClasses(int $num_of_classes) : array{
-        $array = $this->getAllClasses();
-        $captcha_classes = [];
-        for($i = 0; $i<$num_of_classes; $i++){
-            $rnd = rand(0,count($array)-1);
-            $captcha_classes[$i] = $array[$rnd];
-            array_splice($array, $rnd, 1);
-        }
+    public function getCaptchaClasses(int $num_of_classes) {
+        return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->pluck('class');
 
-        return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->get()->toArray();
-
-        return $captcha_classes;
     }
 
     public function updateReliability(string $id, int $reliability) : void {
