@@ -14,7 +14,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        return ImageResource::collection(Image::all());
     }
 
     /**
@@ -65,7 +65,7 @@ class ImageController extends Controller
         //
     }
     
-    private function getAllAvailableClasses() : array {
+    private function getAllClasses() : array {
         $array = Image::select('class')->distinct()->get()->toArray();
         foreach($array as $key => $value){
             $array[$key] = $value['class'];
@@ -74,7 +74,7 @@ class ImageController extends Controller
     }
 
     public function getCaptchaClasses(int $num_of_classes) : array{
-        $array = $this->getAllAvailableClasses();
+        $array = $this->getAllClasses();
         $captcha_classes = [];
         for($i = 0; $i<$num_of_classes; $i++){
             $rnd = rand(0,count($array)-1);
@@ -82,7 +82,7 @@ class ImageController extends Controller
             array_splice($array, $rnd, 1);
         }
 
-        //return Image::select('class')->distinct()->limit($num_of_classes)->get()->toArray();
+        return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->get()->toArray();
 
         return $captcha_classes;
     }
@@ -91,7 +91,7 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImagesOfClass (string $class, int $num_of_images) : array {
-        return Image::where('class', $class)->havingRaw('SUM(reliability) > 50')->inRandomOrder()->limit($num_of_images)->get()->toArray();
+    public function getImagesOfClass (string $class, int $num_of_images){
+        return ImageResource::collection(Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get());
     }
 }
