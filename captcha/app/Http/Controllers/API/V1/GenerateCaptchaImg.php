@@ -22,7 +22,7 @@ class GenerateCaptchaImg{
 
     public function getCaptchaImg(){
         $details = new V1ImageDetails();
-        dd($this->captchaImgBuilder->buildCaptchaImg($details));
+        //dd($this->captchaImgBuilder->buildCaptchaImg($details));
         return $this->captchaImgBuilder->buildCaptchaImg($details);
     }
 }

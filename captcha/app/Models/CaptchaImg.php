@@ -39,7 +39,11 @@ class CaptchaImg extends Model
     }
 
     public function getSolution(){
-        return $this->generateSolution();
+        return $this->solution;
+    }
+
+    public function getImages(){
+        return $this->images;
     }
 
     private function generateSolution(){
