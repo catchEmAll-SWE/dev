@@ -29,9 +29,8 @@ Route::get('v1/decrypt/{data}', [AES256Cipher::class, 'decrypt']);
 
 // ImageController routes
 Route::get('v1/images', [ImageController::class, 'index']);
+Route::get('v1/image/{id}', [ImageController::class, 'getImageId']);
+
 Route::get('v1/classes', [ImageController::class, 'getClasses']);
 Route::get('v1/captchaclasses/{numOfClasses}', [ImageController::class, 'getCaptchaClasses']);
-Route::get('/v1/image/{class}/{numOfImages}', [ImageController::class, 'getImagesOfClass']);
-
-// Build captcha image routes
-Route::get('v1/buildcaptcha/{numOfClasses}/{numOfImagesForClass}', [CaptchaImgBuilder::class, 'buildCaptchaImg']);
+Route::get('/v1/image/{class}/{reliability}', [ImageController::class, 'getImagesOfClass']);
