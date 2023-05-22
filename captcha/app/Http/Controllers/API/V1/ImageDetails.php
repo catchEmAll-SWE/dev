@@ -17,13 +17,13 @@ class ImageDetails{
         $imgs_for_class = [];
         $img_chosen = $this->num_of_classes*2;
         for($i = 0; $i<$this->num_of_classes; $i++){
-            $this->imgs_for_class[$i] = 2;
+            $imgs_for_class[$i] = 2;
         }
         for($i = 0; $i<$this->num_of_classes-1; $i++){
-            $this->imgs_for_class[$i] += rand(0, 9 - $img_chosen);
-            $img_chosen += $this->imgs_for_class[$i]-2;
+            $imgs_for_class[$i] += rand(0, 9 - $img_chosen);
+            $img_chosen += $imgs_for_class[$i]-2;
         }
-        $this->imgs_for_class[$this->num_of_classes-1] += 9-$img_chosen;
+        $imgs_for_class[$this->num_of_classes-1] += 9-$img_chosen;
         return $imgs_for_class;
     }
 

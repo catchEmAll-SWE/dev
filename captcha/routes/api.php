@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Ecryption\AES256Cipher;
+use App\Http\Controllers\API\V1\CaptchaImgBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CatchEmAll;
@@ -30,4 +31,7 @@ Route::get('v1/decrypt/{data}', [AES256Cipher::class, 'decrypt']);
 Route::get('v1/images', [ImageController::class, 'index']);
 Route::get('v1/classes', [ImageController::class, 'getClasses']);
 Route::get('v1/captchaclasses/{numOfClasses}', [ImageController::class, 'getCaptchaClasses']);
-Route::get('/v1/image/{class}/{reliability}', [ImageController::class, 'getImagesOfClass']);
+Route::get('/v1/image/{class}/{numOfImages}', [ImageController::class, 'getImagesOfClass']);
+
+// Build captcha image routes
+Route::get('v1/buildcaptcha/{numOfClasses}/{numOfImagesForClass}', [CaptchaImgBuilder::class, 'buildCaptchaImg']);

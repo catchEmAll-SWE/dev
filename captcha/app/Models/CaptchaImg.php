@@ -25,7 +25,7 @@ class CaptchaImg extends Model
         // TODO check ids generation process
         $image_ids = "";
         foreach ($this->images as $image){
-            $image_ids .= $image->getField('id');
+            $image_ids .= $image->get('id');
         }
         return Hash::make($image_ids);
     }

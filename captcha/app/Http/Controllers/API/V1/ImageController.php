@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateImageRequest;
 use App\Models\Image;
 use App\Http\Resources\V1\ImageResource;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Collection;
 
 class ImageController extends Controller
 {
@@ -79,7 +80,7 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImagesOfClass (string $class, int $num_of_images){
-        return ImageResource::collection(Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get());
+    public function getImagesOfClass (string $class, int $num_of_images) {
+        return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get()->all();
     }
 }
