@@ -26,7 +26,11 @@ class ImageService extends Controller
         return $captcha_classes;
     }
 
-    public function updateReliability(string $id, int $reliability) : void{
+    public function updateReliability(string $id, int $reliability) : void {
         Image::where('id', $id)->update(['reliability' => $reliability]);
+    }
+
+    public function getImage (string $class, int $reliability): Image {
+        return Image::where('class', $class)->where('reliability', $reliability)->inRandomOrder()->first();
     }
 }
