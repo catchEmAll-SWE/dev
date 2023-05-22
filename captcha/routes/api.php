@@ -26,4 +26,4 @@ Route::get('/v1/image/{class}/{reliability}', [ImageController::class, 'getImage
 Route::get('v1/encrypt/{data}', [AES256Cipher::class, 'encrypt']);
 Route::get('v1/decrypt/{data}', [AES256Cipher::class, 'decrypt']);
 Route::get('v1/images', [ImageController::class, 'index']);
-Route::get('v1/classes', [ImageController::class, 'getAllClasses']);
+Route::get('v1/image/{id}', [ImageController::class, 'getImageId']);

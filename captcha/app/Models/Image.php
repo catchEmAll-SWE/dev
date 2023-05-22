@@ -9,6 +9,7 @@ class Image extends Model
 {
     use HasFactory;
     protected $fillable = ['id','class','reliability'];
+    public $incrementing = false;
     
     public function getField($field){
         return $this->{$field};
