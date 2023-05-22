@@ -31,7 +31,7 @@ class ImageDetails{
         return $this->num_of_classes;
     }
 
-    public function getImagesForClass(): array{
+    public function getNumberOfImagesForClass(): array{
         return $this->imgs_for_class;
     }
 }

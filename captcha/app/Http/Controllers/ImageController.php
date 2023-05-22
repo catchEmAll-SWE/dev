@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Models\Image;
+use App\Http\Resources\V1\ImageResource;
 
 class ImageController extends Controller
 {
@@ -37,7 +38,7 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        //
+        return new ImageResource($image);
     }
 
     /**
@@ -63,8 +64,8 @@ class ImageController extends Controller
     {
         //
     }
-
-    private function getAvailableClasses() : array {
+    
+    private function getAllAvailableClasses() : array {
         $array = Image::select('class')->distinct()->get()->toArray();
         foreach($array as $key => $value){
             $array[$key] = $value['class'];
@@ -73,13 +74,16 @@ class ImageController extends Controller
     }
 
     public function getCaptchaClasses(int $num_of_classes) : array{
-        $array = $this->getAvailableClasses();
+        $array = $this->getAllAvailableClasses();
         $captcha_classes = [];
         for($i = 0; $i<$num_of_classes; $i++){
             $rnd = rand(0,count($array)-1);
             $captcha_classes[$i] = $array[$rnd];
             array_splice($array, $rnd, 1);
         }
+
+        //return Image::select('class')->distinct()->limit($num_of_classes)->get()->toArray();
+
         return $captcha_classes;
     }
 
@@ -87,7 +91,7 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImage (string $class, int $reliability): Image {
-        return Image::where('class', $class)->where('reliability', $reliability)->inRandomOrder()->first();
+    public function getImagesOfClass (string $class, int $num_of_images) : array {
+        return Image::where('class', $class)->havingRaw('SUM(reliability) > 50')->inRandomOrder()->limit($num_of_images)->get()->toArray();
     }
 }

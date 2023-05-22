@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\API\V1\ImageDetails as V1ImageDetails;
-use App\Models\Image;
+use App\Http\Controllers\ImageController;
 
 class GenerateCaptchaImg{
     private static $generator = NULL;
+    private CaptchaImgBuilder $captchaImgBuilder;
 
-    private function __construct(){}
+    private function __construct(){
+        $this->captchaImgBuilder = new CaptchaImgBuilder(new ImageController());
+    }
 
     public static function getGenerator(): GenerateCaptchaImg{
         if(self::$generator == NULL){
@@ -19,7 +22,6 @@ class GenerateCaptchaImg{
 
     public function getCaptchaImg(){
         $details = new V1ImageDetails();
-        
-        // return captcha image
+        return $this->captchaImgBuilder->buildCaptchaImg($details);
     }
 }
