@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\API\V1\ImageController;
 use App\Models\CaptchaImg;
 
 class CaptchaImgBuilder {
