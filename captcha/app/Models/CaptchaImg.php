@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\API\Ecryption\AES256Cipher;
+use Illuminate\Database\Eloquent\Collection;
 
 class CaptchaImg extends Model
 {
     use HasFactory;
     private string $id;
     private string $chosen_class;
-    private array $images;
+    private Collection $images;
 
-    public function __construct(string $choosen_class, array $images)
+    public function __construct(string $choosen_class, Collection $images)
     {
         $this->chosen_class = $choosen_class;
         $this->images = $images;
@@ -37,14 +38,14 @@ class CaptchaImg extends Model
     }
 
     public function getImages(){
-        return $this->images;
+        return $this->images; 
     }
 
     private function generateSolution(){
         $encryption_algorithm = new AES256Cipher();
         $solution = "";
-        
-        foreach ($this->images as $image)
+        $images_array = $this->images->all();
+        foreach ($images_array as $image)
                 $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
         
         return $encryption_algorithm->encrypt($solution);
