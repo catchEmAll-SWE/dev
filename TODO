@@ -1,1 +1,11 @@
-Confrontarsi su come gestire la reliability
+Implementazione reliability
+Autenticazione della richiesta (per non fornire il servizio a chiunque)
+--------------------------- => commenti formattati per documentazione + revisione struttura file e nomi file e metodi + test
+Key manager
+Proof of work
+
+
+-----------------------
+Implementazione update reliability
+Verify
+
