@@ -16,7 +16,7 @@ class CaptchaImgResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'images' => $this->getImages(),
+            'images' => ImageResource::collection($this->getImages()),
             'solution' => $this->getSolution(),
             'keyNumber' => '10'
         ];

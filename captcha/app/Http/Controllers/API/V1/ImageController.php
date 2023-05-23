@@ -80,11 +80,11 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImagesIdOfClass (string $class, int $num_of_images) : array{
-        return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get()->all();
+    public function getImagesIdOfClass (string $class, int $num_of_images) : Collection {
+        return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get();
     }
 
-    public function getImageSourceSrc() : string {
-        
+    public function getImageInBase64 (Image $image) {
+        return new ImageResource($image);
     }
 }

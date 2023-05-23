@@ -4,8 +4,8 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Controllers\API\V1\ImageController;
 
-//Inutile
 class ImageResource extends JsonResource
 {
     /**
@@ -16,9 +16,7 @@ class ImageResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->getField('id'),
-            'class' => $this->getField('class'),
-            'reliability' => $this->getField('reliability')
+            'src' => $this->getImageSource(),
         ];
     }
 }
