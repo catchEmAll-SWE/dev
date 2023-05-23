@@ -71,8 +71,8 @@ class ImageController extends Controller
         return Image::select('class')->distinct()->pluck('class');
     }
 
-    public function getCaptchaClasses(int $num_of_classes) {
-        return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->pluck('class');
+    public function getCaptchaClasses(int $num_of_classes) : array {
+        return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->pluck('class')->toArray();
 
     }
 
@@ -80,7 +80,11 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImagesOfClass (string $class) {
-        return Image::where('class', $class)->inRandomOrder()->limit(1)->get()->all();
+    public function getImagesIdOfClass (string $class, int $num_of_images) : array{
+        return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get()->all();
+    }
+
+    public function getImageSourceSrc() : string {
+        
     }
 }

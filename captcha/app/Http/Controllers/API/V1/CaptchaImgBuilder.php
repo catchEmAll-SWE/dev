@@ -15,11 +15,9 @@ class CaptchaImgBuilder {
     public function buildCaptchaImg(ImageDetails $imageDetails){
         $classes = $this->imageController->getCaptchaClasses($imageDetails->getNumberOfClasses());
         $images = [];
-        foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images){
-            for($i = 0; $i<$num_of_images;$i++){
-                array_push($images, $this->imageController->getImagesOfClass($classes[$index]));
-            }
-        }
+        foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images)
+            array_push($images, ...$this->imageController->getImagesIdOfClass($classes[$index], $num_of_images));
+        
         shuffle($images);
         return new CaptchaImg($classes[0], $images);
     }
