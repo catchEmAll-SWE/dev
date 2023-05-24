@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Ecryption;
 
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 
 class AES256Cipher implements IEncryptionAlgorithm {
@@ -11,7 +12,11 @@ class AES256Cipher implements IEncryptionAlgorithm {
     }
 
     public function decrypt($data) : string {
-        return Crypt::decryptString($data);
+        try {
+            return Crypt::decryptString($data);
+        } catch (DecryptException $e) {
+            return $e->getMessage();
+        }
     }
 }
 
