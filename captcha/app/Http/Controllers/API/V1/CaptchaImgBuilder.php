@@ -7,6 +7,8 @@ use App\Http\Controllers\API\V1\ImageController;
 use App\Http\Resources\V1\CaptchaImgResource;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\CaptchaImg;
+use OutOfBoundsException;
+use InvalidArgumentException;
 
 class GenerateCaptchaImg {
     private static $generator = NULL;
@@ -29,12 +31,17 @@ class GenerateCaptchaImg {
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails){
-        $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
         $images = new Collection();
-        foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images)
-            $images->push(...$this->image_controller->getImagesIdOfClass($classes[$index], $num_of_images));
-        
-        $images->shuffle();
+        $classes = [];
+
+        try{
+            $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
+            foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images)
+                $images->push(...$this->image_controller->getImagesIdOfClass($classes[$index], $num_of_images));
+            $images->shuffle();
+        } catch(OutOfBoundsException | InvalidArgumentException $e){
+            return $e->getMessage();
+        }
         return new CaptchaImg($classes[0], $images);
     }
 }
