@@ -7,12 +7,11 @@ use App\Http\Controllers\API\V1\ImageController;
 use App\Http\Resources\V1\CaptchaImgResource;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\CaptchaImg;
-use App\Models\Image;
 use App\Models\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;
 
-class GenerateCaptchaImg {
+class CaptchaImgBuilder {
     private static $generator = NULL;
     private ImageController $image_controller;
 
@@ -20,9 +19,9 @@ class GenerateCaptchaImg {
         $this->image_controller = new ImageController();
     }
 
-    public static function getGenerator(): GenerateCaptchaImg{
+    public static function getGenerator(): CaptchaImgBuilder{
         if(self::$generator == NULL){
-            self::$generator = new GenerateCaptchaImg();
+            self::$generator = new CaptchaImgBuilder();
         }
         return self::$generator;
     }
@@ -33,20 +32,26 @@ class GenerateCaptchaImg {
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails){
+        $images = new Collection();
         $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
-        
-        $number_of_images_per_class = $imageDetails->getNumberOfImagesForClass();      
-        foreach ($number_of_images_per_class as $index => $num_of_images){
+        $arr_imgs = [];
+        foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images){
             if($index == 0){
-                $number_of_reliable_target_images = $number_of_images_per_class[$index] / 2 + 1;
-                 $images = $this->getImages($classes[$index], $number_of_reliable_target_images, $number_of_images_per_class[$index] - $number_of_reliable_target_images);
+                $number_of_reliable_target_images = intdiv($num_of_images,2) + 1;
+                array_push($arr_imgs, ...$this->getImages($classes[$index], $number_of_reliable_target_images, $num_of_images - $number_of_reliable_target_images));
+                //$images->push(...$this->getImages($classes[$index], $number_of_reliable_target_images, $num_of_images - $number_of_reliable_target_images));
             }        
             else{
-                $number_of_reliable_non_target_images = $number_of_images_per_class[$index] / 2;
-                $images = $this->getImages($classes[$index], $number_of_reliable_non_target_images, $number_of_images_per_class[$index] - $number_of_reliable_non_target_images);
+                $number_of_reliable_non_target_images = intdiv($num_of_images,2);
+                array_push($arr_imgs, ...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
+                //$images->push(...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
             }       
         }
-        $images->shuffle();
+        //da vedere lo shuffle (metodo non bellissimo per il momento)
+        shuffle($arr_imgs);
+        //immagine honeypot. Deve essere della classe target e reliable
+        array_push($arr_imgs, ...$this->image_controller->getImagesOfClass($classes[0], 1, Reliability::Reliable));
+        $images->push(...$arr_imgs);
         return new CaptchaImg($classes[0], $images);
     }
 
@@ -56,7 +61,7 @@ class GenerateCaptchaImg {
             $images->push(...$this->image_controller->getImagesOfClass($class, $reliable_images, Reliability::Reliable));
             $images->push(...$this->image_controller->getImagesOfClass($class, $unreliable_images, Reliability::Unreliable));
         } catch(OutOfBoundsException | InvalidArgumentException $e){
-            return $e->getMessage();
+            throw new InvalidArgumentException($e->getMessage()); 
         }
         return $images;
     }

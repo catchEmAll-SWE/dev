@@ -46,7 +46,7 @@ class CaptchaImg extends Model
         $solution = "";
         $images_array = $this->images->all();
         foreach ($images_array as $image)
-                $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
+            $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
         
         return $encryption_algorithm->encrypt($solution);
         
