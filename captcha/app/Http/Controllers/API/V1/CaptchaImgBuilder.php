@@ -7,6 +7,8 @@ use App\Http\Controllers\API\V1\ImageController;
 use App\Http\Resources\V1\CaptchaImgResource;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\CaptchaImg;
+use App\Models\Image;
+use App\Models\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;
 
@@ -31,17 +33,32 @@ class GenerateCaptchaImg {
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails){
-        $images = new Collection();
-        $classes = [];
+        $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
+        
+        $number_of_images_per_class = $imageDetails->getNumberOfImagesForClass();      
+        foreach ($number_of_images_per_class as $index => $num_of_images){
+            if($index == 0){
+                $number_of_reliable_target_images = $number_of_images_per_class[$index] / 2 + 1;
+                 $images = $this->getImages($classes[$index], $number_of_reliable_target_images, $number_of_images_per_class[$index] - $number_of_reliable_target_images);
+            }        
+            else{
+                $number_of_reliable_non_target_images = $number_of_images_per_class[$index] / 2;
+                $images = $this->getImages($classes[$index], $number_of_reliable_non_target_images, $number_of_images_per_class[$index] - $number_of_reliable_non_target_images);
+            }       
+        }
+        $images->shuffle();
+        return new CaptchaImg($classes[0], $images);
+    }
 
+    private function getImages(string $class, int $reliable_images, int $unreliable_images) : Collection {
+        $images = new Collection();
         try{
-            $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
-            foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images)
-                $images->push(...$this->image_controller->getImagesIdOfClass($classes[$index], $num_of_images));
-            $images->shuffle();
+            $images->push(...$this->image_controller->getImagesOfClass($class, $reliable_images, Reliability::Reliable));
+            $images->push(...$this->image_controller->getImagesOfClass($class, $unreliable_images, Reliability::Unreliable));
         } catch(OutOfBoundsException | InvalidArgumentException $e){
             return $e->getMessage();
         }
-        return new CaptchaImg($classes[0], $images);
+        return $images;
     }
+
 }

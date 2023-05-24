@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 use App\Models\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Reliability;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -19,8 +20,11 @@ class ImageController extends Controller
         Image::where('id', $id)->update(['reliability' => $reliability]);
     }
 
-    public function getImagesIdOfClass (string $class, int $num_of_images) : Collection {
-        $images = Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get();
+    public function getImagesOfClass (string $class, int $num_of_images, Reliability $reliability) : Collection {
+        if ($reliability == Reliability::Reliable) 
+            $images = Image::where('class', $class)->where('reliability', '>=', 80)->inRandomOrder()->limit($num_of_images)->get();
+        else
+            $images = Image::where('class', $class)->where('reliability', '<', 80)->inRandomOrder()->limit($num_of_images)->get();
         if (count($images) < $num_of_images)
             throw new InvalidArgumentException("Number of images of class $class is less than $num_of_images");
         return $images;
