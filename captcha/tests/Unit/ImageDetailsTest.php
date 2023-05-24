@@ -20,12 +20,12 @@ class ImageDetailsTest extends TestCase
         $this->assertEqualsWithDelta(3, $num_of_classes_per_captcha, 1);
     }
 
-    public function test_number_of_images_for_class_between_2_and_5(): void
+    public function test_number_of_images_for_class_between_2_and_7(): void
     {
         $imgs_for_class = $this->image_details->getNumberOfImagesForClass();
         foreach ($imgs_for_class as $num_of_images) {
             $this->assertGreaterThanOrEqual(2, $num_of_images);
-            $this->assertLessThanOrEqual(5, $num_of_images);
+            $this->assertLessThanOrEqual(7, $num_of_images);
         }
     }
 

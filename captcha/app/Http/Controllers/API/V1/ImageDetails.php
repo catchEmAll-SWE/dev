@@ -15,15 +15,15 @@ class ImageDetails{
     // Genera per ogni classe il numero di immagini che devono essere prese dal DB
     private function setNumberOfImagesForClass(): array{
         $imgs_for_class = [];
-        $img_chosen = $this->num_of_classes*2;
+        $counter_chosen = $this->num_of_classes*2;
         for($i = 0; $i<$this->num_of_classes; $i++){
             $imgs_for_class[$i] = 2;
         }
         for($i = 0; $i<$this->num_of_classes-1; $i++){
-            $imgs_for_class[$i] += rand(0, 9 - $img_chosen);
-            $img_chosen += $imgs_for_class[$i]-2;
+            $imgs_for_class[$i] += rand(0, 9 - $counter_chosen);
+            $counter_chosen += $imgs_for_class[$i]-2;
         }
-        $imgs_for_class[$this->num_of_classes-1] += 9-$img_chosen;
+        $imgs_for_class[$this->num_of_classes-1] += 9-$counter_chosen;
         return $imgs_for_class;
     }
     

@@ -83,8 +83,4 @@ class ImageController extends Controller
     public function getImagesIdOfClass (string $class, int $num_of_images) : Collection {
         return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get();
     }
-
-    public function getImageInBase64 (Image $image) {
-        return new ImageResource($image);
-    }
 }
