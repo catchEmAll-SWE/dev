@@ -11,6 +11,7 @@ import json
 import mysql.connector
 import base64
 import os
+import sqlite3
 
 # Strategy pattern
 
@@ -52,21 +53,21 @@ class UnsplashService:
 
 # This class provide service for storing images in the database, it provides also a method for checking if an image is already stored (redundancy check)
 class ImageDatabaseService:
-    connection = mysql.connector.connect(host="localhost", user="testuser", password="passwd",database="swe_project")
+    local_db_path = "captcha/database/database.sqlite"
+    connection = sqlite3.connect(local_db_path)#mysql.connector.connect(host="localhost", user="testuser", password="passwd",database="swe_project")
     cursor = connection.cursor()
     
     @staticmethod
     def insertImage(id, img_class):
         try:
-            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability) VALUES(%s,%s,%s)", (id,img_class,50))
+            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability) VALUES(?,?,?)", (id,img_class,50))
             ImageDatabaseService.connection.commit()
         except mysql.connector.Error as error:
             print("Failed to insert new image into MySQL table {}".format(error))
 
     @staticmethod
     def isImageRedundant(img_id) -> bool:
-        ImageDatabaseService.cursor.reset()
-        ImageDatabaseService.cursor.execute("SELECT * FROM images where id = '%s'" % (img_id))
+        ImageDatabaseService.cursor.execute("SELECT * FROM images where id = ?", (img_id,))
         return (len(ImageDatabaseService.cursor.fetchall())) == 1
 
 # This class provide service for storing images in base64 format in the file system
@@ -74,7 +75,7 @@ class StoreImageInBase64Service:
 
     @staticmethod
     def storeImage(image, img_class, img_id):
-        dir = os.path.join("CAPTCHA_DB/images/", img_class)
+        dir = os.path.join("captcha/database/DB_Images/", img_class)
         if not (os.path.exists(dir) or os.path.isdir(dir)):
             os.mkdir(dir)
         try:
@@ -90,7 +91,7 @@ class StoreImageInBase64Service:
 
 def main():
     # list of classes
-    classes = ["car", "ball"]
+    classes = ["car", "ball", "umbrella", "book", "laptop"]
     
     unsplash = UnsplashService()
     outlining = OutliningService(OutliningAlgorithm())

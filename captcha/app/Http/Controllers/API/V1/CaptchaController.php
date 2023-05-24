@@ -10,7 +10,7 @@ class CaptchaController extends Controller
 {
     public function generate(Request $request)
     {
-        return GenerateCaptchaImg::getGenerator()->getCaptchaImg();
+        return CaptchaImgBuilder::getGenerator()->getCaptchaImg();
     }
 
     public function verify(Request $request)

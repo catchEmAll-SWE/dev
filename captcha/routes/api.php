@@ -26,6 +26,6 @@ Route::get('v1/login-error', function(Request $request) {
     return "User is not authenticated";
 })->name('not-authenticated');
 
-
+Route::get('v1/generate', [CaptchaController::class, 'generate']);
 
 
