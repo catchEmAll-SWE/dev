@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Models\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Collection;
+use InvalidArgumentException;
 use OutOfBoundsException;
 
 class ImageController extends Controller
@@ -19,6 +20,9 @@ class ImageController extends Controller
     }
 
     public function getImagesIdOfClass (string $class, int $num_of_images) : Collection {
-        return Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get();
+        $images = Image::where('class', $class)->inRandomOrder()->limit($num_of_images)->get();
+        if (count($images) < $num_of_images)
+            throw new InvalidArgumentException("Number of images of class $class is less than $num_of_images");
+        return $images;
     }
 }
