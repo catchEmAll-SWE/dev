@@ -3,9 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CatchEmAll;
-use App\Http\Controllers\API\V1\ImageController;
-use App\Models\Image;
-use App\Http\Resources\V1\ImageResource;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +16,16 @@ use App\Http\Resources\V1\ImageResource;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', [AuthController::class, 'login']);
+
+Route::group(['prefix'=>'v1', 'middleware'=>['auth:sanctum']], function(){
+    Route::get('generate', [CatchEmAll::class, 'generate']);
 });
 
-Route::get('/v1/generate', [CatchEmAll::class, 'generate']);
-Route::get('/v1/getImage/{id}', [ImageController::class, 'getImageInBase64']);
-Route::get('v1/images', [ImageController::class, 'index']);
-Route::get('v1/images/{image}', function(Image $image){
-    $controller = new ImageController();
-    return $controller->getImageInBase64($image);
-});
+Route::get('v1/login-error', function(Request $request) {
+    return "User is not authenticated";
+})->name('not-authenticated');
+
+
+
 
