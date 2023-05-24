@@ -28,7 +28,7 @@ class GenerateCaptchaImg {
         return new CaptchaImgResource($this->buildCaptchaImg($details));
     }
 
-    public function buildCaptchaImg(ImageDetails $imageDetails){
+    private function buildCaptchaImg(ImageDetails $imageDetails){
         $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
         $images = new Collection();
         foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images)
