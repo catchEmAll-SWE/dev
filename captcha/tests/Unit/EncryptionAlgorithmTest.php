@@ -7,6 +7,10 @@ use Tests\TestCase;
 
 class EncryptionAlgorithmTest extends TestCase
 {
+    /**
+     * verify that the encryption algorithm works correctly
+     * by encrypt a string and then verify it equals to decrypt of the encrypted one
+     */
     public function test_encryption_algorithm(): void
     {
         $algorithm = new AES256Cipher();
