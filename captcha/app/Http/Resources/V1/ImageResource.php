@@ -17,7 +17,6 @@ class ImageResource extends JsonResource
     {
         return [
             'src' => $this->getImageSource(),
-            'class' => $this->class,
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Http\Controllers\API\V1\ImageDetails;
+use App\Http\Business\ImageDetails;
 use PHPUnit\Framework\TestCase;
 
 class ImageDetailsTest extends TestCase

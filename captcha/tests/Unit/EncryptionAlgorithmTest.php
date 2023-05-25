@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Http\Controllers\API\Ecryption\AES256Cipher;
+use App\Http\Business\Ecryption\AES256Cipher;
 use Tests\TestCase;
 
 class EncryptionAlgorithmTest extends TestCase
