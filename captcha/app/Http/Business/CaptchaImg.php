@@ -44,17 +44,10 @@ class CaptchaImg extends Model
     private function generateSolution(){
         $encryption_algorithm = new AES256Cipher();
         $solution = "";
-        $images_array = $this->images->all();
-        foreach ($images_array as $image)
-            $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
         
-        return $encryption_algorithm->encrypt($solution);
-        
-        /*foreach ($this->images as $image_for_class){
-            foreach($image_for_class as $image)
-                $solution .= ($image->getField('class') == $this->chosen_class) ? "1" : "0";
+        foreach ($this->images as $image){
+            $solution .= ($image->getField('class') == $this->chosen_class) ? "1" : "0";
         }
-        return $encryption_algorithm->encrypt($solution);
-        */
+        return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution));
     }
 }

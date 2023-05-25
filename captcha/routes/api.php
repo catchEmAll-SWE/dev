@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CaptchaController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\Ecryption\AES256Cipher;
+use App\Http\Business\Ecryption\AES256Cipher;
 
 /*
 |--------------------------------------------------------------------------
