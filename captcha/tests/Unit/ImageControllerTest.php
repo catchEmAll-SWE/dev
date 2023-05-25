@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\API\V1\ImageController;
+use App\Models\Reliability;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Tests\TestCase;
@@ -36,6 +37,6 @@ class ImageControllerTest extends TestCase
     public function test_get_images_of_undefined_class() : void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->controller->getImagesIdOfClass('undefined', 1);
+        $this->controller->getImagesOfClass('undefined', 1, Reliability::Reliable);
     }
 }
