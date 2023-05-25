@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Ecryption;
+namespace App\Http\Business\Ecryption;
 
 use App\Http\Controllers\KeyController;
 use Illuminate\Contracts\Encryption\DecryptException;

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Business;
 
-use App\Http\Controllers\API\V1\ImageDetails;
 use App\Http\Controllers\API\V1\ImageController;
 use App\Http\Resources\V1\CaptchaImgResource;
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\CaptchaImg;
 use App\Models\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;

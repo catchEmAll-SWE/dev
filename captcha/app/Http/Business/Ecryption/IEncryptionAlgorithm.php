@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Http\Controllers\API\Ecryption;
+namespace App\Http\Business\Ecryption;
 
 interface IEncryptionAlgorithm{
     public function encrypt($data) : string;

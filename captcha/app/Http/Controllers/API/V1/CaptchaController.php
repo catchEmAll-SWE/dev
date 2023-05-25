@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Business\CaptchaImgBuilder;
 use App\Http\Resources\V1\CaptchaImgResource;
 
 class CaptchaController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Business;
 
 class ImageDetails{
     private int $num_of_classes;
