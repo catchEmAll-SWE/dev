@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\API\Ecryption;
 
+use App\Http\Controllers\KeyController;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Encryption\Encrypter;
 
 class AES256Cipher implements IEncryptionAlgorithm {
 
+    private string $cipher = 'aes-256-cbc';
+
     public function encrypt($data) : string {
-        return Crypt::encryptString($data);
+        $encrypter = new Encrypter(KeyController::getActiveKeyValue(), $this->cipher);
+        return $encrypter->encryptString($data);
     }
 
     public function decrypt($data) : string {
         try {
-            return Crypt::decryptString($data);
+            $decrypter = new Encrypter(KeyController::getActiveKeyValue(), $this->cipher);
+            return $decrypter->decryptString($data);
         } catch (DecryptException $e) {
             return $e->getMessage();
         }

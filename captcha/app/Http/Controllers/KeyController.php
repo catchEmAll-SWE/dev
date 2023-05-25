@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Key;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class KeyController {
+
     public function updateKey() {
-        $active_key = $this->getActiveKey();
+        $active_key = KeyController::getActiveKey();
 
         if (!$active_key) {
             $this->insertNewActiveKeyWithId(0);
@@ -24,9 +26,13 @@ class KeyController {
         $this->insertNewActiveKeyWithId($new_key_id);
     }
 
-    private function getActiveKey() {
+    private static function getActiveKey() : Key {
         $active_key = Key::where('active', true)->first();
         return ($active_key) ? $active_key : null;
+    }
+
+    public static function getActiveKeyValue() : string {
+        return KeyController::getActiveKey()->key;
     }
 
     private function disableActiveKey (Key $active_key) {
@@ -37,18 +43,8 @@ class KeyController {
     private function insertNewActiveKeyWithId(int $new_key_id) {
         DB::table('keys')->insert([
             'id' => $new_key_id,
-            'key' => $this->generateRandomKey(),
+            'key' => Crypt::generateKey('AES-256-CBC'),
             'active' => 1,
         ]);
-    }
-
-    private function generateRandomKey() {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < 256; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }

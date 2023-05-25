@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CaptchaController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\Ecryption\AES256Cipher;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,8 @@ Route::get('v1/login-error', function(Request $request) {
 })->name('not-authenticated');
 
 Route::get('v1/generate', [CaptchaController::class, 'generate']);
+
+Route::get('v1/encrypt/{data}', [AES256Cipher::class, 'encrypt']);
+Route::get('v1/decrypt/{data}', [AES256Cipher::class, 'decrypt']);
 
 

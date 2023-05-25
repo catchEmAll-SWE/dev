@@ -1,3 +1,4 @@
+/*
 Implementazione reliability -> fatto
 --------------------------- => commenti formattati per documentazione + revisione struttura file e nomi file e metodi + test
 Key manager
@@ -8,3 +9,16 @@ Proof of work
 Implementazione update reliability
 Verify
 
+
+------------------------
+Scheduler
+
+Database con id (da 0 a 19) e chiave associata <= Model che identifica questi record
+Classe KeyManager che gestisce la creazione e la distribuzione delle chiavi (contiene un attributo index che specifica l'index corrente)
+
+Command:
+    - start key manager
+    - update key
+    - get keymanager status
+
+Usare scheduler di laravel per creare un job che viene eseguito ogni 30 secondi e chiama il metodo che aggiorna le chiavi (attraverso il comando);
