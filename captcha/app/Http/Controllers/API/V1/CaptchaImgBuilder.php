@@ -34,24 +34,18 @@ class CaptchaImgBuilder {
     private function buildCaptchaImg(ImageDetails $imageDetails){
         $images = new Collection();
         $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
-        $arr_imgs = [];
         foreach ($imageDetails->getNumberOfImagesForClass() as $index => $num_of_images){
             if($index == 0){
                 $number_of_reliable_target_images = intdiv($num_of_images,2) + 1;
-                array_push($arr_imgs, ...$this->getImages($classes[$index], $number_of_reliable_target_images, $num_of_images - $number_of_reliable_target_images));
-                //$images->push(...$this->getImages($classes[$index], $number_of_reliable_target_images, $num_of_images - $number_of_reliable_target_images));
+                $images->push(...$this->getImages($classes[$index], $number_of_reliable_target_images, $num_of_images - $number_of_reliable_target_images));
             }        
             else{
                 $number_of_reliable_non_target_images = intdiv($num_of_images,2);
-                array_push($arr_imgs, ...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
-                //$images->push(...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
+                $images->push(...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
             }       
         }
-        //da vedere lo shuffle (metodo non bellissimo per il momento)
-        shuffle($arr_imgs);
-        //immagine honeypot. Deve essere della classe target e reliable
-        array_push($arr_imgs, ...$this->image_controller->getImagesOfClass($classes[0], 1, Reliability::Reliable));
-        $images->push(...$arr_imgs);
+        $images = $images->shuffle();
+        $images->push(...$this->image_controller->getImagesOfClass($classes[0], 1, Reliability::Reliable));
         return new CaptchaImg($classes[0], $images);
     }
 
