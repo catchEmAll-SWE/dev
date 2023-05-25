@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Models\Image;
+use App\Http\Controllers\KeyController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +18,7 @@ class CaptchaImgResource extends JsonResource
         return [
             'images' => ImageResource::collection($this->getImages()),
             'solution' => $this->getSolution(),
-            'keyNumber' => '10'
+            'keyNumber' => KeyController::getKeyNumber(),
         ];
     }
 }

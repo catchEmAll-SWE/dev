@@ -31,10 +31,6 @@ class KeyController {
         return ($active_key) ? $active_key : null;
     }
 
-    public static function getActiveKeyValue() : string {
-        return KeyController::getActiveKey()->key;
-    }
-
     private function disableActiveKey (Key $active_key) {
         $active_key->active = false;
         $active_key->save();
@@ -46,5 +42,13 @@ class KeyController {
             'key' => Crypt::generateKey('AES-256-CBC'),
             'active' => 1,
         ]);
+    }
+
+    public static function getActiveKeyValue() : string {
+        return KeyController::getActiveKey()->key;
+    }
+
+    public static function getKeyNumber() : int {
+        return KeyController::getActiveKey()->id;
     }
 }
