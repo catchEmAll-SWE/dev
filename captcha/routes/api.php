@@ -17,7 +17,7 @@ use App\Http\Business\Ecryption\AES256Cipher;
 |
 */
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('getToken', [AuthController::class, 'getToken']);
 
 Route::group(['prefix'=>'v1', 'middleware'=>['auth:sanctum']], function(){
     Route::get('generate', [CaptchaController::class, 'generate']);
@@ -27,9 +27,5 @@ Route::get('v1/login-error', function(Request $request) {
     return "User is not authenticated";
 })->name('not-authenticated');
 
-Route::get('v1/generate', [CaptchaController::class, 'generate']);
-
-Route::get('v1/encrypt/{data}', [AES256Cipher::class, 'encrypt']);
-Route::get('v1/decrypt/{data}', [AES256Cipher::class, 'decrypt']);
 
 
