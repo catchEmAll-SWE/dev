@@ -21,7 +21,6 @@
 
     <style id="language-style">
         /* starts out as display none and is replaced with js later  */
-                    body .content .bash-example code { display: none; }
                     body .content .javascript-example code { display: none; }
             </style>
 
@@ -36,7 +35,7 @@
 
 </head>
 
-<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+<body data-languages="[&quot;javascript&quot;]">
 
 <a href="#" id="nav-button">
     <span>
@@ -45,9 +44,9 @@
     </span>
 </a>
 <div class="tocify-wrapper">
+            <img src="logo/logo.png" alt="logo" class="logo" style="padding-top: 10px;" width="100%"/>
     
             <div class="lang-selector">
-                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
                                             <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
                     </div>
     
@@ -125,18 +124,6 @@ You can switch the language used with the tabs at the top right (or from the nav
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://swe.gdr00.it/api/getToken" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"email\": \"jermain.wuckert@example.org\",
-    \"password\": \"eaque\"
-}"
-</code></pre></div>
-
-
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
     "https://swe.gdr00.it/api/getToken"
@@ -148,8 +135,8 @@ const headers = {
 };
 
 let body = {
-    "email": "jermain.wuckert@example.org",
-    "password": "eaque"
+    "email": "steuber.clotilde@example.org",
+    "password": "amet"
 };
 
 fetch(url, {
@@ -238,10 +225,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="jermain.wuckert@example.org"
+               value="steuber.clotilde@example.org"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>jermain.wuckert@example.org</code></p>
+<p>Must be a valid email address. Example: <code>steuber.clotilde@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -249,10 +236,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="eaque"
+               value="amet"
                data-component="body">
     <br>
-<p>Example: <code>eaque</code></p>
+<p>Example: <code>amet</code></p>
         </div>
         </form>
 
@@ -265,13 +252,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <span id="example-requests-GETapi-v1-generate">
 <blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://swe.gdr00.it/api/v1/generate" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
@@ -391,13 +371,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://swe.gdr00.it/api/v1/login-error" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
     "https://swe.gdr00.it/api/v1/login-error"
@@ -510,7 +483,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
     </div>
     <div class="dark-box">
                     <div class="lang-selector">
-                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
                                                         <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
                             </div>
             </div>

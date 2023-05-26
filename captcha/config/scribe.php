@@ -15,6 +15,14 @@ return [
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
     'description' => 'API to provide captcha authentication',
+    'intro_text' => <<<INTRO
+    This documentation will provide all the information you need to work with our API.
+
+    <aside>
+    As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+    You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).
+    </aside>
+    INTRO,
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
@@ -268,7 +276,6 @@ INTRO
      *
      */
     'example_languages' => [
-        'bash',
         'javascript',
     ],
 
@@ -344,7 +351,7 @@ INTRO
      * - 'logo' => 'img/logo.png' // for `laravel` type
      *
      */
-    'logo' => false,
+    'logo' => 'logo/logo.png',
 
     /**
      * Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
