@@ -26,6 +26,7 @@
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
             </fieldset>
             <input type="button" id="generate-captcha" onclick="captcha()" value="Genera Captcha"/>
+            <input type="hidden" id="captcha-id" name="captcha-id" value=""/>
             <input type="hidden" id="nonce" name="nonce" value=""/>
             <input type="submit" value="Login">
             <input type="reset" value="Annulla">
