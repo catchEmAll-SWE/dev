@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: steuber.clotilde@example.org
+        example: bmuller@example.com
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: amet
+        example: sequi
         type: string
         custom: []
     cleanBodyParameters:
-      email: steuber.clotilde@example.org
-      password: amet
+      email: bmuller@example.com
+      password: sequi
     fileParameters: []
     responses: []
     responseFields: []
@@ -74,13 +74,58 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+        status: 200
+        content: |-
+          {
+            "data": {
+               "captchaImg": {
+                   "images": [
+                       {
+                           "src" : "image0inbase64"
+                       },
+                       {
+                           "src" : "image1inbase64"
+                       },
+                       {
+                           "src" : "image2inbase64"
+                       },
+                       {
+                           "src" : "image3inbase64"
+                       },
+                       {
+                            "src" : "image4inbase64"
+                       },
+                       {
+                            "src" : "image5inbase64"
+                       },
+                       {
+                            "src" : "image6inbase64"
+                       },
+                       {
+                            "src" : "image7inbase64"
+                       },
+                       {
+                            "src" : "image8inbase64"
+                       },
+                       {
+                            "src" : "image9inbase64"
+                       },
+                    ],
+                    "solution": "eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==",
+                    "keyNumber": 4
+                },
+                "proofOfWorkDetails": {
+                    "fixedStrings": [
+                        "e90eba67bade315aa6535a",
+                        "8fb32a74dccc2ffb11918",
+                         "30a89cc70a1e17010c5bd"
+                    ],
+                    "difficulty": 2
+                }
+            }
+          }
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth: []

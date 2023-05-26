@@ -135,8 +135,8 @@ const headers = {
 };
 
 let body = {
-    "email": "steuber.clotilde@example.org",
-    "password": "amet"
+    "email": "bmuller@example.com",
+    "password": "sequi"
 };
 
 fetch(url, {
@@ -225,10 +225,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="steuber.clotilde@example.org"
+               value="bmuller@example.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>steuber.clotilde@example.org</code></p>
+<p>Must be a valid email address. Example: <code>bmuller@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -236,10 +236,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="amet"
+               value="sequi"
                data-component="body">
     <br>
-<p>Example: <code>amet</code></p>
+<p>Example: <code>sequi</code></p>
         </div>
         </form>
 
@@ -273,19 +273,57 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-generate">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
+  &quot;data&quot;: {
+     &quot;captchaImg&quot;: {
+         &quot;images&quot;: [
+             {
+                 &quot;src&quot; : &quot;image0inbase64&quot;
+             },
+             {
+                 &quot;src&quot; : &quot;image1inbase64&quot;
+             },
+             {
+                 &quot;src&quot; : &quot;image2inbase64&quot;
+             },
+             {
+                 &quot;src&quot; : &quot;image3inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image4inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image5inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image6inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image7inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image8inbase64&quot;
+             },
+             {
+                  &quot;src&quot; : &quot;image9inbase64&quot;
+             },
+          ],
+          &quot;solution&quot;: &quot;eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==&quot;,
+          &quot;keyNumber&quot;: 4
+      },
+      &quot;proofOfWorkDetails&quot;: {
+          &quot;fixedStrings&quot;: [
+              &quot;e90eba67bade315aa6535a&quot;,
+              &quot;8fb32a74dccc2ffb11918&quot;,
+               &quot;30a89cc70a1e17010c5bd&quot;
+          ],
+          &quot;difficulty&quot;: 2
+      }
+  }
 }</code>
  </pre>
     </span>

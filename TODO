@@ -1,5 +1,5 @@
 Implementazione reliability -> done
---------------------------- => commenti formattati per documentazione + revisione struttura file e nomi file e metodi + test (partially done)
+--------------------------- => commenti formattati per documentazione(impostata) + revisione struttura file e nomi file (done) e metodi + test (partially done)
 Key manager-> done (needs scheduler)
 Proof of work -> done (backend)
 La parte javascript la lasciamo gestire al front-end visto che il metodo poi è richiamato lì, noi forniamo le informazioni
