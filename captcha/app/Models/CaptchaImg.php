@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Business;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Business\Ecryption\AES256Cipher;
 use Illuminate\Database\Eloquent\Collection;
+use App\Http\Business\SolutionConverter;
 
-class CaptchaImg extends Model
+class CaptchaImg
 {
-    use HasFactory;
     private string $id;
     private string $chosen_class;
     private Collection $images;

@@ -2,19 +2,18 @@
 
 namespace App\Http\Business;
 
-use App\Http\Controllers\API\V1\ImageController;
-use App\Http\Resources\V1\CaptchaImgResource;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;
+use App\Models\CaptchaImg;
 
 class CaptchaImgBuilder {
     private static $generator = NULL;
-    private ImageController $image_controller;
+    private ImageService $image_controller;
 
     private function __construct(){
-        $this->image_controller = new ImageController();
+        $this->image_controller = new ImageService();
     }
 
     public static function getGenerator(): CaptchaImgBuilder{

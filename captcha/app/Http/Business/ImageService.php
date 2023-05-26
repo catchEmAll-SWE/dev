@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Business;
 use App\Models\Image;
-use App\Http\Controllers\Controller;
 use App\Models\Reliability;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 use OutOfBoundsException;
 
-class ImageController extends Controller
-{
+class ImageService {
     public function getCaptchaClasses(int $num_of_classes) : array {
         if ($num_of_classes <= 0)
             throw new OutOfBoundsException("Number of classes must be positive");

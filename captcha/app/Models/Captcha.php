@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Business\CaptchaImg;
 use App\Http\Business\CaptchaImgBuilder;
 use App\Http\Business\ProofOfWorkDetails;
 
