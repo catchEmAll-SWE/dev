@@ -24,9 +24,9 @@ class CaptchaImgBuilder {
         return self::$generator;
     }
 
-    public function getCaptchaImg() : CaptchaImgResource {
+    public function getCaptchaImg() : CaptchaImg {
         $details = new ImageDetails();
-        return new CaptchaImgResource($this->buildCaptchaImg($details));
+        return $this->buildCaptchaImg($details);
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails){

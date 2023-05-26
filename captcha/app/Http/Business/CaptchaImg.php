@@ -26,7 +26,7 @@ class CaptchaImg extends Model
         $captcha_id = "";
         foreach ($this->images as $image_for_class)
             $captcha_id .= $image_for_class;
-        return Hash::make($captcha_id);
+        return hash("sha256", $captcha_id);
     }
 
     public function getId(){
@@ -40,6 +40,7 @@ class CaptchaImg extends Model
     public function getImages(){
         return $this->images; 
     }
+
 
     private function generateSolution(){
         $encryption_algorithm = new AES256Cipher();
