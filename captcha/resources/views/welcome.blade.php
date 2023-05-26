@@ -25,12 +25,7 @@
                 <label for ="password">Password</label>
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
             </fieldset>
-            <input type="button" id="generate-captcha" onclick="generateCaptcha()"/>
-            <input type="hidden" id="captcha-hashcode-id" name="captcha-hashcode-id" value="<component>captcha-hashcode-id</component>"/>
-            <input type="hidden" id="captcha-difficulty" name="captcha-difficulty" value="<component>captcha-difficulty</component>"/>
-            <input type="hidden" id="nonce" name="nonce" value=""/>
-            <input type="submit" value="Login">
-            <input type="reset" value="Annulla">
+            <input type="button" id="generate-captcha" onclick="captcha()" value="Genera Captcha"/>
         </form>
     </body>
 </html>
