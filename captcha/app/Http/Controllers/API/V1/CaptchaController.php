@@ -10,54 +10,16 @@ use App\Models\Captcha;
 class CaptchaController extends Controller
 {
     /**
-    * @response {
-    *   "data": {
-    *      "captchaImg": {
-    *          "images": [
-    *              {
-    *                  "src" : "image0inbase64"
-    *              },
-    *              {
-    *                  "src" : "image1inbase64"
-    *              },
-    *              {
-    *                  "src" : "image2inbase64"
-    *              },
-    *              {
-    *                  "src" : "image3inbase64"
-    *              },
-    *              {
-    *                   "src" : "image4inbase64"
-    *              },
-    *              {
-    *                   "src" : "image5inbase64"
-    *              },
-    *              {
-    *                   "src" : "image6inbase64"
-    *              },
-    *              {
-    *                   "src" : "image7inbase64"
-    *              },
-    *              {
-    *                   "src" : "image8inbase64"
-    *              },
-    *              {
-    *                   "src" : "image9inbase64"
-    *              },
-    *           ],
-    *           "solution": "eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==",
-    *           "keyNumber": 4
-    *       },
-    *       "proofOfWorkDetails": {
-    *           "fixedStrings": [
-    *               "e90eba67bade315aa6535a",
-    *               "8fb32a74dccc2ffb11918",
-    *                "30a89cc70a1e17010c5bd"
-    *           ],
-    *           "difficulty": 2
-    *       }
-    *   }
-    *}
+    * @authenticated
+    * @responseFile apiResponses/generate.json
+    * 
+    * @responseField captchaImg object Contains all information to create captcha image
+    * @responseField src string Image in base64 format
+    * @responseField solution string Captcha image solution
+    * @responseField keyNumber integer Number of key used to encrypt the solution
+    * @responseField proofOfWorkDetails object Contains all information to create proof of work
+    * @responseField fixedString string[] Array of string to be used in proof of work as fixed part
+    * @responseField difficulty int Number of diffulty's zeros 
     */
     public function generate(Request $request)
     {

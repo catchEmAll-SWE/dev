@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: bmuller@example.com
+        example: candida.collier@example.net
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: sequi
+        example: esse
         type: string
         custom: []
     cleanBodyParameters:
-      email: bmuller@example.com
-      password: sequi
+      email: candida.collier@example.net
+      password: esse
     fileParameters: []
     responses: []
     responseFields: []
@@ -60,9 +60,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -77,58 +78,110 @@ endpoints:
         status: 200
         content: |-
           {
-            "data": {
-               "captchaImg": {
-                   "images": [
-                       {
-                           "src" : "image0inbase64"
-                       },
-                       {
-                           "src" : "image1inbase64"
-                       },
-                       {
-                           "src" : "image2inbase64"
-                       },
-                       {
-                           "src" : "image3inbase64"
-                       },
-                       {
-                            "src" : "image4inbase64"
-                       },
-                       {
-                            "src" : "image5inbase64"
-                       },
-                       {
-                            "src" : "image6inbase64"
-                       },
-                       {
-                            "src" : "image7inbase64"
-                       },
-                       {
-                            "src" : "image8inbase64"
-                       },
-                       {
-                            "src" : "image9inbase64"
-                       },
-                    ],
-                    "solution": "eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==",
-                    "keyNumber": 4
-                },
-                "proofOfWorkDetails": {
-                    "fixedStrings": [
-                        "e90eba67bade315aa6535a",
-                        "8fb32a74dccc2ffb11918",
-                         "30a89cc70a1e17010c5bd"
-                    ],
-                    "difficulty": 2
-                }
-            }
+              "data": {
+                  "captchaImg": {
+                      "images": [
+                          {
+                              "src" : "image0inbase64"
+                          },
+                          {
+                              "src" : "image1inbase64"
+                          },
+                          {
+                              "src" : "image2inbase64"
+                          },
+                          {
+                              "src" : "image3inbase64"
+                          },
+                          {
+                              "src" : "image4inbase64"
+                          },
+                          {
+                              "src" : "image5inbase64"
+                          },
+                          {
+                              "src" : "image6inbase64"
+                          },
+                          {
+                              "src" : "image7inbase64"
+                          },
+                          {
+                              "src" : "image8inbase64"
+                          },
+                          {
+                              "src" : "image9inbase64"
+                          }
+                      ],
+                      "solution": "eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==",
+                      "keyNumber": 4
+                  },
+                  "proofOfWorkDetails": {
+                      "fixedStrings": [
+                          "e90eba67bade315aa6535a",
+                          "8fb32a74dccc2ffb11918",
+                          "30a89cc70a1e17010c5bd"
+                      ],
+                      "difficulty": 2
+                  }
+              }
           }
         headers: []
         description: ''
         custom: []
-    responseFields: []
-    auth: []
+    responseFields:
+      captchaImg:
+        name: captchaImg
+        description: 'Contains all information to create captcha image'
+        required: false
+        example: null
+        type: object
+        custom: []
+      src:
+        name: src
+        description: 'Image in base64 format'
+        required: false
+        example: null
+        type: string
+        custom: []
+      solution:
+        name: solution
+        description: 'Captcha image solution'
+        required: false
+        example: null
+        type: string
+        custom: []
+      keyNumber:
+        name: keyNumber
+        description: 'Number of key used to encrypt the solution'
+        required: false
+        example: null
+        type: integer
+        custom: []
+      proofOfWorkDetails:
+        name: proofOfWorkDetails
+        description: 'Contains all information to create proof of work'
+        required: false
+        example: null
+        type: object
+        custom: []
+      fixedString:
+        name: fixedString
+        description: 'Array of string to be used in proof of work as fixed part'
+        required: false
+        example: null
+        type: 'string[]'
+        custom: []
+      difficulty:
+        name: difficulty
+        description: "Number of diffulty's zeros"
+        required: false
+        example: null
+        type: integer
+        custom: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
     controller: null
     method: null
     route: null

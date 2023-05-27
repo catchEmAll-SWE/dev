@@ -90,7 +90,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 26, 2023</li>
+        <li>Last updated: May 27, 2023</li>
     </ul>
 </div>
 
@@ -107,7 +107,9 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_BEARER_TOKEN}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token calling the <code>/login</code> endpoint and passing your credentials (email and password).</p>
 
         <h1 id="endpoints">Endpoints</h1>
 
@@ -135,8 +137,8 @@ const headers = {
 };
 
 let body = {
-    "email": "bmuller@example.com",
-    "password": "sequi"
+    "email": "candida.collier@example.net",
+    "password": "esse"
 };
 
 fetch(url, {
@@ -225,10 +227,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="bmuller@example.com"
+               value="candida.collier@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>bmuller@example.com</code></p>
+<p>Must be a valid email address. Example: <code>candida.collier@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -236,16 +238,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="sequi"
+               value="esse"
                data-component="body">
     <br>
-<p>Example: <code>sequi</code></p>
+<p>Example: <code>esse</code></p>
         </div>
         </form>
 
                     <h2 id="endpoints-GETapi-v1-generate">GET api/v1/generate</h2>
 
 <p>
+<small class="badge badge-darkred">requires authentication</small>
 </p>
 
 
@@ -260,6 +263,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -278,52 +282,52 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-  &quot;data&quot;: {
-     &quot;captchaImg&quot;: {
-         &quot;images&quot;: [
-             {
-                 &quot;src&quot; : &quot;image0inbase64&quot;
-             },
-             {
-                 &quot;src&quot; : &quot;image1inbase64&quot;
-             },
-             {
-                 &quot;src&quot; : &quot;image2inbase64&quot;
-             },
-             {
-                 &quot;src&quot; : &quot;image3inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image4inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image5inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image6inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image7inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image8inbase64&quot;
-             },
-             {
-                  &quot;src&quot; : &quot;image9inbase64&quot;
-             },
-          ],
-          &quot;solution&quot;: &quot;eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==&quot;,
-          &quot;keyNumber&quot;: 4
-      },
-      &quot;proofOfWorkDetails&quot;: {
-          &quot;fixedStrings&quot;: [
-              &quot;e90eba67bade315aa6535a&quot;,
-              &quot;8fb32a74dccc2ffb11918&quot;,
-               &quot;30a89cc70a1e17010c5bd&quot;
-          ],
-          &quot;difficulty&quot;: 2
-      }
-  }
+    &quot;data&quot;: {
+        &quot;captchaImg&quot;: {
+            &quot;images&quot;: [
+                {
+                    &quot;src&quot;: &quot;image0inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image1inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image2inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image3inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image4inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image5inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image6inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image7inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image8inbase64&quot;
+                },
+                {
+                    &quot;src&quot;: &quot;image9inbase64&quot;
+                }
+            ],
+            &quot;solution&quot;: &quot;eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==&quot;,
+            &quot;keyNumber&quot;: 4
+        },
+        &quot;proofOfWorkDetails&quot;: {
+            &quot;fixedStrings&quot;: [
+                &quot;e90eba67bade315aa6535a&quot;,
+                &quot;8fb32a74dccc2ffb11918&quot;,
+                &quot;30a89cc70a1e17010c5bd&quot;
+            ],
+            &quot;difficulty&quot;: 2
+        }
+    }
 }</code>
  </pre>
     </span>
@@ -344,7 +348,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </span>
 <form id="form-GETapi-v1-generate" data-method="GET"
       data-path="api/v1/generate"
-      data-authed="0"
+      data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
@@ -375,6 +379,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-generate"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -398,7 +413,58 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-GETapi-v1-login-error">GET api/v1/login-error</h2>
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>captchaImg</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+<br>
+<p>Contains all information to create captcha image</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>src</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Image in base64 format</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>solution</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+<br>
+<p>Captcha image solution</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>keyNumber</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+<br>
+<p>Number of key used to encrypt the solution</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>proofOfWorkDetails</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+<br>
+<p>Contains all information to create proof of work</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>fixedString</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+<br>
+<p>Array of string to be used in proof of work as fixed part</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>difficulty</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+<br>
+<p>Number of diffulty's zeros</p>
+        </div>
+                        <h2 id="endpoints-GETapi-v1-login-error">GET api/v1/login-error</h2>
 
 <p>
 </p>
