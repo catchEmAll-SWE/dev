@@ -30,3 +30,6 @@ Http request di ritorno deve avere come body params:
 - keyNumber: int
 - fixedStrings: string[]
 - nonces: String[]
+
+
+Nella soluzione vanno gli id per poi poter modificare la reliability !!!

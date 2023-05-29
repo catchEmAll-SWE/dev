@@ -44,7 +44,7 @@ class CaptchaImg
         $solution = "";
         
         foreach ($this->images as $image){
-            $solution .= ($image->getField('class') == $this->chosen_class) ? "1" : "0";
+            $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
         }
         return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution));
     }
