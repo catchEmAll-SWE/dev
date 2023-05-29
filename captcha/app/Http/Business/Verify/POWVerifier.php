@@ -17,7 +17,7 @@ class POWVerifier {
     // PRECONDITION: $fixed_strings and $nonces are arrays of strings with 3 elements
     public function verify() : bool {
         foreach ($this->fixed_strings as $index => $fixed_string) {
-            $hashcode = Hash::make($fixed_string . $this->nonces[$index]);
+            $hashcode = hash("sha256", $fixed_string . $this->nonces[$index]);
             if (!str_starts_with($hashcode, ProofOfWorkDetails::getDifficulty())) 
                 return false;
         }

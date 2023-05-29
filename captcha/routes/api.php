@@ -35,7 +35,7 @@ Route::get('v1/encrypt/{data}', function(Request $request, string $data){
 
 Route::get('v1/decrypt/{data}', function(Request $request, string $data){
     $algo = new AES256Cipher();
-    return $algo->decrypt($data, KeyController::getActiveKeyValue());
+    return $algo->decrypt($data, 4);
 });
 
 
