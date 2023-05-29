@@ -44,7 +44,7 @@ class CaptchaImgVerifier {
         $uncertain_images_selected = 0;
 
         $target_img_counter = 0;
-
+        //dd($this->solution);
         foreach(str_split($this->solution) as $index => $single_image_solution) {
 
             // image target but uncertain
