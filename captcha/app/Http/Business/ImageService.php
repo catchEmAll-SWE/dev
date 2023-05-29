@@ -14,8 +14,9 @@ class ImageService {
         return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->pluck('class')->toArray();
     }
 
-    public function updateReliability(string $id, int $reliability) : void {
-        Image::where('id', $id)->update(['reliability' => $reliability]);
+    public function updateImageReliability(string $id, int $offset) : void {
+        $reliability_updated = Image::select('reliability')->where('id', $id)->pluck('reliability')->first() + $offset;
+        Image::where('id', $id)->update(['reliability' => $reliability_updated]);
     }
 
     public function getImagesOfClass (string $class, int $num_of_images, Reliability $reliability) : Collection {
