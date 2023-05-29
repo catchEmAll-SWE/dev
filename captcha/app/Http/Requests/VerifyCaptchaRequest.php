@@ -30,10 +30,10 @@ class VerifyCaptchaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'response' => 'required|string|regex:/^(0|1){10}$/', // 10 digits, each digit is 0 or 1
+            'response' => ['required','string','regex:/^(0|1){10}$/'], // 10 digits, each digit is 0 or 1
             'solution' => 'required|string',
             'keyNumber' => 'required|integer|min:0|max:19',
-
+            
             'fixedStrings' => 'required|array|min:3|max:3',
             'fixedStrings.*' => 'required|string|min:21|max:22',
             'nonces' => 'required|array|min:3|max:3',

@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Http\Business\Ecryption\AES256Cipher;
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Business\SolutionConverter;
+use App\Http\Business\SolutionParser;
 
 class CaptchaImg
 {
@@ -40,15 +39,17 @@ class CaptchaImg
 
 
     private function generateSolution(){
-        $encryption_algorithm = new AES256Cipher();
         $target_images = [];
-        $solution = "";
-        
+        $solution = "";  
         foreach ($this->images as $image){
             $img_class = $image->getField('class');
-            $solution .= ($img_class == $this->chosen_class) ? "1" : "0";
-            array_push($target_images, ($img_class == $this->chosen_class) ? $image->getField('id') : "");
+            if($img_class == $this->chosen_class){
+                $solution .= ($image->getField('reliability')>=80) ? "1" : "0";
+                array_push($target_images, $image->getField('id'));
+            }else{
+                $solution .= ($image->getField('reliability')>=80) ? "3" : "2";
+            }
         }
-        return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution, $target_images));
+        return SolutionParser::parseToEncryptedString($solution, $target_images);
     }
 }
