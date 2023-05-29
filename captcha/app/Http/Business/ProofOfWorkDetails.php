@@ -18,7 +18,7 @@ class ProofOfWorkDetails{
         return $this->fixed_string;
     }
 
-    public function getDifficulty(){
+    public static function getDifficulty(){
         return ProofOfWorkDetails::$difficulty;
     }
 }
