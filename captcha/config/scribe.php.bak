@@ -352,6 +352,7 @@ INTRO
      *
      */
     'logo' => 'logo/logo.png',
+    'interactive' => false,
 
     /**
      * Customize the "Last updated" value displayed in the docs by specifying tokens and formats.

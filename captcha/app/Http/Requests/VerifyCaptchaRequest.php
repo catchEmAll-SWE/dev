@@ -40,4 +40,27 @@ class VerifyCaptchaRequest extends FormRequest
             'nonces.*' => 'required|string',
         ];
     }
+
+    public function bodyParameters() {
+        return [
+            'response' => [
+                'description' => 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked',
+            ],
+            'solution' => [
+                'description' => 'The encrypted solution to the captcha challenge, passed as api/v1/generate response ',
+                'example' => 'eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h',
+            ],
+            'keyNumber' => [
+                'description' => 'The number of the key used to encrypt the solution, passed as api/v1/generate response ',
+            ],
+            'fixedStrings' => [
+                'description' => 'The array composed of the three parts of the hashed id of the captcha, passed as api/v1/generate response',
+                'example' => '[ "961fa7b4bc6af6f447ecd0" , "0635c63aadef1d4a1fd13" , "a51133975c8b385275f24" ]',
+            ],
+            'nonces' => [
+                'description' => 'The array of characters that resolves the proof of work for the different fixed strings',
+                'example' => '[ "12cd" , "23dwq" , "65faa" ]',
+            ],   
+        ];
+    }
 }
