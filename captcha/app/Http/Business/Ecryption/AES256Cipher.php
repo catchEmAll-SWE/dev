@@ -15,9 +15,10 @@ class AES256Cipher implements IEncryptionAlgorithm {
         return $encrypter->encryptString($data);
     }
 
-    public function decrypt($data) : string {
+    public function decrypt(string $data, int $key_number) : string {
         try {
-            $decrypter = new Encrypter(KeyController::getActiveKeyValue(), $this->cipher);
+            $key = KeyController::getKeyValue($key_number);
+            $decrypter = new Encrypter($key, $this->cipher);
             return $decrypter->decryptString($data);
         } catch (DecryptException $e) {
             return $e->getMessage();
