@@ -3,9 +3,10 @@
 namespace App\Http\Business;
 
 class SolutionConverter {
-    public static function convertToJsonString(string $solution) : string {
+    public static function convertToJsonString(string $solution, array $target_class_images) : string {
         $obj = new \stdClass();
         $obj->solution = $solution;
+        $obj->targetClassImages = $target_class_images;
         $obj->time = time();
         return json_encode($obj);
     }

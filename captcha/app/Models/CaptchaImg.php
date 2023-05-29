@@ -41,11 +41,14 @@ class CaptchaImg
 
     private function generateSolution(){
         $encryption_algorithm = new AES256Cipher();
+        $target_images = [];
         $solution = "";
         
         foreach ($this->images as $image){
-            $solution .= ($image->getField('class') == $this->chosen_class) ? $image->getField('id') : "";
+            $img_class = $image->getField('class');
+            $solution .= ($img_class == $this->chosen_class) ? "1" : "0";
+            array_push($target_images, ($img_class == $this->chosen_class) ? $image->getField('id') : "");
         }
-        return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution));
+        return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution, $target_images));
     }
 }
