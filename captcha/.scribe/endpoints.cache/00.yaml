@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: stroman.morgan@example.com
+        example: hane.octavia@example.net
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: et
+        example: est
         type: string
         custom: []
     cleanBodyParameters:
-      email: stroman.morgan@example.com
-      password: et
+      email: hane.octavia@example.net
+      password: est
     fileParameters: []
     responses: []
     responseFields: []
@@ -181,7 +181,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
+      - 'Bearer dcfv3VD4168a6aPZEgb5hek'
     controller: null
     method: null
     route: null
@@ -210,23 +210,23 @@ endpoints:
     bodyParameters:
       response:
         name: response
-        description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
+        description: 'Must match the regex /^(0|1){10}$/.'
         required: true
-        example: '1010100111'
+        example: '1100000010'
         type: string
         custom: []
       solution:
         name: solution
-        description: 'The encrypted solution to the captcha challenge, passed as api/v1/generate response .'
+        description: ''
         required: true
-        example: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
+        example: fugit
         type: string
         custom: []
       keyNumber:
         name: keyNumber
-        description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
+        description: 'Must be at least 0. Must not be greater than 19.'
         required: true
-        example: 5
+        example: 14
         type: integer
         custom: []
       fixedStrings:
@@ -250,9 +250,9 @@ endpoints:
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      response: '1010100111'
-      solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
-      keyNumber: 5
+      response: '1100000010'
+      solution: fugit
+      keyNumber: 14
       fixedStrings:
         - 961fa7b4bc6af6f447ecd0
         - 0635c63aadef1d4a1fd13
@@ -276,7 +276,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
+      - 'Bearer 438fZ1cD6gv6VkeE5ahdaPb'
     controller: null
     method: null
     route: null
@@ -312,7 +312,7 @@ endpoints:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '53'
+          x-ratelimit-remaining: '59'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -343,11 +343,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: sit
+        example: maxime
         type: string
         custom: []
     cleanUrlParameters:
-      data: sit
+      data: maxime
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -356,12 +356,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: eyJpdiI6IlpKaWg2SDhtNzN3UnpJOFgyUmxyc1E9PSIsInZhbHVlIjoiYU1YVzdob0paa3ZZeERJS0dkN0VJUT09IiwibWFjIjoiNzVhMDUzZjI2ZDUwNjBlZDczNDMxOTBlZGNkODhlMDFhZGYzYmFkZDA5NWQ1MWEyMzk0YmU2NTUyY2RmMmQ4YiIsInRhZyI6IiJ9
+        content: eyJpdiI6Im1rVi8vb2ZpakIwdEJ6WkllNXBXNVE9PSIsInZhbHVlIjoiZVJDdTlJUzgzYjdMUXM2YVkySzNMQT09IiwibWFjIjoiMzZiOGI2NWRkOWFhNjU1NmVhMDlhMjViOTFiYmI5OGU3NjdkNDY2NjI4NzYxMmFmNjM1M2QyMzVmYjIyOTE2YSIsInRhZyI6IiJ9
         headers:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '52'
+          x-ratelimit-remaining: '58'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -392,11 +392,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: molestias
+        example: perferendis
         type: string
         custom: []
     cleanUrlParameters:
-      data: molestias
+      data: perferendis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -410,7 +410,7 @@ endpoints:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '51'
+          x-ratelimit-remaining: '57'
           access-control-allow-origin: '*'
         description: null
         custom: []

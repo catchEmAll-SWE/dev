@@ -24,12 +24,6 @@
                     body .content .javascript-example code { display: none; }
             </style>
 
-    <script>
-        var tryItOutBaseUrl = "http://localhost";
-        var useCsrf = Boolean();
-        var csrfUrl = "/sanctum/csrf-cookie";
-    </script>
-    <script src="{{ asset("/vendor/scribe/js/tryitout-4.19.1.js") }}"></script>
 
     <script src="{{ asset("/vendor/scribe/js/theme-default-4.19.1.js") }}"></script>
 
@@ -146,8 +140,8 @@ const headers = {
 };
 
 let body = {
-    "email": "stroman.morgan@example.com",
-    "password": "et"
+    "email": "hane.octavia@example.net",
+    "password": "est"
 };
 
 fetch(url, {
@@ -184,23 +178,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('POSTapi-getToken', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-getToken"
-                    onclick="tryItOut('POSTapi-getToken');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-getToken"
-                    onclick="cancelTryOut('POSTapi-getToken');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-getToken"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
@@ -236,10 +213,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="stroman.morgan@example.com"
+               value="hane.octavia@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>stroman.morgan@example.com</code></p>
+<p>Must be a valid email address. Example: <code>hane.octavia@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -247,10 +224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="et"
+               value="est"
                data-component="body">
     <br>
-<p>Example: <code>et</code></p>
+<p>Example: <code>est</code></p>
         </div>
         </form>
 
@@ -364,23 +341,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-generate', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-generate"
-                    onclick="tryItOut('GETapi-v1-generate');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-generate"
-                    onclick="cancelTryOut('GETapi-v1-generate');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-generate"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
@@ -497,9 +457,9 @@ const headers = {
 };
 
 let body = {
-    "response": "1010100111",
-    "solution": "eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h",
-    "keyNumber": 5,
+    "response": "1100000010",
+    "solution": "fugit",
+    "keyNumber": 14,
     "fixedStrings": [
         "961fa7b4bc6af6f447ecd0",
         "0635c63aadef1d4a1fd13",
@@ -555,23 +515,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-verify', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-verify"
-                    onclick="tryItOut('POSTapi-v1-verify');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-verify"
-                    onclick="cancelTryOut('POSTapi-v1-verify');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-verify"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
@@ -618,10 +561,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="response"                data-endpoint="POSTapi-v1-verify"
-               value="1010100111"
+               value="1100000010"
                data-component="body">
     <br>
-<p>The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/. Example: <code>1010100111</code></p>
+<p>Must match the regex /^(0|1){10}$/. Example: <code>1100000010</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>solution</code></b>&nbsp;&nbsp;
@@ -629,10 +572,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="solution"                data-endpoint="POSTapi-v1-verify"
-               value="eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h"
+               value="fugit"
                data-component="body">
     <br>
-<p>The encrypted solution to the captcha challenge, passed as api/v1/generate response . Example: <code>eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h</code></p>
+<p>Example: <code>fugit</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>keyNumber</code></b>&nbsp;&nbsp;
@@ -640,10 +583,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                name="keyNumber"                data-endpoint="POSTapi-v1-verify"
-               value="5"
+               value="14"
                data-component="body">
     <br>
-<p>The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19. Example: <code>5</code></p>
+<p>Must be at least 0. Must not be greater than 19. Example: <code>14</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>fixedStrings</code></b>&nbsp;&nbsp;
@@ -712,7 +655,7 @@ fetch(url, {
             <pre><code class="language-http">content-type: text/html; charset=UTF-8
 cache-control: no-cache, private
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 53
+x-ratelimit-remaining: 59
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
@@ -743,23 +686,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-login-error', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-login-error"
-                    onclick="tryItOut('GETapi-v1-login-error');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-login-error"
-                    onclick="cancelTryOut('GETapi-v1-login-error');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-login-error"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
@@ -803,7 +729,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://swe.gdr00.it/api/v1/encrypt/sit"
+    "https://swe.gdr00.it/api/v1/encrypt/maxime"
 );
 
 const headers = {
@@ -829,11 +755,11 @@ fetch(url, {
             <pre><code class="language-http">content-type: text/html; charset=UTF-8
 cache-control: no-cache, private
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 52
+x-ratelimit-remaining: 58
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">eyJpdiI6IlpKaWg2SDhtNzN3UnpJOFgyUmxyc1E9PSIsInZhbHVlIjoiYU1YVzdob0paa3ZZeERJS0dkN0VJUT09IiwibWFjIjoiNzVhMDUzZjI2ZDUwNjBlZDczNDMxOTBlZGNkODhlMDFhZGYzYmFkZDA5NWQ1MWEyMzk0YmU2NTUyY2RmMmQ4YiIsInRhZyI6IiJ9</code>
+<code class="language-json" style="max-height: 300px;">eyJpdiI6Im1rVi8vb2ZpakIwdEJ6WkllNXBXNVE9PSIsInZhbHVlIjoiZVJDdTlJUzgzYjdMUXM2YVkySzNMQT09IiwibWFjIjoiMzZiOGI2NWRkOWFhNjU1NmVhMDlhMjViOTFiYmI5OGU3NjdkNDY2NjI4NzYxMmFmNjM1M2QyMzVmYjIyOTE2YSIsInRhZyI6IiJ9</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-encrypt--data-" hidden>
@@ -860,23 +786,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-encrypt--data-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-encrypt--data-"
-                    onclick="tryItOut('GETapi-v1-encrypt--data-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-encrypt--data-"
-                    onclick="cancelTryOut('GETapi-v1-encrypt--data-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-encrypt--data-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
@@ -912,10 +821,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="data"                data-endpoint="GETapi-v1-encrypt--data-"
-               value="sit"
+               value="maxime"
                data-component="url">
     <br>
-<p>Example: <code>sit</code></p>
+<p>Example: <code>maxime</code></p>
             </div>
                     </form>
 
@@ -932,7 +841,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://swe.gdr00.it/api/v1/decrypt/molestias"
+    "https://swe.gdr00.it/api/v1/decrypt/perferendis"
 );
 
 const headers = {
@@ -958,7 +867,7 @@ fetch(url, {
             <pre><code class="language-http">content-type: text/html; charset=UTF-8
 cache-control: no-cache, private
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 51
+x-ratelimit-remaining: 57
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
@@ -989,23 +898,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
       onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-decrypt--data-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-decrypt--data-"
-                    onclick="tryItOut('GETapi-v1-decrypt--data-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-decrypt--data-"
-                    onclick="cancelTryOut('GETapi-v1-decrypt--data-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-decrypt--data-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
@@ -1041,10 +933,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="data"                data-endpoint="GETapi-v1-decrypt--data-"
-               value="molestias"
+               value="perferendis"
                data-component="url">
     <br>
-<p>Example: <code>molestias</code></p>
+<p>Example: <code>perferendis</code></p>
             </div>
                     </form>
 
