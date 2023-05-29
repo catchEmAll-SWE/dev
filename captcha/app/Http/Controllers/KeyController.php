@@ -51,4 +51,8 @@ class KeyController {
     public static function getKeyNumber() : int {
         return KeyController::getActiveKey()->id;
     }
+
+    public static function getKeyValue(int $key_number) : string {
+        return Key::where('id', $key_number)->first()->key;
+    }
 }
