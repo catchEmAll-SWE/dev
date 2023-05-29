@@ -32,4 +32,20 @@ Http request di ritorno deve avere come body params:
 - nonces: String[]
 
 
-Nella soluzione vanno gli id per poi poter modificare la reliability !!!
+Nella soluzione vanno anche gli id per poi poter modificare la reliability !!!
+
+
+//-------------------------------------------
+UPDATE RELIABILITY
+
+- Immagini sicure ==> reliability > 85 punti
+- Tutte immagini della classe target devono essere aggiornate di affidabilità
+
+
+
+soluzione:
+- 0 target non sicura
+- 1 target sicura
+- 2 non target non sicura
+- 3 non target sicura
+array contiene tutti gli id delle immagini target

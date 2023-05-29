@@ -5,12 +5,20 @@ namespace App\Http\Business\Verify;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Business\ProofOfWorkDetails;
 
-class POWVerify {
+class POWVerifier {
+    private array $fixed_strings;
+    private array $nonces;
+
+    public function __construct(array $fixed_strings, array $nonces)
+    {
+        $this->fixed_strings = $fixed_strings;
+        $this->nonces = $nonces;
+    }
     // PRECONDITION: $fixed_strings and $nonces are arrays of strings with 3 elements
-    public static function isPOWCorrect(array $fixed_strings, array $nonces) : bool {
-        $difficulty = ProofOfWorkDetails::getDifficulty();
-        foreach ($fixed_strings as $index => $fixed_string) {
-            if (substr(Hash::make($fixed_string + $nonces[$index]), 0, $difficulty) != '00') 
+    public function verify() : bool {
+        foreach ($this->fixed_strings as $index => $fixed_string) {
+            $hashcode = Hash::make($fixed_string . $this->nonces[$index]);
+            if (!str_starts_with($hashcode, ProofOfWorkDetails::getDifficulty())) 
                 return false;
         }
         return true;
