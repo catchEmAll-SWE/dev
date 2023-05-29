@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: candida.collier@example.net
+        example: stroman.morgan@example.com
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: esse
+        example: et
         type: string
         custom: []
     cleanBodyParameters:
-      email: candida.collier@example.net
-      password: esse
+      email: stroman.morgan@example.com
+      password: et
     fileParameters: []
     responses: []
     responseFields: []
@@ -121,7 +121,7 @@ endpoints:
                           "8fb32a74dccc2ffb11918",
                           "30a89cc70a1e17010c5bd"
                       ],
-                      "difficulty": 2
+                      "difficulty": "00"
                   }
               }
           }
@@ -159,7 +159,7 @@ endpoints:
         custom: []
       proofOfWorkDetails:
         name: proofOfWorkDetails
-        description: 'Contains all information to create proof of work'
+        description: 'Contains all info rmation to create proof of work'
         required: false
         example: null
         type: object
@@ -178,6 +178,101 @@ endpoints:
         example: null
         type: integer
         custom: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/verify
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      response:
+        name: response
+        description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
+        required: true
+        example: '1010100111'
+        type: string
+        custom: []
+      solution:
+        name: solution
+        description: 'The encrypted solution to the captcha challenge, passed as api/v1/generate response .'
+        required: true
+        example: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
+        type: string
+        custom: []
+      keyNumber:
+        name: keyNumber
+        description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
+        required: true
+        example: 5
+        type: integer
+        custom: []
+      fixedStrings:
+        name: fixedStrings
+        description: 'The array composed of the three parts of the hashed id of the captcha, passed as api/v1/generate response.'
+        required: true
+        example:
+          - 961fa7b4bc6af6f447ecd0
+          - 0635c63aadef1d4a1fd13
+          - a51133975c8b385275f24
+        type: 'string[]'
+        custom: []
+      nonces:
+        name: nonces
+        description: 'The array of characters that resolves the proof of work for the different fixed strings.'
+        required: true
+        example:
+          - 12cd
+          - 23dwq
+          - 65faa
+        type: 'string[]'
+        custom: []
+    cleanBodyParameters:
+      response: '1010100111'
+      solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
+      keyNumber: 5
+      fixedStrings:
+        - 961fa7b4bc6af6f447ecd0
+        - 0635c63aadef1d4a1fd13
+        - a51133975c8b385275f24
+      nonces:
+        - 12cd
+        - 23dwq
+        - 65faa
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "passed": true
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
     auth:
       - headers
       - Authorization
@@ -217,7 +312,105 @@ endpoints:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '59'
+          x-ratelimit-remaining: '53'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/encrypt/{data}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      data:
+        name: data
+        description: ''
+        required: true
+        example: sit
+        type: string
+        custom: []
+    cleanUrlParameters:
+      data: sit
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: eyJpdiI6IlpKaWg2SDhtNzN3UnpJOFgyUmxyc1E9PSIsInZhbHVlIjoiYU1YVzdob0paa3ZZeERJS0dkN0VJUT09IiwibWFjIjoiNzVhMDUzZjI2ZDUwNjBlZDczNDMxOTBlZGNkODhlMDFhZGYzYmFkZDA5NWQ1MWEyMzk0YmU2NTUyY2RmMmQ4YiIsInRhZyI6IiJ9
+        headers:
+          content-type: 'text/html; charset=UTF-8'
+          cache-control: 'no-cache, private'
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '52'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/decrypt/{data}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      data:
+        name: data
+        description: ''
+        required: true
+        example: molestias
+        type: string
+        custom: []
+    cleanUrlParameters:
+      data: molestias
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: 'The payload is invalid.'
+        headers:
+          content-type: 'text/html; charset=UTF-8'
+          cache-control: 'no-cache, private'
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '51'
           access-control-allow-origin: '*'
         description: null
         custom: []

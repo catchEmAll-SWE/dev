@@ -27,16 +27,6 @@ class CaptchaImgVerifier {
     //PRECONDITION: $user_response is a string of 10 digits, each digit is 0 or 1, key_number is an integer between 0 and 19 and target_class_images is an array of 10 strings
     public function verify() : bool {
 
-        /*
-
-        soluzione:
-        - 0 target non sicura
-        - 1 target sicura
-        - 2 non target non sicura
-        - 3 non target sicura
-        array contiene tutti gli id delle immagini target
-        */
-
         $uncertain_target_images = 0;
         $uncertain_target_images_selected = 0;
 
@@ -44,7 +34,13 @@ class CaptchaImgVerifier {
         $uncertain_images_selected = 0;
 
         $target_img_counter = 0;
-        //dd($this->solution);
+
+        $honey_pot = substr($this->user_answer, -1);
+        if($honey_pot == '1')
+            return false;
+
+        $this->user_answer = substr($this->user_answer, 0, -1);
+
         foreach(str_split($this->solution) as $index => $single_image_solution) {
 
             // image target but uncertain
@@ -81,11 +77,10 @@ class CaptchaImgVerifier {
             else if ($single_image_solution == '3' && $this->user_answer[$index] == '1')
                 return false;
                 
-
         }
 
-        $target_factor = $uncertain_target_images_selected / $uncertain_target_images;
-        $non_target_factor = $uncertain_images_selected / $uncertain_images;
+        $target_factor = ($uncertain_target_images != 0) ? $uncertain_target_images_selected / $uncertain_target_images : 1;
+        $non_target_factor = ($uncertain_target_images_selected != 0) ? $uncertain_images_selected / $uncertain_images : 0;
 
         return $target_factor > 0.8 && $non_target_factor < 0.4;
     }

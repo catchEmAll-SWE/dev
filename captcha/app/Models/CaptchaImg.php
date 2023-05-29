@@ -41,7 +41,8 @@ class CaptchaImg
     private function generateSolution(){
         $target_images = [];
         $solution = "";  
-        foreach ($this->images as $image){
+        for ($i = 0; $i < 9; $i++){
+            $image = $this->images[$i];
             $img_class = $image->getField('class');
             if($img_class == $this->chosen_class){
                 $solution .= ($image->getField('reliability')>=80) ? "1" : "0";

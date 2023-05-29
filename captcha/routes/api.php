@@ -22,6 +22,7 @@ Route::post('getToken', [AuthController::class, 'getToken']);
 
 Route::group(['prefix'=>'v1', 'middleware'=>['auth:sanctum']], function(){
     Route::get('generate', [CaptchaController::class, 'generate']);
+    Route::post('verify', [CaptchaController::class, 'verify']);
 });
 
 Route::get('v1/login-error', function(Request $request) {
@@ -35,10 +36,7 @@ Route::get('v1/encrypt/{data}', function(Request $request, string $data){
 
 Route::get('v1/decrypt/{data}', function(Request $request, string $data){
     $algo = new AES256Cipher();
-    return $algo->decrypt($data, KeyController::getActiveKeyValue());
+    return $algo->decrypt($data, 4);
 });
-
-
-Route::post('v1/verify', [CaptchaController::class, 'verify']);
 
 
