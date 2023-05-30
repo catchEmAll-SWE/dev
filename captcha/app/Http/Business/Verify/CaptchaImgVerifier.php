@@ -2,11 +2,8 @@
 
 namespace App\Http\Business\Verify;
 
-use App\Http\Business\Ecryption\AES256Cipher;
 use App\Http\Business\ImageService;
-use Spatie\FlareClient\Http\Exceptions\InvalidData;
 use App\Http\Business\SolutionParser;
-use InvalidArgumentException;
 
 class CaptchaImgVerifier {
     private static float $reliability_delta = 0.3;

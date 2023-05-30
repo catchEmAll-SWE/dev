@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Business;
+namespace App\Http\Business\Generate;
 
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;
 use App\Models\CaptchaImg;
+use App\Http\Business\ImageService;
 
 class CaptchaImgBuilder {
     private static $generator = NULL;

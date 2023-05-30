@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Business;
+namespace App\Http\Business\Generate;
 
 class ImageDetails{
     private int $num_of_classes;

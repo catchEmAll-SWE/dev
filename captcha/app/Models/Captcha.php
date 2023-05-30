@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Business\CaptchaImgBuilder;
+use App\Http\Business\Generate\CaptchaImgBuilder;
 use App\Http\Business\ProofOfWorkDetails;
 
 class Captcha {

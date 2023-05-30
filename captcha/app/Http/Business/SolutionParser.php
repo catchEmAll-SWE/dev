@@ -3,7 +3,6 @@
 namespace App\Http\Business;
 
 use App\Http\Business\Ecryption\AES256Cipher;
-use App\Http\Business\Ecryption\IEncryptionAlgorithm;
 use InvalidArgumentException;
 
 class SolutionParser {

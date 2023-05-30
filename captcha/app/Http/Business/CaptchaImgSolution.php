@@ -2,7 +2,6 @@
 
 namespace App\Http\Business;
 
-use InvalidArgumentException;
 use JsonSerializable;
 
 class CaptchaImgSolution implements JsonSerializable {

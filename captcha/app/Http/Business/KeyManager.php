@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Business;
 
 use App\Models\Key;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
-class KeyController {
+class KeyManager {
 
     public function updateKey() {
-        $active_key = KeyController::getActiveKey();
+        $active_key = KeyManager::getActiveKey();
 
         if (!$active_key) {
             $this->insertNewActiveKeyWithId(0);
@@ -45,11 +45,11 @@ class KeyController {
     }
 
     public static function getActiveKeyValue() : string {
-        return KeyController::getActiveKey()->key;
+        return KeyManager::getActiveKey()->key;
     }
 
     public static function getKeyNumber() : int {
-        return KeyController::getActiveKey()->id;
+        return KeyManager::getActiveKey()->id;
     }
 
     public static function getKeyValue(int $key_number) : string {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Business\Verify;
 
-use Illuminate\Support\Facades\Hash;
 use App\Http\Business\ProofOfWorkDetails;
 
 class POWVerifier {

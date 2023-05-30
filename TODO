@@ -21,3 +21,10 @@ Il captcha controller quando riceve la richiesta invia un json con 2 oggetti:
   
 Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro diverso da fare. Quando verrà fatta la richiesta del captcha al load di esso sarà caricato il metodo che lancia il pow, che 
 è javascript.
+
+
+TODO 30 maggio:
+- disposizione dei file (cartella generate)
+- finire i test della generate test (documentarsi sui mock test)
+- aggiornare lucidchart con i nuovi metodi e le nuovi classi
+- rimuovere metodi che non sono utilizzati
