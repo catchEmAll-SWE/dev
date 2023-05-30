@@ -48,10 +48,6 @@ class KeyManager {
         return KeyManager::getActiveKey()->key;
     }
 
-    public static function getKeyNumber() : int {
-        return KeyManager::getActiveKey()->id;
-    }
-
     public static function getKeyValue(int $key_number) : string {
         return Key::where('id', $key_number)->first()->key;
     }
