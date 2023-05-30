@@ -14,7 +14,7 @@ class ProofOfWorkDetails{
         return [substr($id, 0, 22), substr($id, 22, 21), substr($id, 43, 21)];
     }
 
-    public function getFixedString(){
+    public function getFixedString():array{
         return $this->fixed_string;
     }
 
