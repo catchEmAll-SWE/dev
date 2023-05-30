@@ -24,7 +24,6 @@ Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro d
 
 
 TODO 30 maggio:
-- disposizione dei file (cartella generate)
 - finire i test della generate test (documentarsi sui mock test)
-- aggiornare lucidchart con i nuovi metodi e le nuovi classi
+- aggiornare lucidchart con i nuovi metodi e le nuovi classi (in parte fatto)
 - rimuovere metodi che non sono utilizzati

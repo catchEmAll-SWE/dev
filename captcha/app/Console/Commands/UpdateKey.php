@@ -2,17 +2,18 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Business\KeyManager;
 use Illuminate\Console\Command;
 use App\Http\Controllers\KeyController;
 
-class KeyManager extends Command
+class UpdateKey extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:key-manager';
+    protected $signature = 'app:key-update';
 
     /**
      * The console command description.
@@ -26,7 +27,7 @@ class KeyManager extends Command
      */
     public function handle()
     {
-        $key_controller = new KeyController();
+        $key_controller = new KeyManager();
         $key_controller->updateKey();
     }
 }

@@ -12,7 +12,7 @@ class ImageDetails{
     }
 
     
-    // Genera per ogni classe il numero di immagini che devono essere prese dal DB
+    // For each class it generates the number of images that should be taken from the DB
     private function setNumberOfImagesForClass(): array{
         $imgs_for_class = [];
         $counter_chosen = $this->num_of_classes*2;

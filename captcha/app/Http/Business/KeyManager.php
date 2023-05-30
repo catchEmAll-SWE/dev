@@ -55,4 +55,8 @@ class KeyManager {
     public static function getKeyValue(int $key_number) : string {
         return Key::where('id', $key_number)->first()->key;
     }
+
+    public static function getActiveKeyNumber() : int {
+        return KeyManager::getActiveKey()->id;
+    }
 }

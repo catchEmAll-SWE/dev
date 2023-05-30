@@ -2,7 +2,7 @@
 
 namespace App\Http\Business\Ecryption;
 
-use App\Console\Commands\KeyManager;
+use App\Http\Business\KeyManager;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Encryption\Encrypter;
 
@@ -14,6 +14,8 @@ class AES256Cipher implements IEncryptionAlgorithm {
         $encrypter = new Encrypter(KeyManager::getActiveKeyValue(), $this->cipher);
         return $encrypter->encryptString($data);
     }
+
+    // TODO: FIX THIS
 
     public function decrypt(string $data, int $key_number) : string {
         try {

@@ -3,6 +3,8 @@
 namespace Tests\Unit;
 
 use App\Http\Business\Ecryption\AES256Cipher;
+use App\Http\Business\KeyManager;
+use App\Models\Key;
 use Tests\TestCase;
 
 class EncryptionAlgorithmTest extends TestCase
@@ -16,6 +18,6 @@ class EncryptionAlgorithmTest extends TestCase
         $algorithm = new AES256Cipher();
         $string_to_encrypt = 'Secret message';
         $encrypted_string = $algorithm->encrypt($string_to_encrypt);
-        $this->assertEquals($string_to_encrypt, $algorithm->decrypt($encrypted_string));
+        $this->assertEquals($string_to_encrypt, $algorithm->decrypt($encrypted_string, KeyManager::getActiveKeyNumber()));
     }
 }
