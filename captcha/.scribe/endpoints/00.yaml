@@ -26,19 +26,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: stroman.morgan@example.com
+        example: dixie.balistreri@example.net
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: et
+        example: est
         type: string
         custom: []
     cleanBodyParameters:
-      email: stroman.morgan@example.com
-      password: et
+      email: dixie.balistreri@example.net
+      password: est
     fileParameters: []
     responses: []
     responseFields: []
@@ -210,7 +210,7 @@ endpoints:
         name: response
         description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
         required: true
-        example: '1010100111'
+        example: '0000101000'
         type: string
         custom: []
       solution:
@@ -224,7 +224,7 @@ endpoints:
         name: keyNumber
         description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
         required: true
-        example: 5
+        example: 17
         type: integer
         custom: []
       fixedStrings:
@@ -248,9 +248,9 @@ endpoints:
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      response: '1010100111'
+      response: '0000101000'
       solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
-      keyNumber: 5
+      keyNumber: 17
       fixedStrings:
         - 961fa7b4bc6af6f447ecd0
         - 0635c63aadef1d4a1fd13
@@ -310,7 +310,7 @@ endpoints:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '53'
+          x-ratelimit-remaining: '59'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -341,11 +341,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: sit
+        example: repellendus
         type: string
         custom: []
     cleanUrlParameters:
-      data: sit
+      data: repellendus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -354,12 +354,12 @@ endpoints:
     responses:
       -
         status: 200
-        content: eyJpdiI6IlpKaWg2SDhtNzN3UnpJOFgyUmxyc1E9PSIsInZhbHVlIjoiYU1YVzdob0paa3ZZeERJS0dkN0VJUT09IiwibWFjIjoiNzVhMDUzZjI2ZDUwNjBlZDczNDMxOTBlZGNkODhlMDFhZGYzYmFkZDA5NWQ1MWEyMzk0YmU2NTUyY2RmMmQ4YiIsInRhZyI6IiJ9
+        content: eyJpdiI6IjNtci9IRStJMVZsUllleTAzYkJHNkE9PSIsInZhbHVlIjoiK3ZaYmlCSm9BSmkzeGFRazZHcCtDQT09IiwibWFjIjoiMTM2NWJiNTE5MGZjZDNhNGYzNjlkMzczMDUxMTVkNTc4OTEyZDJjZWZlYTUyYzA0OTIwM2JhY2M5YzE2OTkxZCIsInRhZyI6IiJ9
         headers:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '52'
+          x-ratelimit-remaining: '58'
           access-control-allow-origin: '*'
         description: null
         custom: []
@@ -390,11 +390,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: molestias
+        example: fuga
         type: string
         custom: []
     cleanUrlParameters:
-      data: molestias
+      data: fuga
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -408,7 +408,7 @@ endpoints:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '51'
+          x-ratelimit-remaining: '57'
           access-control-allow-origin: '*'
         description: null
         custom: []
