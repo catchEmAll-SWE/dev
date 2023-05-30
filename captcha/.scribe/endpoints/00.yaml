@@ -26,19 +26,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: dixie.balistreri@example.net
+        example: nolan.tyrel@example.com
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: est
+        example: eum
         type: string
         custom: []
     cleanBodyParameters:
-      email: dixie.balistreri@example.net
-      password: est
+      email: nolan.tyrel@example.com
+      password: eum
     fileParameters: []
     responses: []
     responseFields: []
@@ -210,7 +210,7 @@ endpoints:
         name: response
         description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
         required: true
-        example: '0000101000'
+        example: '1100100011'
         type: string
         custom: []
       solution:
@@ -224,7 +224,7 @@ endpoints:
         name: keyNumber
         description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
         required: true
-        example: 17
+        example: 9
         type: integer
         custom: []
       fixedStrings:
@@ -248,9 +248,9 @@ endpoints:
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      response: '0000101000'
+      response: '1100100011'
       solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
-      keyNumber: 17
+      keyNumber: 9
       fixedStrings:
         - 961fa7b4bc6af6f447ecd0
         - 0635c63aadef1d4a1fd13
@@ -341,11 +341,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: repellendus
+        example: amet
         type: string
         custom: []
     cleanUrlParameters:
-      data: repellendus
+      data: amet
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -354,7 +354,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: eyJpdiI6IjNtci9IRStJMVZsUllleTAzYkJHNkE9PSIsInZhbHVlIjoiK3ZaYmlCSm9BSmkzeGFRazZHcCtDQT09IiwibWFjIjoiMTM2NWJiNTE5MGZjZDNhNGYzNjlkMzczMDUxMTVkNTc4OTEyZDJjZWZlYTUyYzA0OTIwM2JhY2M5YzE2OTkxZCIsInRhZyI6IiJ9
+        content: eyJpdiI6IjBkdkV0TG16YWhyekJTaUJSTHdVQmc9PSIsInZhbHVlIjoic3lsNGUxWDZpTjI4UTJhamQraUNLZz09IiwibWFjIjoiMzYxNzU0NWJhMzVhYjNjYTRkZWNmYmI0NTJlYzFiNTNhMDZiMzMxNzFhMzg5MjU2NDU3MTQ4MThiYmU0Nzg1YyIsInRhZyI6IiJ9
         headers:
           content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
@@ -390,11 +390,11 @@ endpoints:
         name: data
         description: ''
         required: true
-        example: fuga
+        example: veniam
         type: string
         custom: []
     cleanUrlParameters:
-      data: fuga
+      data: veniam
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
