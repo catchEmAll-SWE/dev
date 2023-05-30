@@ -21,31 +21,3 @@ Il captcha controller quando riceve la richiesta invia un json con 2 oggetti:
   
 Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro diverso da fare. Quando verrà fatta la richiesta del captcha al load di esso sarà caricato il metodo che lancia il pow, che 
 è javascript.
-
-
-// ------------------------------------------
-Http request di ritorno deve avere come body params:
-- response: string
-- solution: string
-- keyNumber: int
-- fixedStrings: string[]
-- nonces: String[]
-
-
-Nella soluzione vanno anche gli id per poi poter modificare la reliability !!!
-
-
-//-------------------------------------------
-UPDATE RELIABILITY
-
-- Immagini sicure ==> reliability > 85 punti
-- Tutte immagini della classe target devono essere aggiornate di affidabilità
-
-
-
-soluzione:
-- 0 target non sicura
-- 1 target sicura
-- 2 non target non sicura
-- 3 non target sicura
-array contiene tutti gli id delle immagini target
