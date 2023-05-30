@@ -8,15 +8,15 @@ use InvalidArgumentException;
 class SolutionParser {
 
     public static function parseToEncryptedString(string $solution, array $target_class_images) : string {
-        return (new AES256Cipher())->encrypt(json_encode(new CaptchaImgSolution($solution, $target_class_images)));
+        $algo = new AES256Cipher();
+        return $algo->encrypt(json_encode(new CaptchaImgSolution($solution, $target_class_images)));
     }
 
     public static function parseFromEncryptedString(string $encrypted_data, int $key) : CaptchaImgSolution {
-        $data = json_decode((new AES256Cipher())->decrypt($encrypted_data, $key));
+        $algo = new AES256Cipher();
+        $data = json_decode($algo->decrypt($encrypted_data, $key));
         if ($data == null || (!isset($data->solution) || !isset($data->targetClassImagesId)))
             throw new InvalidArgumentException("Invalid encrypted solution passed");
         return new CaptchaImgSolution($data->solution, $data->targetClassImagesId);
     }
-
-    // FIXME: create a static variable to store the encryption algorithm
 }
