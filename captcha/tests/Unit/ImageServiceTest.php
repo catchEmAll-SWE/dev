@@ -5,16 +5,12 @@ namespace Tests\Unit;
 use App\Http\Business\ImageService;
 use App\Models\Image;
 use App\Http\Business\Enum\Reliability;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Tests\TestCase;
 
 class ImageServiceTest extends TestCase
 {
-
-    use RefreshDatabase;
-
     protected ImageService $controller;
 
     protected function setUp(): void
