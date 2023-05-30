@@ -3,7 +3,7 @@
 namespace App\Http\Business\Generate;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\Reliability;
+use App\Http\Business\Enum\Reliability;
 use OutOfBoundsException;
 use InvalidArgumentException;
 use App\Models\CaptchaImg;
@@ -45,7 +45,7 @@ class CaptchaImgBuilder {
             }
             $images = $images->shuffle();
             $images->push(...$this->image_controller->getImagesOfClass($classes[0], 1, Reliability::Reliable)); 
-            return new CaptchaImg($classes[0], $images);
+            return new CaptchaImg($images);
         }catch(OutOfBoundsException){
             return null;
         }

@@ -5,11 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-enum Reliability{
-    case Reliable;
-    case Unreliable;
-}
-
 class Image extends Model
 {
     use HasFactory;

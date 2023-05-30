@@ -11,9 +11,10 @@ class CaptchaImg
     private string $chosen_class;
     private Collection $images;
 
-    public function __construct(string $choosen_class, Collection $images)
+    // PRE: $images is a collection of 10 images
+    public function __construct(Collection $images)
     {
-        $this->chosen_class = $choosen_class;
+        $this->chosen_class = $images[0]->getField('class');
         $this->images = $images;
         $this->id = $this->generateId();
     }

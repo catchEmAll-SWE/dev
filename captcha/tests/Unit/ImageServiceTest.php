@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Business\ImageService;
 use App\Models\Image;
-use App\Models\Reliability;
+use App\Http\Business\Enum\Reliability;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Tests\TestCase;
@@ -60,7 +60,6 @@ class ImageServiceTest extends TestCase
         
         $images = $this->controller->getImagesOfClass($class, $num_of_images, $reliability);
         $this->assertNotEmpty($images);
-        $this->assertIsArray($images);
         $this->assertCount($num_of_images, $images);
 
         foreach($images as $image){

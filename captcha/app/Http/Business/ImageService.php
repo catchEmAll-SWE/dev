@@ -2,7 +2,7 @@
 
 namespace App\Http\Business;
 use App\Models\Image;
-use App\Models\Reliability;
+use App\Http\Business\Enum\Reliability;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 use OutOfBoundsException;
