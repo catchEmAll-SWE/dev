@@ -19,7 +19,7 @@ class CaptchaImgResource extends JsonResource
         return [
             'images' => ImageResource::collection($this->getImages()),
             'solution' => $this->getSolution(),
-            'keyNumber' => KeyManager::getKeyNumber(),
+            'keyNumber' => KeyManager::getActiveKeyNumber(),
         ];
     }
 }

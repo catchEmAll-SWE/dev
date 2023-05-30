@@ -14,7 +14,7 @@ class CaptchaImgSolution implements JsonSerializable {
         $this->target_class_images = $target_class_images;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         return [
             'solution' => $this->solution,
             'targetClassImagesId' => $this->target_class_images,

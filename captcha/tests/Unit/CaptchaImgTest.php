@@ -16,10 +16,11 @@ class CaptchaImgTest extends TestCase
     protected function setUp() : void {
         parent::setUp();
         $service = new ImageService();
-        $images = $service->getImagesOfClass("car", 3, Reliability::Reliable);
+        $images = $service->getImagesOfClass("car", 2, Reliability::Reliable);
         $images->push(...$service->getImagesOfClass("car", 2, Reliability::Unreliable));
         $images->push(...$service->getImagesOfClass("laptop", 2, Reliability::Reliable));
         $images->push(...$service->getImagesOfClass("laptop", 3, Reliability::Unreliable));
+        $images->push(...$service->getImagesOfClass("car", 1, Reliability::Reliable));
         $this->captcha_img = new CaptchaImg($images);
     }
 
@@ -29,6 +30,6 @@ class CaptchaImgTest extends TestCase
         $solution = SolutionParser::parseFromEncryptedString(
             $this->captcha_img->getSolution(), KeyManager::getActiveKeyNumber());
         
-        $this->assertEquals($solution->getSolution(), "111003322");
+        $this->assertEquals($solution->getSolution(), "110033222");
     }
 }

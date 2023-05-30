@@ -30,6 +30,8 @@ class CaptchaImgBuilder {
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails){
+        if ($imageDetails == null)
+            throw new InvalidArgumentException("ImageDetails cannot be null");
         $images = new Collection();
         try{
             $classes = $this->image_controller->getCaptchaClasses($imageDetails->getNumberOfClasses());
@@ -43,10 +45,11 @@ class CaptchaImgBuilder {
                     $images->push(...$this->getImages($classes[$index], $number_of_reliable_non_target_images, $num_of_images - $number_of_reliable_non_target_images));
                 }       
             }
+
             $images = $images->shuffle();
             $images->push(...$this->image_controller->getImagesOfClass($classes[0], 1, Reliability::Reliable)); 
             return new CaptchaImg($images);
-        }catch(OutOfBoundsException){
+        } catch(OutOfBoundsException){
             return null;
         }
     }
