@@ -38,6 +38,9 @@ class CaptchaImgVerifier {
 
         $this->user_answer = substr($this->user_answer, 0, -1);
 
+        //TODO: RELIABLE NON TARGET IMAGE SELECTION
+        
+
         foreach(str_split($this->solution) as $index => $single_image_solution) {
 
             // image target but uncertain

@@ -38,7 +38,6 @@ class CaptchaImg
         return $this->images; 
     }
 
-
     private function generateSolution(){
         $target_images = [];
         $solution = "";  
