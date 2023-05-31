@@ -1,14 +1,8 @@
-Implementazione reliability -> done
 --------------------------- => commenti formattati per documentazione(impostata) + revisione struttura file e nomi file (done) e metodi + test (partially done)
 Key manager-> done (needs scheduler)
 Proof of work -> done (backend)
 La parte javascript la lasciamo gestire al front-end visto che il metodo poi è richiamato lì, noi forniamo le informazioni
 (leggi sotto)
-
-
------------------------
-Implementazione update reliability
-Verify
 
 
 
@@ -23,8 +17,10 @@ Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro d
 è javascript.
 
 
-TODO 30 maggio:
-
-- test delle route generate
-- test della parte di verify
-- aggiornare lucidchart con i nuovi metodi e le nuovi classi (in parte fatto)
+Ancora da fare DIO CANE
+- Testare le route
+- Introdurre metodo di controllo captcha creati/risolti 
+- Analisi statica del codice
+- Controllo copertura test
+- Controllo generale di tutto
+- (può essere fatto dopo) Aggiornare lucidchart con i nuovi metodi e le nuovi classi (in parte fatto)
