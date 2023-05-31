@@ -17,8 +17,9 @@ class POWVerifier {
     public function verify() : bool {
         foreach ($this->fixed_strings as $index => $fixed_string) {
             $hashcode = hash("sha256", $fixed_string . $this->nonces[$index]);
-            if (!str_starts_with($hashcode, ProofOfWorkDetails::getDifficulty())) 
+            if (!str_starts_with($hashcode, ProofOfWorkDetails::getDifficulty())){
                 return false;
+            }   
         }
         return true;
     }
