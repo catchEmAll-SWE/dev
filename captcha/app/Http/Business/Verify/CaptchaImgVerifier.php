@@ -36,10 +36,7 @@ class CaptchaImgVerifier {
         if($honey_pot == '1')
             return false;
 
-        $this->user_answer = substr($this->user_answer, 0, -1);
-
-        //TODO: RELIABLE NON TARGET IMAGE SELECTION
-        
+        $this->user_answer = substr($this->user_answer, 0, -1);     
 
         foreach(str_split($this->solution) as $index => $single_image_solution) {
 
@@ -75,13 +72,10 @@ class CaptchaImgVerifier {
 
             //image non target and certain and selected
             else if ($single_image_solution == '3' && $this->user_answer[$index] == '1')
-                return false;
-                
+                return false;                
         }
-
         $target_factor = ($uncertain_target_images != 0) ? $uncertain_target_images_selected / $uncertain_target_images : 1;
         $non_target_factor = ($uncertain_target_images_selected != 0) ? $uncertain_images_selected / $uncertain_images : 0;
-
         return $target_factor > 0.8 && $non_target_factor < 0.4;
     }
 
