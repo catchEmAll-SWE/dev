@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Business\Generate\CaptchaImgBuilder;
-use App\Http\Business\ProofOfWorkDetails;
+use App\Http\Business\Generate\ProofOfWorkDetails;
 
 class Captcha {
     private CaptchaImg $captcha_img;

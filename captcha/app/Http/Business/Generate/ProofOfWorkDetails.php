@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Business;
+namespace App\Http\Business\Generate;
 
 class ProofOfWorkDetails{
     private $fixed_string = [];
