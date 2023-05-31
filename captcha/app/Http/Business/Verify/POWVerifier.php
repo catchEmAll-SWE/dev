@@ -2,7 +2,7 @@
 
 namespace App\Http\Business\Verify;
 
-use App\Http\Business\ProofOfWorkDetails;
+use App\Http\Business\Generate\ProofOfWorkDetails;
 
 class POWVerifier {
     private array $fixed_strings;

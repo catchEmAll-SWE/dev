@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Http\Business\ProofOfWorkDetails;
+use App\Http\Business\Generate\ProofOfWorkDetails;
 use PHPUnit\Framework\TestCase;
 
 class ProofOfWorkDetailsTest extends TestCase

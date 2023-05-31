@@ -38,7 +38,7 @@ class CaptchaImgVerifierTest extends TestCase
 
         $this->captcha_img_verifier_unreliable_imgs_true = new CaptchaImgVerifier("eyJpdiI6Ik5KV2o2WWh6eCtyU1lWR0dwRjZCbWc9PSIsInZhbHVlIjoiNE9JaVpNNTVQUG0rT001U
         GpVZy9aRHU2dUtSMlJLL2p2N091c00wVkFubHhRY0Uvc3dmRDIwSWZqQzY4MkNxek5WNWZzS0RlTFVQSHNPMzJ1QXJiTXdYSmJOZFBGbUtha3NNeEdmbUFSTmIxTkMxUjMw
-        bHl0K05yNHpSZC9KREUiLCJtYWMiOiI0NzlmOTdhYjU2YTY2OTcxMjU4NzgxNGU5NjI5ZGM5NjIzZmQzZmFjODZmZmEzZjVkODliNWM5MmQyODVmZjQ2IiwidGFnIjoiIn0=","1000101010",4);
+        bHl0K05yNHpSZC9KREUiLCJtYWMiOiI0NzlmOTdhYjU2YTY2OTcxMjU4NzgxNGU5NjI5ZGM5NjIzZmQzZmFjODZmZmEzZjVkODliNWM5MmQyODVmZjQ2IiwidGFnIjoiIn0=","1000101000",4);
 
         $this->captcha_img_verifier_unreliable_imgs_false = new CaptchaImgVerifier("eyJpdiI6Ik5KV2o2WWh6eCtyU1lWR0dwRjZCbWc9PSIsInZhbHVlIjoiNE9JaVpNNTVQUG0rT001U
         GpVZy9aRHU2dUtSMlJLL2p2N091c00wVkFubHhRY0Uvc3dmRDIwSWZqQzY4MkNxek5WNWZzS0RlTFVQSHNPMzJ1QXJiTXdYSmJOZFBGbUtha3NNeEdmbUFSTmIxTkMxUjMw
@@ -50,6 +50,7 @@ class CaptchaImgVerifierTest extends TestCase
 
     }
     //233312122
+    //100010111
     public function test_verify_correct_solution(){
         $this->assertTrue($this->captcha_img_verifier_correct_solution->verify());
     }

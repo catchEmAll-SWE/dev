@@ -27,8 +27,8 @@ class CaptchaImgVerifier {
         $uncertain_target_images = 0;
         $uncertain_target_images_selected = 0;
 
-        $uncertain_images = 0;
-        $uncertain_images_selected = 0;
+        $uncertain_non_target_images = 0;
+        $uncertain_non_target_images_selected = 0;
 
         $target_img_counter = 0;
 
@@ -65,17 +65,19 @@ class CaptchaImgVerifier {
 
             // image non target and uncertain
             else if ($single_image_solution == '2'){
-                $uncertain_images++;
+                $uncertain_non_target_images++;
                 if ($this->user_answer[$index] == '1')
-                    $uncertain_images_selected++;
+                    $uncertain_non_target_images_selected++;
             }
 
             //image non target and certain and selected
             else if ($single_image_solution == '3' && $this->user_answer[$index] == '1')
                 return false;                
         }
+
         $target_factor = ($uncertain_target_images != 0) ? $uncertain_target_images_selected / $uncertain_target_images : 1;
-        $non_target_factor = ($uncertain_target_images_selected != 0) ? $uncertain_images_selected / $uncertain_images : 0;
+        $non_target_factor = ($uncertain_non_target_images_selected != 0) ? $uncertain_non_target_images_selected / $uncertain_non_target_images : 0;
+
         return $target_factor > 0.8 && $non_target_factor < 0.4;
     }
 
