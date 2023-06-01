@@ -12,10 +12,16 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
+
     <source>
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./app/Http/Business</directory>
+            <directory suffix=".php">./app/Http/Controllers/API/V1</directory>
+            <directory suffix=".php">./app/Models</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">./app/Http/Business/Enum</directory>
+        </exclude>
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
@@ -28,4 +34,5 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
     </php>
+
 </phpunit>
