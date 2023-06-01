@@ -62,9 +62,33 @@ class CaptchaControllerTest extends TestCase
 
     public function test_verify_captcha_without_token() : void{
         $response = $this->get('api/v1/verify');
-        $response->assertStatus(401);
+        $response->assertRedirect('docs');
+    }
+
+    public function test_verify_using_request_with_missing_params () : void {
+
+        $response = $this->post('api/v1/verify', [
+            'random attribute' => 'random value'
+        ]);
+
+        $response->assertRedirect('docs');
     }
 
     public function test_verify_captcha_response() : void{
+
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $response = $this->post('api/v1/verify', [
+            'response' => '1111111111',
+            'solution' => 'xsdhbcisdbciu',
+            'keyNumber' => '4',
+            'fixedStrings' => ['tryrtfqwertafdtyertsqw', 'tryrtfqwertafdtyertsqw', 'tryrtfqwertafdtyertsqw'],
+            'nonces' => ['random nonce', 'random nonce', 'random nonce'],
+        ]);
+
+        $response->assertStatus(200);
     }
 }
