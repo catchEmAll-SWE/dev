@@ -12,8 +12,8 @@ class Captcha extends Model {
     protected $primaryKey = 'hashed_id';
 
     protected $fillable = ['hashed_id'];
-    public $timestamps = false;
     public $incrementing = false;
+
 
     private CaptchaImg $captcha_img;
     private ProofOfWorkDetails $proof_of_work_details;

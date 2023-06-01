@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('active_captchas', function (Blueprint $table) {
             $table->string('hashed_id')->primary();
+            $table->timestamps();
         });
     }
 
