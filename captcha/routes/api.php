@@ -26,10 +26,6 @@ Route::group(['prefix'=>'v1', 'middleware'=>['auth:sanctum']], function(){
     Route::post('verify', [CaptchaController::class, 'verify']);
 });
 
-Route::get('v1/login-error', function(Request $request) {
-    return "User is not authenticated";
-})->name('not-authenticated');
-
 Route::get('v1/encrypt/{data}', function(Request $request, string $data){
     $algo = new AES256Cipher();
     return $algo->encrypt($data);

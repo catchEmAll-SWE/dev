@@ -25,17 +25,27 @@ class CaptchaControllerTest extends TestCase
 
     public function test_generate_captcha_route_without_token () : void {
         $response = $this->get('api/v1/generate');
-        $response->assertStatus(401);
+        $response->assertRedirect('docs');
     }
 
     public function test_generate_captcha_route_return_json_with_right_values () : void {
-        $user = DB::table('users')->select('*')->where('email', '=', 'catchemall@email.com')->first();
-        Sanctum::actingAs($user, ['*']);
+
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
         $response = $this->get('api/v1/generate');
-        //$response->assertStatus(200);
 
-        $json_response = json_decode($response->getContent());
-
+        $response->assertJson(fn (AssertableJson $json) =>
+            $json->has('data', fn (AssertableJson $json) =>
+                $json->where('captchaImg', fn (array $captchaImg) => count($captchaImg) == 10)
+                    ->has('proofOfWorkDetails', fn (AssertableJson $json) =>
+                        $json->has('fixedStrings')
+                            ->has('difficulty')
+                        )
+                    )
+        );
     }
 
 
