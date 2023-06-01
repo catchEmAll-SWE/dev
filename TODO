@@ -18,8 +18,8 @@ Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro d
 
 
 Ancora da fare DIO CANE
-- Testare le route
-- Introdurre metodo di controllo captcha creati/risolti 
+- Introdurre metodo di controllo captcha creati/risolti
+- Badge test coverage
 - Analisi statica del codice
 - Controllo copertura test
 - Controllo generale di tutto
