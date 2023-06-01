@@ -4,15 +4,16 @@ namespace App\Models;
 
 use App\Http\Business\Generate\CaptchaImgBuilder;
 use App\Http\Business\Generate\ProofOfWorkDetails;
+use Illuminate\Database\Eloquent\Model;
 
-class Captcha {
+class Captcha extends Model {
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'captchas';
+    protected $table = 'active_captchas';
 
     protected $fillable = ['id'];
     public $incrementing = false;

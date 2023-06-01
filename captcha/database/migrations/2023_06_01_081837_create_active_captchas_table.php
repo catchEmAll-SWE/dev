@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('captchas', function (Blueprint $table) {
+        Schema::create('active_captchas', function (Blueprint $table) {
             $table->string('id')->primary();
         });
     }
@@ -21,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('captchas');
+        Schema::dropIfExists('active_captchas');
     }
 };

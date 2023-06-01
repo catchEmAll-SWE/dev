@@ -8,6 +8,7 @@ use App\Http\Requests\VerifyCaptchaRequest;
 use App\Http\Resources\V1\CaptchaResource;
 use App\Models\Captcha;
 use App\Http\Business\Verify\CaptchaVerifier;
+use PhpParser\Node\Expr\Cast;
 
 class CaptchaController extends Controller
 {
@@ -25,7 +26,7 @@ class CaptchaController extends Controller
     */
     public function generate(Request $request)
     {
-        return new CaptchaResource(new Captcha());
+        return new CaptchaResource($this->getNewCaptcha());
     }
     
 
@@ -38,6 +39,22 @@ class CaptchaController extends Controller
      */
     public function verify(VerifyCaptchaRequest $request)
     {
-        return CaptchaVerifier::verify($request) ? "true" : "false";
+        $verifier = new CaptchaVerifier($request);
+        $captcha_to_verify_id = $verifier->getIdOfCaptchaToVerify();
+        if (Captcha::find($captcha_to_verify_id) && $verifier->verify($request)) {
+            Captcha::destroy($captcha_to_verify_id);
+            return true;
+        }
+        return false;
+    }
+
+    private function getNewCaptcha () : Captcha {
+        $captcha = new Captcha();
+        $max_attemps = 5;
+
+        while(Captcha::find($captcha->id) && $max_attemps > 0)
+            $captcha = new Captcha();
+
+        return $captcha;
     }
 }
