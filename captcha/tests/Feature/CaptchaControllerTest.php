@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Testing\Fluent\AssertableJson;
-use Illuminate\Support\Facades\DB;
 
 class CaptchaControllerTest extends TestCase
 {
@@ -39,12 +39,19 @@ class CaptchaControllerTest extends TestCase
 
         $response->assertJson(fn (AssertableJson $json) =>
             $json->has('data', fn (AssertableJson $json) =>
-                $json->where('captchaImg', fn (array $captchaImg) => count($captchaImg) == 10)
-                    ->has('proofOfWorkDetails', fn (AssertableJson $json) =>
-                        $json->has('fixedStrings')
-                            ->has('difficulty')
-                        )
+                $json->has('captchaImg', fn (AssertableJson $json) =>
+                    $json->has('images', fn (AssertableJson $json) =>
+                        $json->has(10)
+                        ->etc()
                     )
+                    ->has('solution')
+                    ->has('keyNumber')
+                )
+                ->has('proofOfWorkDetails', fn (AssertableJson $json) =>
+                    $json->has('fixedStrings')
+                    ->has('difficulty')
+                )
+            )
         );
     }
 
@@ -61,7 +68,7 @@ class CaptchaControllerTest extends TestCase
     */
 
     public function test_verify_captcha_without_token() : void{
-        $response = $this->get('api/v1/verify');
+        $response = $this->post('api/v1/verify');
         $response->assertRedirect('docs');
     }
 
