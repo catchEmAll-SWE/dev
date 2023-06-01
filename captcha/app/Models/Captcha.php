@@ -6,8 +6,26 @@ use App\Http\Business\Generate\CaptchaImgBuilder;
 use App\Http\Business\Generate\ProofOfWorkDetails;
 
 class Captcha {
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'captchas';
+
+    protected $fillable = ['id'];
+    public $incrementing = false;
+    public $timestamps = false;
+
     private CaptchaImg $captcha_img;
     private ProofOfWorkDetails $proof_of_work_details;
+
+    public function getField($field){
+        if ($field == 'id')
+            return $this->captcha_img->getId();
+        return 'null';
+    }
 
     public function __construct()
     {
