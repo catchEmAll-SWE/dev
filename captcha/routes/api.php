@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\CaptchaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Business\Ecryption\AES256Cipher;
+use App\Http\Business\KeyManager;
 use App\Http\Controllers\KeyController;
 
 /*
@@ -31,9 +32,7 @@ Route::get('v1/encrypt/{data}', function(Request $request, string $data){
     return $algo->encrypt($data);
 });
 
-Route::get('v1/decrypt/{data}', function(Request $request, string $data){
+Route::get('v1/decrypt/{data}/{key}', function(Request $request, string $data, int $key){
     $algo = new AES256Cipher();
-    return $algo->decrypt($data, 4);
+    return $algo->decrypt($data, $key);
 });
-
-
