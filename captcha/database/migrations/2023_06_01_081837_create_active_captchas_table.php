@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('active_captchas', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->string('hashed_id')->primary();
         });
     }
 

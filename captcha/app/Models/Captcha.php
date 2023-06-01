@@ -8,30 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Captcha extends Model {
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'active_captchas';
+    protected $primaryKey = 'hashed_id';
 
-    protected $fillable = ['id'];
-    public $incrementing = false;
+    protected $fillable = ['hashed_id'];
     public $timestamps = false;
+    public $incrementing = false;
 
     private CaptchaImg $captcha_img;
     private ProofOfWorkDetails $proof_of_work_details;
-
-    public function getField($field){
-        if ($field == 'id')
-            return $this->captcha_img->getId();
-        return 'null';
-    }
 
     public function __construct()
     {
         $this->captcha_img = CaptchaImgBuilder::getGenerator()->getCaptchaImg();
         $this->proof_of_work_details = new ProofOfWorkDetails($this->captcha_img->getId());
+        $this->setAttribute('hashed_id', $this->captcha_img->getId());
+    }
+
+    public function getField (string $field) : string {
+        return $this->{$field};
+    }
+
+    public function getId () : string {
+        return $this->captcha_img->getId();
     }
 
     public function getCaptchaImg() : CaptchaImg {

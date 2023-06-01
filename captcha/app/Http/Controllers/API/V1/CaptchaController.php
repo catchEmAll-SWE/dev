@@ -8,7 +8,7 @@ use App\Http\Requests\VerifyCaptchaRequest;
 use App\Http\Resources\V1\CaptchaResource;
 use App\Models\Captcha;
 use App\Http\Business\Verify\CaptchaVerifier;
-use PhpParser\Node\Expr\Cast;
+use Illuminate\Support\Facades\DB;
 
 class CaptchaController extends Controller
 {
@@ -26,7 +26,9 @@ class CaptchaController extends Controller
     */
     public function generate(Request $request)
     {
-        return new CaptchaResource($this->getNewCaptcha());
+        $captcha = $this->getNewCaptcha();
+        $captcha->save();
+        return new CaptchaResource($captcha);
     }
     
 
@@ -41,18 +43,17 @@ class CaptchaController extends Controller
     {
         $verifier = new CaptchaVerifier($request);
         $captcha_to_verify_id = $verifier->getIdOfCaptchaToVerify();
-        if (Captcha::find($captcha_to_verify_id) && $verifier->verify($request)) {
+        if (Captcha::select('hashed_id')->where('hashed_id', $captcha_to_verify_id)->get()->count() == 1 && $verifier->verify($request)) {
             Captcha::destroy($captcha_to_verify_id);
             return true;
         }
-        return false;
+        return response()->json(['message' => 'Captcha not found or invalid'], 404);
     }
 
     private function getNewCaptcha () : Captcha {
         $captcha = new Captcha();
         $max_attemps = 5;
-
-        while(Captcha::find($captcha->id) && $max_attemps > 0)
+        while(Captcha::find($captcha->id) && $max_attemps-- > 0)
             $captcha = new Captcha();
 
         return $captcha;
