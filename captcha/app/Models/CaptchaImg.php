@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Http\Business\Ecryption\AES256Cipher;
 use Illuminate\Database\Eloquent\Collection;
-use App\Http\Business\SolutionConverter;
+use App\Http\Business\SolutionParser;
 
 class CaptchaImg
 {
@@ -12,9 +11,10 @@ class CaptchaImg
     private string $chosen_class;
     private Collection $images;
 
-    public function __construct(string $choosen_class, Collection $images)
+    // PRE: $images is a collection of 10 images
+    public function __construct(Collection $images)
     {
-        $this->chosen_class = $choosen_class;
+        $this->chosen_class = $images[9]->getField('class');
         $this->images = $images;
         $this->id = $this->generateId();
     }
@@ -38,14 +38,19 @@ class CaptchaImg
         return $this->images; 
     }
 
-
     private function generateSolution(){
-        $encryption_algorithm = new AES256Cipher();
-        $solution = "";
-        
-        foreach ($this->images as $image){
-            $solution .= ($image->getField('class') == $this->chosen_class) ? "1" : "0";
+        $target_images = [];
+        $solution = "";  
+        for ($i = 0; $i < 9; $i++){
+            $image = $this->images[$i];
+            $img_class = $image->getField('class');
+            if($img_class == $this->chosen_class){
+                $solution .= ($image->getField('reliability')>=80) ? "1" : "0";
+                array_push($target_images, $image->getField('id'));
+            }else{
+                $solution .= ($image->getField('reliability')>=80) ? "3" : "2";
+            }
         }
-        return $encryption_algorithm->encrypt(SolutionConverter::convertToJsonString($solution));
+        return SolutionParser::parseToEncryptedString($solution, $target_images);
     }
 }

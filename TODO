@@ -1,14 +1,8 @@
-Implementazione reliability -> done
 --------------------------- => commenti formattati per documentazione(impostata) + revisione struttura file e nomi file (done) e metodi + test (partially done)
 Key manager-> done (needs scheduler)
 Proof of work -> done (backend)
 La parte javascript la lasciamo gestire al front-end visto che il metodo poi è richiamato lì, noi forniamo le informazioni
 (leggi sotto)
-
-
------------------------
-Implementazione update reliability
-Verify
 
 
 
@@ -21,3 +15,10 @@ Il captcha controller quando riceve la richiesta invia un json con 2 oggetti:
   
 Ogni web worker dovrà risolvere una parte di id diverso così da avere lavoro diverso da fare. Quando verrà fatta la richiesta del captcha al load di esso sarà caricato il metodo che lancia il pow, che 
 è javascript.
+
+
+Ancora da fare DIO CANE
+- Badge test coverage
+- Analisi statica del codice
+- Controllo generale di tutto
+- Controllare le relazioni tra le classi su lucidchart
