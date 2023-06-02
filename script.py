@@ -69,6 +69,14 @@ class ImageDatabaseService:
     def isImageRedundant(img_id) -> bool:
         ImageDatabaseService.cursor.execute("SELECT * FROM images where id = ?", (img_id,))
         return (len(ImageDatabaseService.cursor.fetchall())) == 1
+    
+    def isImageBanned(img_id)-> bool:
+        ImageDatabaseService.cursor.execute("SELECT * FROM images where isBanned = 1 and id = ?", (img_id,))
+        return (len(ImageDatabaseService.cursor.fetchall())) == 1
+    
+    def banImage():
+        ImageDatabaseService.cursor.execute("UPDATE images SET isBanned = 1 where reliability <= 0")
+        
 
 # This class provide service for storing images in base64 format in the file system
 class StoreImageInBase64Service:
@@ -97,7 +105,7 @@ def main():
     outlining = OutliningService(OutliningAlgorithm())
     for img_class in classes:
         img, id = unsplash.retriveImage(img_class)
-        if(ImageDatabaseService.isImageRedundant(id) == False):
+        if(ImageDatabaseService.isImageRedundant(id) == False and ImageDatabaseService.isImageBanned(id) == False):
             outliningImage = outlining.elaborate(img)
             StoreImageInBase64Service.storeImage(outliningImage, img_class, id)
             ImageDatabaseService.insertImage(id,img_class)
