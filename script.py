@@ -60,7 +60,7 @@ class ImageDatabaseService:
     @staticmethod
     def insertImage(id, img_class):
         try:
-            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability) VALUES(?,?,?)", (id,img_class,50))
+            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability,isBanned) VALUES(?,?,?,?)", (id,img_class,50,0))
             ImageDatabaseService.connection.commit()
         except mysql.connector.Error as error:
             print("Failed to insert new image into MySQL table {}".format(error))
