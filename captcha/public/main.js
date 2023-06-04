@@ -6,9 +6,9 @@ function Captcha(){
     }
     });
 
-    alert(response);
-
     let data = response.json();
+
+    alert(data);
 
     let images_array = [];
     let images_containers = document.getElementsByClassName("img-container");
