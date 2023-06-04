@@ -13,7 +13,7 @@ function Captcha(){
 
     for(let i = 0;i < 10;i++){
         images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
-        images_src[i].src = images_array[i];
+        images_src[i].src = 'data:image/jpeg;base64, ' + images_array[i];
     }
 
     let pow_array = [];
