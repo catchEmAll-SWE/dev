@@ -17,7 +17,7 @@
         <h1>
             <span lang="en">Login</span>
         </h1>
-        <form method="POST" action="/api/v1/verify">
+        <form method="POST" action="Response()">
             <fieldset class="credentials">
                 <legend>Credenziali</legend>
                 <label for ="username">Username</label>

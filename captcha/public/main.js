@@ -27,9 +27,16 @@ function Captcha(){
     sessionStorage.setItem('keyNumber', data["data"]["captchaImg"]["keyNumber"]);
     sessionStorage.setItem('difficulty', data["data"]["proofOfWorkDetails"]["difficulty"]);
 
-
-    pow();
+    Pow();
 
 }
 
+function Response(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let images_array = [];
+    
+
+}
 
