@@ -4,9 +4,9 @@ function Captcha(){
     headers: {
         Authentication: '4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
     }
-    }).then(function(response) {
-        return response.json();
-    });
+    }).then(response => response.json())
+    .then( json => console.log(JSON.stringify(json)))
+    .catch( error => console.error(error));
 
     alert(data);
 
