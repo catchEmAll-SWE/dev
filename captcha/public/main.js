@@ -45,11 +45,23 @@ function Response(){
         "response" : images_array,
         "solution" : sessionStorage.getItem('solution'),
         "keyNumber" : sessionStorage.getItem('keyNumber'),
+        "fixedStrings" : sessionStorage.getItem('fixedStrings'),
+        "nonces" : sessionStorage.getItem('nonces')
+    };
 
+    var json_response = JSON.stringify(dict_json);
 
+    fetch("/api/v1/verify",{
+        method: "POST",
+        headers:{
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: json_response
+    }).then(res => res.json())
+      .catch(function(error){
+        console.log('Request failed', error);
+      });
 
-    }
-
-v
 }
 
