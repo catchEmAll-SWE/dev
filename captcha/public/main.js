@@ -1,5 +1,5 @@
 function Captcha(){
-    let response = fetch('htpps://swe.gdr00.it/api/v1/generate', {
+    let response = fetch('https://swe.gdr00.it/api/v1/generate', {
     method: 'GET',
     headers: {
         Authentication: '4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
@@ -18,14 +18,21 @@ function Captcha(){
     }
 
     sessionStorage.clear();
-    
+
     sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
     sessionStorage.setItem('keyNumber', data["data"]["captchaImg"]["keyNumber"]);
     sessionStorage.setItem('difficulty', data["data"]["proofOfWorkDetails"]["difficulty"]);
 
-
-    pow();
+    Pow();
 
 }
 
+function Response(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let images_array = [];
+    
+
+}
 
