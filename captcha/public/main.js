@@ -1,5 +1,5 @@
 function Captcha(){
-    let data = fetch('/api/v1/generate', {
+    let data = fetch('https://swe.gdr00.it/api/v1/generate', {
     method: 'GET',
     headers: {
         Authentication: 'Bearer {4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff}'
