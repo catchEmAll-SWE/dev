@@ -68,6 +68,12 @@ fieldset {
     display: none;
 }
 
+.img-container:last-child {
+    width: 1px;
+    height: 1px;
+    margin-left: -999px;
+}
+
 label::before {
   background-color: white;
   color: white;
