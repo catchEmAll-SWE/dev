@@ -6,15 +6,26 @@ function Captcha(){
     }
     });
     let data = response.json();
+
     let images_array = [];
-    for(let i = 0;i < 9;i++){
+    for(let i = 0;i < 10;i++){
         images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
     }
-    let solution = data["data"]["captchaImg"]["solution"];
-    let keyNumber = data["data"]["captchaImg"]["keyNumber"];
+
     let pow__array = [];
     for(let i = 0; i < 3;i++){
         pow_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
     }
-    let difficulty = data["data"]["proofOfWorkDetails"]["difficulty"];
+
+    sessionStorage.clear();
+    
+    sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
+    sessionStorage.setItem('keyNumber', data["data"]["captchaImg"]["keyNumber"]);
+    sessionStorage.setItem('difficulty', data["data"]["proofOfWorkDetails"]["difficulty"]);
+
+
+    pow();
+
 }
+
+
