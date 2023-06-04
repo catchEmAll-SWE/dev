@@ -1,10 +1,13 @@
 function Captcha(){
-    let response = fetch('https://swe.gdr00.it/api/v1/generate', {
+    let response = fetch('/api/v1/generate', {
     method: 'GET',
     headers: {
         Authentication: '4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
     }
     });
+
+    alert(response);
+
     let data = response.json();
 
     let images_array = [];
@@ -36,7 +39,7 @@ function Response(){
     let password = document.getElementById("password").value;
 
     let images_array = [];
-    
+
 
 }
 
