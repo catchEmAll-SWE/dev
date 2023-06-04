@@ -7,15 +7,13 @@ function Captcha(){
     }).then(function(response) {
         return response.json();
     });
-    
-   
+
     let images_array = [];
-    let images_containers = document.getElementsByClassName("img-container");
-    let images_src = images_containers.getElementsByTagName('img');
+    let images_container = document.getElementsByClassName("img-container");
 
     for(let i = 0;i < 10;i++){
         images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
-        images_src[i].src = images_array[i];
+        images_container[i].item(1).getElementsByTagName("img").src = images_array[i];
     }
 
     let fs_array = [];
