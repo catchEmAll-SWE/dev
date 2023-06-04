@@ -1,3 +1,34 @@
+function Pow(){
+    console.log("Starting pow");
+    if (typeof(Worker) !== "undefined") {    
+        console.log("Starting pow's workers");
+
+        content = sessionStorage.getItem('fixedStrings');
+        difficulty = sessionStorage.getItem('difficulty');
+
+        //create 3 workers
+        for(let i=0; i<3; ++i){
+            worker = new Worker("../web-worker.js");
+            worker.onmessage = workerDone;
+            worker.postMessage([content[i], difficulty, i]);
+            running++;
+        }
+
+    } else {
+        // Sorry! No Web Worker support..
+        console.log("No Web Worker support");
+    }
+}
+
+function workerDone(e){
+    --running;
+    console.log("Worker "+e.data[1]+" is done, hashcode found: "+e.data[0]);
+    document.getElementById('nonce').value = e.data[0];
+    if(running === 0){
+        console.log("All workers complete");
+    }
+}
+
 function Captcha(){
     let data = fetch('/api/v1/generate', {
     method: 'GET',
