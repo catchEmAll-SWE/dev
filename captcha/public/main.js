@@ -16,7 +16,7 @@ function Captcha(){
         images_src[i].src = images_array[i];
     }
 
-    let pow__array = [];
+    let pow_array = [];
     for(let i = 0; i < 3;i++){
         pow_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
     }
