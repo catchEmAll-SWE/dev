@@ -8,11 +8,15 @@ function Captcha(){
     let data = response.json();
 
     let images_array = [];
+    let images_containers = document.getElementsByClassName("img-container");
+    let images_src = images_containers.getElementsByTagName('img');
+
     for(let i = 0;i < 10;i++){
         images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
+        images_src[i].src = images_array[i];
     }
 
-    let pow__array = [];
+    let pow_array = [];
     for(let i = 0; i < 3;i++){
         pow_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
     }
