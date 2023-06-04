@@ -17,7 +17,7 @@
         <h1>
             <span lang="en">Login</span>
         </h1>
-        <form method="POST" action="/api/v1">
+        <form method="POST" action="/api/v1/verify">
             <fieldset class="credentials">
                 <legend>Credenziali</legend>
                 <label for ="username">Username</label>
@@ -25,7 +25,45 @@
                 <label for ="password">Password</label>
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
             </fieldset>
-            <input type="button" id="generate-captcha" onclick="captcha()" value="Genera Captcha"/>
+            <fieldset class="captcha-images">
+                <legend>Seleziona le immagini appartenente alla classe <component>ClassTarget</component></legend>
+                <div class="img-container">
+                    <input type="checkbox" id="img0" name="" value="0" />
+                    <label for="img0"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img1" name="" value="1" />
+                    <label for="img1" ><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img2" name="" value="2" />
+                    <label for="img2"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img3" name="" value="3" />
+                    <label for="img3"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img4" name="" value="4" />
+                    <label for="img4"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img5" name="" value="5" />
+                    <label for="img5"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img6" name="" value="6" />
+                    <label for="img6"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img7" name="" value="7" />
+                    <label for="img7"><img src=""></label>
+                </div>
+                <div class="img-container">
+                    <input type="checkbox" id="img8" name="" value="8" />
+                    <label for="img8"><img src=""></label>
+                </div>
+            </fieldset>
             <input type="hidden" id="captcha-id" name="captcha-id" value=""/>
             <input type="hidden" id="nonce" name="nonce" value=""/>
             <input type="submit" value="Login">
