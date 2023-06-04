@@ -1,12 +1,12 @@
 function Captcha(){
-    let response = fetch('/api/v1/generate', {
+    let data = fetch('/api/v1/generate', {
     method: 'GET',
     headers: {
         Authentication: '4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
     }
+    }).then(function(response) {
+        return response.json();
     });
-
-    let data = response.json();
 
     alert(data);
 
