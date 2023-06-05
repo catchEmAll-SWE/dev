@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class KeyManager {
 
-    public function updateKey() {
+    public function updateKey() : void {
         $active_key = KeyManager::getActiveKey();
 
         if (!$active_key) {
@@ -31,12 +31,12 @@ class KeyManager {
         return ($active_key) ? $active_key : null;
     }
 
-    private function disableActiveKey (Key $active_key) {
+    private function disableActiveKey (Key $active_key) : void {
         $active_key->active = false;
         $active_key->save();
     }
 
-    private function insertNewActiveKeyWithId(int $new_key_id) {
+    private function insertNewActiveKeyWithId(int $new_key_id) : void {
         DB::table('keys')->insert([
             'id' => $new_key_id,
             'key' => Crypt::generateKey('AES-256-CBC'),

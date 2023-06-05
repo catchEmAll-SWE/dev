@@ -22,7 +22,7 @@ class CaptchaVerifier {
         }
     }
 
-    public function getIdOfCaptchaToVerify () {
+    public function getIdOfCaptchaToVerify () : string {
         $fixedStrings = $this->request->get('fixedStrings');
         return $fixedStrings[0] . $fixedStrings[1] . $fixedStrings[2];
     }

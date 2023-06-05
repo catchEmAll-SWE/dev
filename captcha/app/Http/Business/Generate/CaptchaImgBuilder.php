@@ -10,7 +10,7 @@ use App\Models\CaptchaImg;
 use App\Http\Business\ImageService;
 
 class CaptchaImgBuilder {
-    private static $generator = NULL;
+    private static ?CaptchaImgBuilder $generator = NULL;
     private ImageService $image_controller;
 
     private function __construct(){
@@ -29,7 +29,7 @@ class CaptchaImgBuilder {
         return $this->buildCaptchaImg($details);
     }
 
-    private function buildCaptchaImg(ImageDetails $imageDetails){
+    private function buildCaptchaImg(ImageDetails $imageDetails) : CaptchaImg {
         if ($imageDetails == null)
             throw new InvalidArgumentException("ImageDetails cannot be null");
         $images = new Collection();

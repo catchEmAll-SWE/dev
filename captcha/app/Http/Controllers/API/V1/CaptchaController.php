@@ -8,7 +8,6 @@ use App\Http\Requests\VerifyCaptchaRequest;
 use App\Http\Resources\V1\CaptchaResource;
 use App\Models\Captcha;
 use App\Http\Business\Verify\CaptchaVerifier;
-use Illuminate\Support\Facades\DB;
 
 class CaptchaController extends Controller
 {
@@ -24,7 +23,7 @@ class CaptchaController extends Controller
     * @responseField fixedString string[] Array of string to be used in proof of work as fixed part
     * @responseField difficulty int Number of diffulty's zeros
     */
-    public function generate(Request $request)
+    public function generate(Request $request) : CaptchaResource
     {
         $captcha = $this->getNewCaptcha();
         $captcha->save();
@@ -39,7 +38,7 @@ class CaptchaController extends Controller
      * @bodyParam fixedStrings string[] required The array composed of the three parts of the hashed id of the captcha, passed as api/v1/generate response. Example: [ "961fa7b4bc6af6f447ecd0" , "0635c63aadef1d4a1fd13" , "a51133975c8b385275f24" ]
      * @bodyParam nonces string[] required The array of characters that resolves the proof of work for the different fixed strings. Example: [ "12cd" , "23dwq" , "65faa" ]
      */
-    public function verify(VerifyCaptchaRequest $request)
+    public function verify(VerifyCaptchaRequest $request) : bool
     {
         $verifier = new CaptchaVerifier($request);
         $captcha_to_verify_id = $verifier->getIdOfCaptchaToVerify();
