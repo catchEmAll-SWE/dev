@@ -2,8 +2,7 @@ let running = 0;
 let nonces = [];
 async function getCaptcha(){
     const url = new URL(
-        "http://localhost/SWE/dev/captcha/public/api/v1/generate"
-        //"https://swe.gdr00.it/api/v1/generate"
+        "https://swe.gdr00.it/api/v1/generate"
     );
     const headers = {
         "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
