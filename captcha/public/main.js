@@ -50,7 +50,7 @@ function Pow(){
 
         //create 3 workers
         for(let i=0; i<3; ++i){
-            worker = new Worker("../web-worker.js");
+            worker = new Worker("../public/web-worker.js");
             worker.onmessage = workerDone;
             worker.postMessage([content[i], difficulty, i]);
             running++;
