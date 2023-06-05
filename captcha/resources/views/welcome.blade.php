@@ -17,7 +17,7 @@
         <h1>
             <span lang="en">Login</span>
         </h1>
-        <form method="POST" action="Response()">
+        <form id="form">
             <fieldset class="credentials">
                 <legend>Credenziali</legend>
                 <label for ="username">Username</label>
@@ -68,10 +68,9 @@
                     <label for="img9"><img src=""></label>
                 </div>
             </fieldset>
-            <input type="hidden" id="captcha-id" name="captcha-id" value=""/>
-            <input type="hidden" id="nonce" name="nonce" value=""/>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" onclick="Verify();">
             <input type="reset" value="Annulla">
         </form>
     </body>
+    
 </html>

@@ -1,7 +1,9 @@
 let running = 0;
+let nonces = [];
 async function getCaptcha(){
     const url = new URL(
-        "https://swe.gdr00.it/api/v1/generate"
+        "http://localhost/SWE/dev/captcha/public/api/v1/generate"
+        //"https://swe.gdr00.it/api/v1/generate"
     );
     const headers = {
         "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
@@ -14,6 +16,7 @@ async function getCaptcha(){
         headers,
     });
     data = await response.json();
+    console.log(data);
 
     
     let images_array = [];
@@ -34,7 +37,8 @@ async function getCaptcha(){
     sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
     sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
     sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
-    sessionStorage.setItem('fixedStrings',fs_array);
+    sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
+
 
     Pow();
 
@@ -44,13 +48,11 @@ function Pow(){
     console.log("Starting pow");
     if (typeof(Worker) !== "undefined") {    
         console.log("Starting pow's workers");
-
         content = sessionStorage.getItem('fixedStrings');
         difficulty = sessionStorage.getItem('difficulty');
-
         //create 3 workers
         for(let i=0; i<3; ++i){
-            worker = new Worker("../public/web-worker.js");
+            worker = new Worker(location.pathname + "/web-worker.js");
             worker.onmessage = workerDone;
             worker.postMessage([content[i], difficulty, i]);
             running++;
@@ -65,43 +67,57 @@ function Pow(){
 function workerDone(e){
     --running;
     console.log("Worker "+e.data[1]+" is done, hashcode found: "+e.data[0]);
-    document.getElementById('nonce').value = e.data[0];
+    nonces[e.data[1]] = e.data[0].toString();
     if(running === 0){
         console.log("All workers complete");
     }
-}
+    sessionStorage.setItem("nonces", JSON.stringify(nonces));}
 
 
-function Response(){
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+async function Verify(){
+    const form = document.getElementById('form');
 
-    let images_array = [];
+    form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let response = "";
+    let fixedStrings = JSON.parse(sessionStorage.getItem("fixedStrings"));
+    let nonces = JSON.parse(sessionStorage.getItem("nonces"));
+
     for(let i=0; i < 10; i++){
-        images_array.push(document.getElementById("img"+i).checked);
+        if(document.getElementById("img"+i).checked){
+            response += "1";
+        }else{
+            response+= "0";
+        }
     }
-
-    var dict_json = {
-        "response" : images_array,
-        "solution" : sessionStorage.getItem('solution'),
-        "keyNumber" : sessionStorage.getItem('keyNumber'),
-        "fixedStrings" : sessionStorage.getItem('fixedStrings'),
-        "nonces" : sessionStorage.getItem('nonces')
-    };
-
-    var json_response = JSON.stringify(dict_json);
-
-    fetch("/api/v1/verify",{
-        method: "POST",
-        headers:{
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: json_response
-    }).then(res => res.json())
-      .catch(function(error){
-        console.log('Request failed', error);
-      });
-
+            const url = new URL(
+                "http://localhost/SWE/dev/captcha/public/api/v1/verify"
+                //"https://swe.gdr00.it/api/v1/verify"
+            );
+                    
+            const headers = {
+                "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            };
+                    
+            let body = {
+                "response": response,
+                "solution": sessionStorage.getItem('solution'),
+                "keyNumber": parseInt(sessionStorage.getItem('keyNumber')),
+                "fixedStrings": fixedStrings,
+                "nonces": nonces
+            };
+            console.log(JSON.stringify(body));
+            
+            result = await fetch(url, {
+                method: "post",
+                headers,
+                body: JSON.stringify(body),
+            })
+            console.log(await result);
+            });
 }
+
+
 

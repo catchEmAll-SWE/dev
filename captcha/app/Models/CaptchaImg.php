@@ -30,6 +30,10 @@ class CaptchaImg
         return $this->id;
     }
 
+    public function getChosenClass(){
+        return $this->chosen_class;
+    }
+
     public function getSolution(){
         return $this->generateSolution();
     }
