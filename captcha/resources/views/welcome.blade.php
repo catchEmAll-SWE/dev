@@ -69,7 +69,12 @@
                 </div>
             </fieldset>
             <input type="hidden" id="captcha-id" name="captcha-id" value=""/>
-            <input type="hidden" id="nonce" name="nonce" value=""/>
+            <input type="hidden" id="fixed_strings" name="fixed_strings[]" value=""/>
+            <input type="hidden" id="fixed_strings" name="fixed_strings[]" value=""/>
+            <input type="hidden" id="fixed_strings" name="fixed_strings[]" value=""/>
+            <input type="hidden" id="nonces" name="nonces[]" value=""/>
+            <input type="hidden" id="nonces" name="nonces[]" value=""/>
+            <input type="hidden" id="nonces" name="nonces[]" value=""/>
             <input type="submit" value="Login">
             <input type="reset" value="Annulla">
         </form>

@@ -25,8 +25,10 @@ async function getCaptcha(){
         images[i].src = "data:image/png;base64," + images_array[i];
     }
     let fs_array = [];
+    let fixedStrings = document.getElementsByName('fixed_strings[]');
     for(let i = 0; i < 3;i++){
         fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
+        fixedStrings[i].value = data["data"]["proofOfWorkDetails"]["fixedStrings"][i];
     }
 
     sessionStorage.clear();
@@ -63,9 +65,11 @@ function Pow(){
 }
 
 function workerDone(e){
+    let nonces = document.getElementsByName('nonces[]');
     --running;
     console.log("Worker "+e.data[1]+" is done, hashcode found: "+e.data[0]);
-    document.getElementById('nonce').value = e.data[0];
+    nonces[e.data[1]].value = e.data[0];
+    document.getElementById('nonces').value = e.data[0];
     if(running === 0){
         console.log("All workers complete");
     }
