@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="main.css">
         <script src="main.js"></script>
     </head>
-    <body onload="Captcha()">
+    <body onload="getCaptcha()">
 	<p id="currentPath"></p>
         <h1>
             <span lang="en">Login</span>

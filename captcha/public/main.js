@@ -1,3 +1,45 @@
+let running = 0;
+async function getCaptcha(){
+    const url = new URL(
+        "https://swe.gdr00.it/api/v1/generate"
+    );
+    const headers = {
+        "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    };
+    
+    let response = await fetch(url, {
+        method: "GET",
+        headers,
+    });
+    data = await response.json();
+
+    
+    let images_array = [];
+    let images = document.querySelectorAll("img");
+
+
+    for(let i = 0;i < 10;i++){
+        images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
+        images[i].src = "data:image/png;base64," + images_array[i];
+    }
+    let fs_array = [];
+    for(let i = 0; i < 3;i++){
+        fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
+    }
+
+    sessionStorage.clear();
+
+    sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
+    sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
+    sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
+    sessionStorage.setItem('fixedStrings',fs_array);
+
+    Pow();
+
+}
+
 function Pow(){
     console.log("Starting pow");
     if (typeof(Worker) !== "undefined") {    
@@ -29,39 +71,6 @@ function workerDone(e){
     }
 }
 
-function Captcha(){
-    let data = fetch('https://swe.gdr00.it/api/v1/generate', {
-    method: 'GET',
-    headers: {
-        Authentication: 'Bearer {4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff}'
-    }
-    }).then(function(response) {
-        return response.json();
-    });
-
-    let images_array = [];
-    let images_container = document.getElementsByClassName("img-container");
-
-    for(let i = 0;i < 10;i++){
-        images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
-        images_container[i].item(1).getElementsByTagName("img").src = images_array[i];
-    }
-
-    let fs_array = [];
-    for(let i = 0; i < 3;i++){
-        fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
-    }
-
-    sessionStorage.clear();
-
-    sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
-    sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
-    sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
-    sessionStorage.setItem('fixedStrings',fs_array);
-
-    Pow();
-
-}
 
 function Response(){
     let username = document.getElementById("username").value;
