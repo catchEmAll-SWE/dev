@@ -3,7 +3,7 @@
 namespace App\Http\Business\Generate;
 
 class ProofOfWorkDetails{
-    private $fixed_string = [];
+    private array $fixed_string = [];
     private static string $difficulty = '00';
 
     public function __construct(string $id){
@@ -18,7 +18,7 @@ class ProofOfWorkDetails{
         return $this->fixed_string;
     }
 
-    public static function getDifficulty(){
+    public static function getDifficulty() : string {
         return ProofOfWorkDetails::$difficulty;
     }
 }

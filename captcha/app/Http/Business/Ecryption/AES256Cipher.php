@@ -8,7 +8,7 @@ use Illuminate\Encryption\Encrypter;
 
 class AES256Cipher implements IEncryptionAlgorithm {
 
-    public function encrypt($data) : string {
+    public function encrypt(string $data) : string {
         $encrypter = new Encrypter(KeyManager::getActiveKeyValue(), 'aes-256-cbc');
         return $encrypter->encryptString($data);
     }
