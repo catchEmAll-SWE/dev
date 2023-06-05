@@ -94,8 +94,7 @@ async function Verify(){
         }
     }
             const url = new URL(
-                "http://localhost/SWE/dev/captcha/public/api/v1/verify"
-                //"https://swe.gdr00.it/api/v1/verify"
+                "https://swe.gdr00.it/api/v1/verify"
             );
                     
             const headers = {
