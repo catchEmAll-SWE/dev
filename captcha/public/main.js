@@ -8,14 +8,14 @@ async function getCaptcha(){
         "Content-Type": "application/json",
         "Accept": "application/json",
     };
-    
+
     let response = await fetch(url, {
         method: "GET",
         headers,
     });
     data = await response.json();
 
-    
+
     let images_array = [];
     let images = document.querySelectorAll("img");
 
@@ -42,7 +42,7 @@ async function getCaptcha(){
 
 function Pow(){
     console.log("Starting pow");
-    if (typeof(Worker) !== "undefined") {    
+    if (typeof(Worker) !== "undefined") {
         console.log("Starting pow's workers");
 
         content = sessionStorage.getItem('fixedStrings');
@@ -50,7 +50,7 @@ function Pow(){
 
         //create 3 workers
         for(let i=0; i<3; ++i){
-            worker = new Worker("../public/web-worker.js");
+            worker = new Worker("web-worker.js");
             worker.onmessage = workerDone;
             worker.postMessage([content[i], difficulty, i]);
             running++;
