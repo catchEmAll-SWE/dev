@@ -28,10 +28,8 @@ async function getCaptcha(){
         images[i].src = "data:image/png;base64," + images_array[i];
     }
     let fs_array = [];
-    let fixedStrings = document.getElementsByName('fixed_strings[]');
     for(let i = 0; i < 3;i++){
         fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
-        fixedStrings[i].value = data["data"]["proofOfWorkDetails"]["fixedStrings"][i];
     }
 
     sessionStorage.clear();
@@ -41,7 +39,6 @@ async function getCaptcha(){
     sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
     sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
 
-
     Pow();
 
 }
@@ -50,12 +47,13 @@ function Pow(){
     console.log("Starting pow");
     if (typeof(Worker) !== "undefined") {
         console.log("Starting pow's workers");
-        content = sessionStorage.getItem('fixedStrings');
+        content = JSON.parse(sessionStorage.getItem("fixedStrings"));
         difficulty = sessionStorage.getItem('difficulty');
         //create 3 workers
         for(let i=0; i<3; ++i){
             worker = new Worker("web-worker.js");
             worker.onmessage = workerDone;
+            console.log(content[i]);
             worker.postMessage([content[i], difficulty, i]);
             running++;
         }
@@ -67,7 +65,6 @@ function Pow(){
 }
 
 function workerDone(e){
-    let nonces = document.getElementsByName('nonces[]');
     --running;
     console.log("Worker "+e.data[1]+" is done, hashcode found: "+e.data[0]);
     nonces[e.data[1]] = e.data[0].toString();
