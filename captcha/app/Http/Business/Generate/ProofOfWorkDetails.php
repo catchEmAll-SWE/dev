@@ -4,7 +4,7 @@ namespace App\Http\Business\Generate;
 
 class ProofOfWorkDetails{
     private array $fixed_string = [];
-    private static string $difficulty = '00';
+    private static string $difficulty = '0000';
 
     public function __construct(string $id){
         $this->fixed_string = $this->getSplittedId($id);

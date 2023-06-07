@@ -1,7 +1,19 @@
 let running = 0;
 let nonces = [];
+
+function loading(){
+    document.getElementById("loading").style.visibility = "visible";
+}
+
+function stopLoading(){
+    document.getElementById("loading").style.visibility = "hidden";
+}
+
+
 async function getCaptcha(){
+    loading();
     const url = new URL(
+        //"http://localhost/SWE/dev/captcha/public/api/v1/generate"
         "https://swe.gdr00.it/api/v1/generate"
     );
     const headers = {
@@ -15,9 +27,13 @@ async function getCaptcha(){
         headers,
     });
     data = await response.json();
+    stopLoading();
+    document.getElementById("reset").style.visibility = "visible";
+    document.getElementById("submit").style.visibility = "visible";
+    document.getElementById("captcha-images").style.display = "grid";
+
+
     console.log(data);
-
-
     let images_array = [];
     let images = document.querySelectorAll("img");
 
@@ -52,7 +68,6 @@ function Pow(){
         for(let i=0; i<3; ++i){
             worker = new Worker("web-worker.js");
             worker.onmessage = workerDone;
-            console.log(content[i]);
             worker.postMessage([content[i], difficulty, i]);
             running++;
         }
@@ -90,6 +105,7 @@ async function Verify(){
         }
     }
             const url = new URL(
+                //"http://localhost/SWE/dev/captcha/public/api/v1/verify"
                 "https://swe.gdr00.it/api/v1/verify"
             );
                     
@@ -106,7 +122,6 @@ async function Verify(){
                 "fixedStrings": fixedStrings,
                 "nonces": nonces
             };
-            console.log(JSON.stringify(body));
             
             result = await fetch(url, {
                 method: "post",

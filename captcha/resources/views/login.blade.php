@@ -12,8 +12,7 @@
         <link rel="stylesheet" type="text/css" href="main.css">
         <script src="main.js"></script>
     </head>
-    <body onload="getCaptcha()">
-	<p id="currentPath"></p>
+    <body>
         <h1>
             <span lang="en">Login</span>
         </h1>
@@ -25,7 +24,9 @@
                 <label for ="password">Password</label>
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
             </fieldset>
-            <fieldset class="captcha-images">
+            <button id="generate" onclick="getCaptcha();">Genera captcha</button>
+            <div id="loading"></div>
+            <fieldset class="captcha-images" id="captcha-images">
                 <legend>Seleziona le immagini appartenente alla classe <component>ClassTarget</component></legend>
                 <div class="img-container">
                     <input type="checkbox" id="img0" name="image[]" value="0" />
@@ -68,8 +69,8 @@
                     <label for="img9"><img src=""></label>
                 </div>
             </fieldset>
-            <input type="submit" value="Login" onclick="Verify();">
-            <input type="reset" value="Annulla">
+            <input type="reset" id="reset" value="Annulla">
+            <input type="submit" id="submit" value="Login" onclick="Verify();">
         </form>
     </body>
     
