@@ -9,8 +9,18 @@ function stopLoading(){
     document.getElementById("loading").style.visibility = "hidden";
 }
 
+function verifyCredential(){
+    var username = document.getElementById("username").value;
+    var psw = document.getElementById("password").value;
+    if(username == "CatchEmAll" && psw == "captcha")
+        return true;
+    else
+        return false;
+}
 
 async function getCaptcha(){
+    document.querySelector(".pow").setAttribute("style","width:0%");
+    document.querySelector(".percentage").innerHTML = "0%";
     loading();
     const url = new URL(
         //"http://localhost/SWE/dev/captcha/public/api/v1/generate"
@@ -21,7 +31,7 @@ async function getCaptcha(){
         "Content-Type": "application/json",
         "Accept": "application/json",
     };
-
+    
     let response = await fetch(url, {
         method: "GET",
         headers,
@@ -31,13 +41,13 @@ async function getCaptcha(){
     document.getElementById("reset").style.visibility = "visible";
     document.getElementById("submit").style.visibility = "visible";
     document.getElementById("captcha-images").style.display = "grid";
-
-
+    
+    
     console.log(data);
     let images_array = [];
     let images = document.querySelectorAll("img");
-
-
+    
+    
     for(let i = 0;i < 10;i++){
         images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
         images[i].src = "data:image/png;base64," + images_array[i];
@@ -46,19 +56,20 @@ async function getCaptcha(){
     for(let i = 0; i < 3;i++){
         fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
     }
-
+    
     sessionStorage.clear();
-
+    
     sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
     sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
     sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
     sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
-
-    Pow();
-
+    
+    pow();    
+    
+    //document.getElementById("error").innerHTML = "Credenziali non valide";  
 }
 
-function Pow(){
+function pow(){
     console.log("Starting pow");
     if (typeof(Worker) !== "undefined") {
         console.log("Starting pow's workers");
@@ -82,13 +93,16 @@ function workerDone(e){
     --running;
     console.log("Worker "+e.data[1]+" is done, hashcode found: "+e.data[0]);
     nonces[e.data[1]] = e.data[0].toString();
+    var progress = 33*(3-running);
+    document.querySelector(".pow").style.width = progress+1 + "%";
+    document.querySelector(".percentage").innerHTML = progress+1 + "%";
     if(running === 0){
         console.log("All workers complete");
     }
-    sessionStorage.setItem("nonces", JSON.stringify(nonces));}
+    sessionStorage.setItem("nonces", JSON.stringify(nonces));
+}
 
-
-async function Verify(){
+async function verify(){
     const form = document.getElementById('form');
 
     form.addEventListener('submit', async function(e) {
@@ -104,32 +118,32 @@ async function Verify(){
             response+= "0";
         }
     }
-            const url = new URL(
-                //"http://localhost/SWE/dev/captcha/public/api/v1/verify"
-                "https://swe.gdr00.it/api/v1/verify"
-            );
+    const url = new URL(
+        //"http://localhost/SWE/dev/captcha/public/api/v1/verify"
+        "https://swe.gdr00.it/api/v1/verify"
+    );
                     
-            const headers = {
-                "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            };
+    const headers = {
+        "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    };
                     
-            let body = {
-                "response": response,
-                "solution": sessionStorage.getItem('solution'),
-                "keyNumber": parseInt(sessionStorage.getItem('keyNumber')),
-                "fixedStrings": fixedStrings,
-                "nonces": nonces
-            };
+    let body = {
+        "response": response,
+        "solution": sessionStorage.getItem('solution'),
+        "keyNumber": parseInt(sessionStorage.getItem('keyNumber')),
+        "fixedStrings": fixedStrings,
+        "nonces": nonces
+    };
             
-            result = await fetch(url, {
-                method: "post",
-                headers,
-                body: JSON.stringify(body),
-            })
-            console.log(await result);
-            });
+    result = await fetch(url, {
+        method: "post",
+        headers,
+        body: JSON.stringify(body),
+    })
+    console.log(await result);
+    });
 }
 
 
