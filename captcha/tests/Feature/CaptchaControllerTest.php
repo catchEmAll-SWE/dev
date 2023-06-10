@@ -41,6 +41,7 @@ class CaptchaControllerTest extends TestCase
                         ->etc()
                     )
                     ->has('solution')
+                    ->has('target')
                     ->has('keyNumber')
                 )
                 ->has('proofOfWorkDetails', fn (AssertableJson $json) =>
