@@ -8,6 +8,7 @@ use App\Http\Requests\VerifyCaptchaRequest;
 use App\Http\Resources\V1\CaptchaResource;
 use App\Models\Captcha;
 use App\Http\Business\Verify\CaptchaVerifier;
+use App\Http\Business\Verify\CaptchaJsonResultGenerator;
 
 class CaptchaController extends Controller
 {
@@ -42,10 +43,12 @@ class CaptchaController extends Controller
     {
         $verifier = new CaptchaVerifier($request);
         $captcha_to_verify_id = $verifier->getIdOfCaptchaToVerify();
-        if (Captcha::select('hashed_id')->where('hashed_id', $captcha_to_verify_id)->get()->count() == 1 && $verifier->verify($request)) {
-            Captcha::destroy($captcha_to_verify_id);
-            return true;
+        if (Captcha::select('hashed_id')->where('hashed_id', $captcha_to_verify_id)->get()->count() == 1){
+            if ($verifier->verify())
+                return CaptchaJsonResultGenerator::createHumanResult();
+            return CaptchaJsonResultGenerator::createBotResult();
         }
+        
         return response()->json(['message' => 'Captcha not found or invalid'], 404);
     }
 
