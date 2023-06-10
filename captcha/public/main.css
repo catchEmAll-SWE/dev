@@ -24,6 +24,15 @@ fieldset {
     margin: .5em 0;
 }
 
+#error{
+    color: red;
+}
+
+.credentials{
+    display: flex;
+    flex-direction: column;
+}
+
 #loading {
     width: 2rem;
     height: 2rem;
@@ -140,6 +149,39 @@ label img {
   transform: scale(0.9);
   box-shadow: 0 0 5px #333;
   z-index: -1;
+}
+
+.progress-bar{
+    background: #9e9fbd;
+    width: 38em;
+    height: 1em;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.progress-bar div{
+    height: 1.5em;
+    border-radius: 5px;
+    background: rgb(98, 155, 219);
+    width: 0%;
+    transition: 1s ease 0.3s;
+}
+
+.progress-bar div span{
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    background: rgb(49, 73, 206);
+    color: #fff;
+    float: right;
+    margin-top: -15px;
+    margin-right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #13144b;
+
 }
 
 #generate{
