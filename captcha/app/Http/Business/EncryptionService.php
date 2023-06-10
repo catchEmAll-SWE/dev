@@ -22,7 +22,11 @@ class EncryptionService {
         return $this->algortith->encrypt($data, $key);
     }
 
-    public function decrypt (string $data, string $key): string {
+    public function decrypt(string $data, string $key): string {
         return $this->algortith->decrypt($data, $key);
+    }
+
+    public function decryptWithKeyNumber (string $data, int $key_number) : string {
+        return $this->decrypt($data, $this->keyManager->getKeyValue($key_number));
     }
 }

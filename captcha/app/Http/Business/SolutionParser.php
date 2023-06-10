@@ -14,7 +14,7 @@ class SolutionParser {
 
     public static function parseFromEncryptedString(string $encrypted_data, int $key) : CaptchaImgSolution {
         $service = new EncryptionService(new AES256Cipher());
-        $data = json_decode($service->decrypt($encrypted_data, $key));
+        $data = json_decode($service->decryptWithKeyNumber($encrypted_data, $key));
         if ($data == null || (!isset($data->solution) || !isset($data->targetClassImagesId)))
             throw new InvalidArgumentException("Invalid encrypted solution passed");
         return new CaptchaImgSolution($data->solution, $data->targetClassImagesId);

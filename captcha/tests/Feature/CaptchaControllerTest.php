@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Http\Business\Ecryption\AES256Cipher;
+use App\Http\Business\EncryptionService;
 use App\Models\Captcha;
 use Tests\TestCase;
 use App\Models\User;
@@ -108,5 +110,32 @@ class CaptchaControllerTest extends TestCase
         ]);
 
         $response->assertStatus(404);
+    }
+
+    public function test_verify_captcha_return_json_with_right_values () : void {
+
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $response = $this->post('api/v1/verify', [
+            'response' => '0001100100',
+            'solution' => 'eyJpdiI6IkV3NllkdGpwcHNiMWNpRjJoSEVpSUE9PSIsInZhbHVlIjoiRG5ST3JDSkNlL1hLYWpqaE4vNUY5RVQ5VFh6NmdPdW9EYWtWUVJUYVB4RGlneFgyWlBsbDVzVGsrT0pOZzdjWUs2cXpHN1Vjcjd3NnJHUjloVDNaZFhQZGxWRWgyLzRsM1pvS1lRckpmeTVwQ3JVb1cweVpOOFVsVkROOXZ0VUh3OVhIMGNXSDNqZ1pxT2ZvdHBPMkhnPT0iLCJtYWMiOiI1ZjU4ZmUwZDU5MzQ0YjExODQyYWE1ZTE2MTBhNjQ5OWRkNzc4NjdmZThmMWJkZTU5NWVmZDIyNjc5MjExZjYzIiwidGFnIjoiIn0=',
+            'keyNumber' => '4',
+            'fixedStrings' => [
+                "75c663c79321fab919ec39",
+                "e285c8e4bee7088be195e",
+                "98386266f84a83e8e1fb0"
+            ],
+            'nonces' => ['335', '258', '3'],
+        ]);
+
+        $service = new EncryptionService(new AES256Cipher());
+        $response = json_decode($service->decrypt($response->getContent(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")));
+
+        $this->assertTrue(json_last_error() === JSON_ERROR_NONE);
+        $this->assertContains($response->userClass, ['human', 'bot']);
+        $this->assertIsInt($response->time);
     }
 }

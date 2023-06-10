@@ -13,18 +13,18 @@ enum UserClass: string
 
 class CaptchaJsonResultGenerator
 {
-    private const CONST = "NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=";
+    private static $key = "NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=";
 
     public static function createHumanResult(): string
     {
         $service = new EncryptionService(new AES256Cipher());
-        return $service->encrypt(self::getJsonResponse(UserClass::Human), base64_decode(self::CONST));
+        return $service->encrypt(self::getJsonResponse(UserClass::Human), base64_decode(self::$key));
     }
 
     public static function createBotResult(): string
     {
         $service = new EncryptionService(new AES256Cipher());
-        return $service->encrypt(self::getJsonResponse(UserClass::Bot), base64_decode(self::CONST));
+        return $service->encrypt(self::getJsonResponse(UserClass::Bot), base64_decode(self::$key));
     }
 
     private static function getJsonResponse (UserClass $userClass) : string {

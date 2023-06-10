@@ -16,7 +16,7 @@ class EncryptionAlgorithmTest extends TestCase
     {
         $algorithm = new AES256Cipher();
         $string_to_encrypt = 'Secret message';
-        $encrypted_string = $algorithm->encrypt($string_to_encrypt);
-        $this->assertEquals($string_to_encrypt, $algorithm->decrypt($encrypted_string, KeyManager::getActiveKeyNumber()));
+        $encrypted_string = $algorithm->encrypt($string_to_encrypt, KeyManager::getActiveKeyValue());
+        $this->assertEquals($string_to_encrypt, $algorithm->decrypt($encrypted_string, KeyManager::getActiveKeyValue()));
     }
 }
