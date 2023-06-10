@@ -17,7 +17,7 @@ class POWVerifierTest extends TestCase
 
     protected function setUp() : void {
         parent::setUp();
-        $this->pow_verifier_correct = new POWVerifier(array("3f42696d757d4fed9aaf43","b10a90ce9eda297a315cb","a83a118677a9e8a4ccae6"), array("58","171","237"));
+        $this->pow_verifier_correct = new POWVerifier(array("3f42696d757d4fed9aaf43","b10a90ce9eda297a315cb","a83a118677a9e8a4ccae6"), array("10540","71748","95614"));
         $this->pow_verifier_wrong = new POWVerifier(array("3f42696d757d4fed9aaf43","b10a90ce9eda297a315cb","a83a118677a9e8a4ccae6"), array("58","172","237"));
     }
 
