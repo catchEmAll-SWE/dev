@@ -25,7 +25,6 @@
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
                 <label id ="error"></label>
             </fieldset>
-            <button id="generate" onclick="getCaptcha();">Genera captcha</button>
             <div id="loading"></div>
             <fieldset class="captcha-images" id="captcha-images">
                 <legend>Seleziona le immagini appartenente alla classe <component>ClassTarget</component></legend>
@@ -70,12 +69,13 @@
                     <label for="img9"><img src=""></label>
                 </div>
             </fieldset>
-            <div class="progress-bar">
+            <div class="progress-bar" id="progress-bar">
                 <div class="pow"><span class="percentage">0%</span></div>
             </div>
             <input type="reset" id="reset" value="Annulla">
             <input type="submit" id="submit" value="Login" onclick="verify();">
         </form>
+        <button id="generate" onclick="getCaptcha();">Genera captcha</button>
     </body>
     
 </html>
