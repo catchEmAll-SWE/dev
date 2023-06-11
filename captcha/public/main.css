@@ -122,7 +122,7 @@ label::before {
   transition-duration: 0.4s;
   transform: scale(0);
 }
-#form{
+#form1, #form2{
     display: grid;
     justify-content: center;
     align-items: center;

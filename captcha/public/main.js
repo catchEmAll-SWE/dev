@@ -20,7 +20,9 @@ function verifyCredential(){
 
 async function getCaptcha(){
     if(verifyCredential()){
+        document.getElementById("form2").reset();
         document.getElementById("error").innerHTML = "";
+        document.getElementById("generate").style.display = "hidden"; 
         document.getElementById("generate").innerHTML = "Rigenera captcha"; 
         document.querySelector(".pow").setAttribute("style","width:0%");
         document.querySelector(".percentage").innerHTML = "0%";
@@ -42,12 +44,13 @@ async function getCaptcha(){
         data = await response.json();
         stopLoading();
         document.getElementById("progress-bar").style.visibility = "visible";
-        document.getElementById("reset").style.visibility = "visible";
+        document.getElementById("resetForm").style.visibility = "visible";
         document.getElementById("submit").style.visibility = "visible";
         document.getElementById("captcha-images").style.display = "grid";
         
         
         console.log(data);
+        document.getElementById("target-class").textContent=data["data"]["captchaImg"]["target"];
         let images_array = [];
         let images = document.querySelectorAll("img");
         
@@ -67,15 +70,14 @@ async function getCaptcha(){
         sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
         sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
         sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
-        
-        pow();    
+        pow(); 
+          
     }else{
         document.getElementById("error").innerHTML = "Credenziali non valide";  
     }
 }
 
 function pow(){
-    running = 0;
     console.log("Starting pow");
     if (typeof(Worker) !== "undefined") {
         console.log("Starting pow's workers");
@@ -104,6 +106,7 @@ function workerDone(e){
     document.querySelector(".percentage").innerHTML = progress+1 + "%";
     if(running === 0){
         console.log("All workers complete");
+        document.getElementById("generate").style.visibility = "visible"; 
     }
     sessionStorage.setItem("nonces", JSON.stringify(nonces));
 }
