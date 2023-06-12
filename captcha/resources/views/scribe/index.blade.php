@@ -25,7 +25,7 @@
             </style>
 
 
-    <script src="{{ asset("/vendor/scribe/js/theme-default-4.19.1.js") }}"></script>
+    <script src="{{ asset("/vendor/scribe/js/theme-default-4.21.0.js") }}"></script>
 
 </head>
 
@@ -73,14 +73,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-verify">
                                 <a href="#endpoints-POSTapi-v1-verify">POST api/v1/verify</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-login-error">
-                                <a href="#endpoints-GETapi-v1-login-error">GET api/v1/login-error</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-encrypt--data-">
-                                <a href="#endpoints-GETapi-v1-encrypt--data-">GET api/v1/encrypt/{data}</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-decrypt--data-">
-                                <a href="#endpoints-GETapi-v1-decrypt--data-">GET api/v1/decrypt/{data}</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-decrypt--data---key-">
+                                <a href="#endpoints-GETapi-v1-decrypt--data---key-">GET api/v1/decrypt/{data}/{key}</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -93,7 +87,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 30, 2023</li>
+        <li>Last updated: June 12, 2023</li>
     </ul>
 </div>
 
@@ -140,8 +134,8 @@ const headers = {
 };
 
 let body = {
-    "email": "wilfred68@example.net",
-    "password": "laborum"
+    "email": "ofeeney@example.net",
+    "password": "sit"
 };
 
 fetch(url, {
@@ -213,10 +207,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="wilfred68@example.net"
+               value="ofeeney@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>wilfred68@example.net</code></p>
+<p>Must be a valid email address. Example: <code>ofeeney@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -224,10 +218,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="laborum"
+               value="sit"
                data-component="body">
     <br>
-<p>Example: <code>laborum</code></p>
+<p>Example: <code>sit</code></p>
         </div>
         </form>
 
@@ -303,6 +297,7 @@ fetch(url, {
                 }
             ],
             &quot;solution&quot;: &quot;eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==&quot;,
+            &quot;target&quot;: &quot;umbrella&quot;,
             &quot;keyNumber&quot;: 4
         },
         &quot;proofOfWorkDetails&quot;: {
@@ -457,9 +452,9 @@ const headers = {
 };
 
 let body = {
-    "response": "1110111010",
+    "response": "0010010100",
     "solution": "eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h",
-    "keyNumber": 18,
+    "keyNumber": 6,
     "fixedStrings": [
         "961fa7b4bc6af6f447ecd0",
         "0635c63aadef1d4a1fd13",
@@ -487,7 +482,8 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;passed&quot;: true
+    &quot;userClass&quot;: &quot;human&quot;,
+    &quot;time&quot;: 1234567890
 }</code>
  </pre>
     </span>
@@ -561,10 +557,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="response"                data-endpoint="POSTapi-v1-verify"
-               value="1110111010"
+               value="0010010100"
                data-component="body">
     <br>
-<p>The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/. Example: <code>1110111010</code></p>
+<p>The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/. Example: <code>0010010100</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>solution</code></b>&nbsp;&nbsp;
@@ -583,10 +579,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                name="keyNumber"                data-endpoint="POSTapi-v1-verify"
-               value="18"
+               value="6"
                data-component="body">
     <br>
-<p>The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19. Example: <code>18</code></p>
+<p>The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19. Example: <code>6</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>fixedStrings</code></b>&nbsp;&nbsp;
@@ -616,20 +612,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-v1-login-error">GET api/v1/login-error</h2>
+                    <h2 id="endpoints-GETapi-v1-decrypt--data---key-">GET api/v1/decrypt/{data}/{key}</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-v1-login-error">
+<span id="example-requests-GETapi-v1-decrypt--data---key-">
 <blockquote>Example request:</blockquote>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://swe.gdr00.it/api/v1/login-error"
+    "https://swe.gdr00.it/api/v1/decrypt/nostrum/consequuntur"
 );
 
 const headers = {
@@ -644,52 +640,479 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-v1-login-error">
+<span id="example-responses-GETapi-v1-decrypt--data---key-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">content-type: text/html; charset=UTF-8
-cache-control: no-cache, private
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
 x-ratelimit-limit: 60
 x-ratelimit-remaining: 59
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">User is not authenticated</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Illuminate\\Routing\\RouteFileRegistrar::{closure}(): Argument #3 ($key) must be of type int, string given, called in D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\CallableDispatcher.php on line 40&quot;,
+    &quot;exception&quot;: &quot;TypeError&quot;,
+    &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\routes\\api.php&quot;,
+    &quot;line&quot;: 29,
+    &quot;trace&quot;: [
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\CallableDispatcher.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\RouteFileRegistrar&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php&quot;,
+            &quot;line&quot;: 237,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\CallableDispatcher&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php&quot;,
+            &quot;line&quot;: 208,
+            &quot;function&quot;: &quot;runCallable&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Route&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 799,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Route&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Routing\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php&quot;,
+            &quot;line&quot;: 50,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\SubstituteBindings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 152,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 118,
+            &quot;function&quot;: &quot;handleRequest&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php&quot;,
+            &quot;line&quot;: 80,
+            &quot;function&quot;: &quot;handleRequestUsingNamedLimiter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Middleware\\ThrottleRequests&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 798,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 777,
+            &quot;function&quot;: &quot;runRouteWithinStack&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 741,
+            &quot;function&quot;: &quot;runRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php&quot;,
+            &quot;line&quot;: 730,
+            &quot;function&quot;: &quot;dispatchToRoute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;dispatch&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Routing\\Router&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 141,
+            &quot;function&quot;: &quot;Illuminate\\Foundation\\Http\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php&quot;,
+            &quot;line&quot;: 31,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php&quot;,
+            &quot;line&quot;: 21,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php&quot;,
+            &quot;line&quot;: 40,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\TrimStrings&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php&quot;,
+            &quot;line&quot;: 27,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php&quot;,
+            &quot;line&quot;: 86,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php&quot;,
+            &quot;line&quot;: 62,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\HandleCors&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php&quot;,
+            &quot;line&quot;: 39,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 180,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Http\\Middleware\\TrustProxies&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php&quot;,
+            &quot;line&quot;: 116,
+            &quot;function&quot;: &quot;Illuminate\\Pipeline\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 175,
+            &quot;function&quot;: &quot;then&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Pipeline\\Pipeline&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php&quot;,
+            &quot;line&quot;: 144,
+            &quot;function&quot;: &quot;sendRequestThroughRouter&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 299,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Http\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 287,
+            &quot;function&quot;: &quot;callLaravelOrLumenRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 92,
+            &quot;function&quot;: &quot;makeApiCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 45,
+            &quot;function&quot;: &quot;makeResponseCall&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;makeResponseCallIfConditionsPass&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 209,
+            &quot;function&quot;: &quot;__invoke&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 163,
+            &quot;function&quot;: &quot;iterateThroughStrategies&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php&quot;,
+            &quot;line&quot;: 95,
+            &quot;function&quot;: &quot;fetchResponses&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 124,
+            &quot;function&quot;: &quot;processRoute&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Extracting\\Extractor&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 71,
+            &quot;function&quot;: &quot;extractEndpointsInfoFromLaravelApp&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php&quot;,
+            &quot;line&quot;: 49,
+            &quot;function&quot;: &quot;extractEndpointsInfoAndWriteToDisk&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php&quot;,
+            &quot;line&quot;: 51,
+            &quot;function&quot;: &quot;get&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 36,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Knuckles\\Scribe\\Commands\\GenerateDocumentation&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php&quot;,
+            &quot;line&quot;: 41,
+            &quot;function&quot;: &quot;Illuminate\\Container\\{closure}&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 93,
+            &quot;function&quot;: &quot;unwrapIfClosure&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Util&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;callBoundMethod&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php&quot;,
+            &quot;line&quot;: 662,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\BoundMethod&quot;,
+            &quot;type&quot;: &quot;::&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 208,
+            &quot;function&quot;: &quot;call&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Container\\Container&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Command\\Command.php&quot;,
+            &quot;line&quot;: 312,
+            &quot;function&quot;: &quot;execute&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php&quot;,
+            &quot;line&quot;: 177,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Command\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 1040,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Console\\Command&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 314,
+            &quot;function&quot;: &quot;doRunCommand&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php&quot;,
+            &quot;line&quot;: 168,
+            &quot;function&quot;: &quot;doRun&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php&quot;,
+            &quot;line&quot;: 200,
+            &quot;function&quot;: &quot;run&quot;,
+            &quot;class&quot;: &quot;Symfony\\Component\\Console\\Application&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        },
+        {
+            &quot;file&quot;: &quot;D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\artisan&quot;,
+            &quot;line&quot;: 35,
+            &quot;function&quot;: &quot;handle&quot;,
+            &quot;class&quot;: &quot;Illuminate\\Foundation\\Console\\Kernel&quot;,
+            &quot;type&quot;: &quot;-&gt;&quot;
+        }
+    ]
+}</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-v1-login-error" hidden>
+<span id="execution-results-GETapi-v1-decrypt--data---key-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-login-error"></span>:
+                id="execution-response-status-GETapi-v1-decrypt--data---key-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-login-error"
+    <pre class="json"><code id="execution-response-content-GETapi-v1-decrypt--data---key-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-v1-login-error" hidden>
+<span id="execution-error-GETapi-v1-decrypt--data---key-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-login-error">
+    <pre><code id="execution-error-message-GETapi-v1-decrypt--data---key-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-v1-login-error" data-method="GET"
-      data-path="api/v1/login-error"
+<form id="form-GETapi-v1-decrypt--data---key-" data-method="GET"
+      data-path="api/v1/decrypt/{data}/{key}"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-login-error', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-decrypt--data---key-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/v1/login-error</code></b>
+            <b><code>api/v1/decrypt/{data}/{key}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -697,7 +1120,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-               name="Content-Type"                data-endpoint="GETapi-v1-login-error"
+               name="Content-Type"                data-endpoint="GETapi-v1-decrypt--data---key-"
                value="application/json"
                data-component="header">
     <br>
@@ -708,107 +1131,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-               name="Accept"                data-endpoint="GETapi-v1-login-error"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
-
-                    <h2 id="endpoints-GETapi-v1-encrypt--data-">GET api/v1/encrypt/{data}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-encrypt--data-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://swe.gdr00.it/api/v1/encrypt/suscipit"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-encrypt--data-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">content-type: text/html; charset=UTF-8
-cache-control: no-cache, private
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
-access-control-allow-origin: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">eyJpdiI6IkdIQUtmSEFJOEdrK3ZUUkZsTUFHMkE9PSIsInZhbHVlIjoiTStpZnpuMGoxckZLZkVtUUwrUFVMdz09IiwibWFjIjoiNzMyMWU1NGVmMzIwMGUyOWNiNTNjMzJmZGE3YzBhYjIwNjZmZjAzMGVkMjc3NTFhYTkyZWY4ZTc5ZjY1ZGQzNSIsInRhZyI6IiJ9</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-encrypt--data-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-encrypt--data-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-encrypt--data-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-encrypt--data-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-encrypt--data-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-encrypt--data-" data-method="GET"
-      data-path="api/v1/encrypt/{data}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-encrypt--data-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/encrypt/{data}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-               name="Content-Type"                data-endpoint="GETapi-v1-encrypt--data-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-               name="Accept"                data-endpoint="GETapi-v1-encrypt--data-"
+               name="Accept"                data-endpoint="GETapi-v1-decrypt--data---key-"
                value="application/json"
                data-component="header">
     <br>
@@ -820,123 +1143,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-               name="data"                data-endpoint="GETapi-v1-encrypt--data-"
-               value="suscipit"
+               name="data"                data-endpoint="GETapi-v1-decrypt--data---key-"
+               value="nostrum"
                data-component="url">
     <br>
-<p>Example: <code>suscipit</code></p>
+<p>Example: <code>nostrum</code></p>
             </div>
-                    </form>
-
-                    <h2 id="endpoints-GETapi-v1-decrypt--data-">GET api/v1/decrypt/{data}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-decrypt--data-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://swe.gdr00.it/api/v1/decrypt/voluptatem"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-decrypt--data-">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">content-type: text/html; charset=UTF-8
-cache-control: no-cache, private
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 57
-access-control-allow-origin: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">The payload is invalid.</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-decrypt--data-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-decrypt--data-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-decrypt--data-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-decrypt--data-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-decrypt--data-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-decrypt--data-" data-method="GET"
-      data-path="api/v1/decrypt/{data}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-decrypt--data-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/decrypt/{data}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-               name="Content-Type"                data-endpoint="GETapi-v1-decrypt--data-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-               name="Accept"                data-endpoint="GETapi-v1-decrypt--data-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>key</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-               name="data"                data-endpoint="GETapi-v1-decrypt--data-"
-               value="voluptatem"
+               name="key"                data-endpoint="GETapi-v1-decrypt--data---key-"
+               value="consequuntur"
                data-component="url">
     <br>
-<p>Example: <code>voluptatem</code></p>
+<p>Example: <code>consequuntur</code></p>
             </div>
                     </form>
 

@@ -27,8 +27,13 @@
             </fieldset>
         </form>
         <button id="generate" onclick="getCaptcha();">Genera captcha</button>
-        <form id="form2">
-            <div id="loading"></div>
+        <div id="loading"></div>
+        <form id="form2" method="POST" action="response">
+        @csrf
+            <input type="hidden" name="fixedStrings" id="fixedStrings" value="">
+            <input type="hidden" name="nonces" id="nonces" value="">
+            <input type="hidden" name="key" id="key" value="">
+            <input type="hidden" name="solution" id="solution" value="">
             <fieldset class="captcha-images" id="captcha-images">
                 <legend>Seleziona le immagini appartenente alla classe <span id="target-class"></span></legend>
                 <div class="img-container">
@@ -76,7 +81,7 @@
                 <div class="pow"><span class="percentage">0%</span></div>
             </div>
             <input type="reset" id="resetForm" value="Annulla">
-            <input type="submit" id="submit" value="Login" onclick="verify();">
+            <input type="submit" id="submit" value="Login">
         </form>
         
     </body>

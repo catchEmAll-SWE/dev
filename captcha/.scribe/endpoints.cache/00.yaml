@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: wilfred68@example.net
+        example: ofeeney@example.net
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: laborum
+        example: sit
         type: string
         custom: []
     cleanBodyParameters:
-      email: wilfred68@example.net
-      password: laborum
+      email: ofeeney@example.net
+      password: sit
     fileParameters: []
     responses: []
     responseFields: []
@@ -113,6 +113,7 @@ endpoints:
                           }
                       ],
                       "solution": "eyJpdiI6ImtkS3BaaXExZmlDOUxwVDEzZ01Fb1E9PSIsInZhbHVlIjoiYkxQcjNpU3gxcjhDRnB==",
+                      "target": "umbrella",
                       "keyNumber": 4
                   },
                   "proofOfWorkDetails": {
@@ -181,7 +182,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
+      - 'Bearer Zf83bae6kV1haE4gD5P6dvc'
     controller: null
     method: null
     route: null
@@ -212,7 +213,7 @@ endpoints:
         name: response
         description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
         required: true
-        example: '1110111010'
+        example: '0010010100'
         type: string
         custom: []
       solution:
@@ -226,7 +227,7 @@ endpoints:
         name: keyNumber
         description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
         required: true
-        example: 18
+        example: 6
         type: integer
         custom: []
       fixedStrings:
@@ -250,9 +251,9 @@ endpoints:
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      response: '1110111010'
+      response: '0010010100'
       solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
-      keyNumber: 18
+      keyNumber: 6
       fixedStrings:
         - 961fa7b4bc6af6f447ecd0
         - 0635c63aadef1d4a1fd13
@@ -267,7 +268,8 @@ endpoints:
         status: 200
         content: |-
           {
-              "passed": true
+              "userClass": "human",
+              "time": 1234567890
           }
         headers: []
         description: ''
@@ -276,7 +278,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff'
+      - 'Bearer 8Vef6EDvh4d31k5baZPcga6'
     controller: null
     method: null
     route: null
@@ -284,7 +286,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/login-error
+    uri: 'api/v1/decrypt/{data}/{key}'
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -297,8 +299,24 @@ endpoints:
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      data:
+        name: data
+        description: ''
+        required: true
+        example: nostrum
+        type: string
+        custom: []
+      key:
+        name: key
+        description: ''
+        required: true
+        example: consequuntur
+        type: string
+        custom: []
+    cleanUrlParameters:
+      data: nostrum
+      key: consequuntur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -306,111 +324,441 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: 'User is not authenticated'
+        status: 500
+        content: |-
+          {
+              "message": "Illuminate\\Routing\\RouteFileRegistrar::{closure}(): Argument #3 ($key) must be of type int, string given, called in D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\CallableDispatcher.php on line 40",
+              "exception": "TypeError",
+              "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\routes\\api.php",
+              "line": 29,
+              "trace": [
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\CallableDispatcher.php",
+                      "line": 40,
+                      "function": "{closure}",
+                      "class": "Illuminate\\Routing\\RouteFileRegistrar",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "line": 237,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\CallableDispatcher",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+                      "line": 208,
+                      "function": "runCallable",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 799,
+                      "function": "run",
+                      "class": "Illuminate\\Routing\\Route",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 141,
+                      "function": "Illuminate\\Routing\\{closure}",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+                      "line": 50,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 152,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 118,
+                      "function": "handleRequest",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+                      "line": 80,
+                      "function": "handleRequestUsingNamedLimiter",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 116,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 798,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 777,
+                      "function": "runRouteWithinStack",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 741,
+                      "function": "runRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+                      "line": 730,
+                      "function": "dispatchToRoute",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 200,
+                      "function": "dispatch",
+                      "class": "Illuminate\\Routing\\Router",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 141,
+                      "function": "Illuminate\\Foundation\\Http\\{closure}",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",
+                      "line": 31,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+                      "line": 21,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",
+                      "line": 40,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+                      "line": 27,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",
+                      "line": 86,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",
+                      "line": 62,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\HandleCors",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",
+                      "line": 39,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 180,
+                      "function": "handle",
+                      "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+                      "line": 116,
+                      "function": "Illuminate\\Pipeline\\{closure}",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 175,
+                      "function": "then",
+                      "class": "Illuminate\\Pipeline\\Pipeline",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+                      "line": 144,
+                      "function": "sendRequestThroughRouter",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 299,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Http\\Kernel",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 287,
+                      "function": "callLaravelOrLumenRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 92,
+                      "function": "makeApiCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 45,
+                      "function": "makeResponseCall",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Strategies\\Responses\\ResponseCalls.php",
+                      "line": 35,
+                      "function": "makeResponseCallIfConditionsPass",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 209,
+                      "function": "__invoke",
+                      "class": "Knuckles\\Scribe\\Extracting\\Strategies\\Responses\\ResponseCalls",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 163,
+                      "function": "iterateThroughStrategies",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Extracting\\Extractor.php",
+                      "line": 95,
+                      "function": "fetchResponses",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 124,
+                      "function": "processRoute",
+                      "class": "Knuckles\\Scribe\\Extracting\\Extractor",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 71,
+                      "function": "extractEndpointsInfoFromLaravelApp",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\GroupedEndpoints\\GroupedEndpointsFromApp.php",
+                      "line": 49,
+                      "function": "extractEndpointsInfoAndWriteToDisk",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\knuckleswtf\\scribe\\src\\Commands\\GenerateDocumentation.php",
+                      "line": 51,
+                      "function": "get",
+                      "class": "Knuckles\\Scribe\\GroupedEndpoints\\GroupedEndpointsFromApp",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 36,
+                      "function": "handle",
+                      "class": "Knuckles\\Scribe\\Commands\\GenerateDocumentation",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",
+                      "line": 41,
+                      "function": "Illuminate\\Container\\{closure}",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 93,
+                      "function": "unwrapIfClosure",
+                      "class": "Illuminate\\Container\\Util",
+                      "type": "::"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+                      "line": 35,
+                      "function": "callBoundMethod",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+                      "line": 662,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\BoundMethod",
+                      "type": "::"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "line": 208,
+                      "function": "call",
+                      "class": "Illuminate\\Container\\Container",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Command\\Command.php",
+                      "line": 312,
+                      "function": "execute",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+                      "line": 177,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Command\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php",
+                      "line": 1040,
+                      "function": "run",
+                      "class": "Illuminate\\Console\\Command",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php",
+                      "line": 314,
+                      "function": "doRunCommand",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\symfony\\console\\Application.php",
+                      "line": 168,
+                      "function": "doRun",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+                      "line": 200,
+                      "function": "run",
+                      "class": "Symfony\\Component\\Console\\Application",
+                      "type": "->"
+                  },
+                  {
+                      "file": "D:\\Users\\mstoc\\Documents\\GitHub\\SWE\\dev\\captcha\\artisan",
+                      "line": 35,
+                      "function": "handle",
+                      "class": "Illuminate\\Foundation\\Console\\Kernel",
+                      "type": "->"
+                  }
+              ]
+          }
         headers:
-          content-type: 'text/html; charset=UTF-8'
           cache-control: 'no-cache, private'
+          content-type: application/json
           x-ratelimit-limit: '60'
           x-ratelimit-remaining: '59'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/encrypt/{data}'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      data:
-        name: data
-        description: ''
-        required: true
-        example: suscipit
-        type: string
-        custom: []
-    cleanUrlParameters:
-      data: suscipit
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: eyJpdiI6IkdIQUtmSEFJOEdrK3ZUUkZsTUFHMkE9PSIsInZhbHVlIjoiTStpZnpuMGoxckZLZkVtUUwrUFVMdz09IiwibWFjIjoiNzMyMWU1NGVmMzIwMGUyOWNiNTNjMzJmZGE3YzBhYjIwNjZmZjAzMGVkMjc3NTFhYTkyZWY4ZTc5ZjY1ZGQzNSIsInRhZyI6IiJ9
-        headers:
-          content-type: 'text/html; charset=UTF-8'
-          cache-control: 'no-cache, private'
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '58'
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/v1/decrypt/{data}'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      data:
-        name: data
-        description: ''
-        required: true
-        example: voluptatem
-        type: string
-        custom: []
-    cleanUrlParameters:
-      data: voluptatem
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 200
-        content: 'The payload is invalid.'
-        headers:
-          content-type: 'text/html; charset=UTF-8'
-          cache-control: 'no-cache, private'
-          x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '57'
           access-control-allow-origin: '*'
         description: null
         custom: []

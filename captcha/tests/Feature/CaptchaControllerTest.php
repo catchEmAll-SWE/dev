@@ -27,7 +27,6 @@ class CaptchaControllerTest extends TestCase
     }
 
     public function test_generate_captcha_route_return_json_with_right_values () : void {
-
         Sanctum::actingAs(
             User::factory()->create(),
             ['*']
@@ -58,8 +57,6 @@ class CaptchaControllerTest extends TestCase
         $response = $this->post('api/v1/verify');
         $response->assertRedirect('docs');
     }
-
-    
 
     public function test_verify_using_request_with_missing_params () : void {
 
@@ -131,9 +128,9 @@ class CaptchaControllerTest extends TestCase
             'nonces' => ['335', '258', '3'],
         ]);
 
+        
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->getContent(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")));
-
         $this->assertTrue(json_last_error() === JSON_ERROR_NONE);
         $this->assertContains($response->userClass, ['human', 'bot']);
         $this->assertIsInt($response->time);

@@ -64,7 +64,6 @@ class CaptchaController extends Controller
                 return CaptchaJsonResultGenerator::createHumanResult();
             return CaptchaJsonResultGenerator::createBotResult();
         }
-        
         //otherwise
         return response()->json(['message' => 'Captcha not found or invalid'], 404);
     }
