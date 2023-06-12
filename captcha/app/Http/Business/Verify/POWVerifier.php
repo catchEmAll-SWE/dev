@@ -4,7 +4,7 @@ namespace App\Http\Business\Verify;
 
 use App\Http\Business\Generate\ProofOfWorkDetails;
 
-class POWVerifier {
+class POWVerifier implements IComponentVerifier {
     private array $fixed_strings;
     private array $nonces;
 

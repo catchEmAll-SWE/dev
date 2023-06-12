@@ -5,7 +5,7 @@ namespace App\Http\Business\Verify;
 use App\Http\Business\ImageService;
 use App\Http\Business\SolutionParser;
 
-class CaptchaImgVerifier {
+class CaptchaImgVerifier implements IComponentVerifier {
     private static float $reliability_delta = 0.3;
     private string $solution;
     private array $target_class_images;
