@@ -6,24 +6,21 @@ use App\Http\Requests\VerifyCaptchaRequest;
 use InvalidArgumentException;
 
 class CaptchaVerifier {
-    private VerifyCaptchaRequest $request;
+    private array $verifiers;
 
-    public function __construct(VerifyCaptchaRequest $request) {
-        $this->request = $request;
+    public function __construct(array $verifiers) {
+        $this->verifiers = $verifiers;
     }
-    public function verify() : bool {
+    public function isUserResponseRight() : bool {
         try {
-            $pow_verifier = new POWVerifier($this->request->get('fixedStrings'), $this->request->get('nonces'));
-            $img_verifier = new CaptchaImgVerifier($this->request->get('solution'), $this->request->get('response'), $this->request->get('keyNumber'));
-            return $pow_verifier->verify() && $img_verifier->verify();
-        } catch (InvalidArgumentException $e) {
+            foreach ($this->verifiers as $verifier) 
+                if (!$verifier->verify()) 
+                    return false;
+            return true;
+        } 
+        catch (InvalidArgumentException $e) {
             echo $e->getMessage();
             return false;
         }
-    }
-
-    public function getIdOfCaptchaToVerify () : string {
-        $fixedStrings = $this->request->get('fixedStrings');
-        return $fixedStrings[0] . $fixedStrings[1] . $fixedStrings[2];
     }
 }
