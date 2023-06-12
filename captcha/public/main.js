@@ -28,8 +28,8 @@ async function getCaptcha(){
         document.querySelector(".percentage").innerHTML = "0%";
         loading();
         const url = new URL(
-            "http://localhost/SWE/dev/captcha/public/api/v1/generate"
-            //"https://swe.gdr00.it/api/v1/generate"
+            //"http://localhost/SWE/dev/captcha/public/api/v1/generate"
+            "https://swe.gdr00.it/api/v1/generate"
         );
         const headers = {
             "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
@@ -131,8 +131,8 @@ async function verify(){
         }
     }
     const url = new URL(
-        "http://localhost/SWE/dev/captcha/public/api/v1/verify"
-        //"https://swe.gdr00.it/api/v1/verify"
+        //"http://localhost/SWE/dev/captcha/public/api/v1/verify"
+        "https://swe.gdr00.it/api/v1/verify"
     );
                     
     const headers = {
