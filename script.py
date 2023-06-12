@@ -99,15 +99,19 @@ def main():
     ImageDatabaseService.banImage()
     
     classes = ["car", "ball", "umbrella", "book", "laptop"]
+    #classes_db = ["macchina", "palla", "ombrello", "libro", "laptop"]
     
     unsplash = UnsplashService()
     outlining = OutliningService(OutliningAlgorithm())
+    #counter = 0
     for img_class in classes:
         img, id = unsplash.retriveImage(img_class)
         if(ImageDatabaseService.isImageRedundant(id) == False):
             outliningImage = outlining.elaborate(img)
             StoreImageInBase64Service.storeImage(outliningImage, img_class, id)
             ImageDatabaseService.insertImage(id,img_class)
+        #classes_db[counter]
+        #counter+=1
 
 # ----------------------------------------------------------------------------------------------------------------
 

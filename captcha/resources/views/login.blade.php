@@ -16,7 +16,7 @@
         <h1>
             <span lang="en">Login</span>
         </h1>
-        <form id="form">
+        <form id="form1">
             <fieldset class="credentials">
                 <legend>Credenziali</legend>
                 <label for ="username">Username</label>
@@ -25,10 +25,12 @@
                 <input type="password" id="password" name="password" maxlength="30" placeholder="Password" required>
                 <label id ="error"></label>
             </fieldset>
-            <button id="generate" onclick="getCaptcha();">Genera captcha</button>
+        </form>
+        <button id="generate" onclick="getCaptcha();">Genera captcha</button>
+        <form id="form2">
             <div id="loading"></div>
             <fieldset class="captcha-images" id="captcha-images">
-                <legend>Seleziona le immagini appartenente alla classe <component>ClassTarget</component></legend>
+                <legend>Seleziona le immagini appartenente alla classe <span id="target-class"></span></legend>
                 <div class="img-container">
                     <input type="checkbox" id="img0" name="image[]" value="0" />
                     <label for="img0"><img src=""></label>
@@ -70,12 +72,13 @@
                     <label for="img9"><img src=""></label>
                 </div>
             </fieldset>
-            <div class="progress-bar">
+            <div class="progress-bar" id="progress-bar">
                 <div class="pow"><span class="percentage">0%</span></div>
             </div>
-            <input type="reset" id="reset" value="Annulla">
+            <input type="reset" id="resetForm" value="Annulla">
             <input type="submit" id="submit" value="Login" onclick="verify();">
         </form>
+        
     </body>
     
 </html>

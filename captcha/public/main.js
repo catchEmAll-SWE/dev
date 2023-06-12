@@ -19,54 +19,62 @@ function verifyCredential(){
 }
 
 async function getCaptcha(){
-    document.querySelector(".pow").setAttribute("style","width:0%");
-    document.querySelector(".percentage").innerHTML = "0%";
-    loading();
-    const url = new URL(
-        //"http://localhost/SWE/dev/captcha/public/api/v1/generate"
-        "https://swe.gdr00.it/api/v1/generate"
-    );
-    const headers = {
-        "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    };
-    
-    let response = await fetch(url, {
-        method: "GET",
-        headers,
-    });
-    data = await response.json();
-    stopLoading();
-    document.getElementById("reset").style.visibility = "visible";
-    document.getElementById("submit").style.visibility = "visible";
-    document.getElementById("captcha-images").style.display = "grid";
-    
-    
-    console.log(data);
-    let images_array = [];
-    let images = document.querySelectorAll("img");
-    
-    
-    for(let i = 0;i < 10;i++){
-        images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
-        images[i].src = "data:image/png;base64," + images_array[i];
+    if(verifyCredential()){
+        document.getElementById("form2").reset();
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("generate").style.display = "hidden"; 
+        document.getElementById("generate").innerHTML = "Rigenera captcha"; 
+        document.querySelector(".pow").setAttribute("style","width:0%");
+        document.querySelector(".percentage").innerHTML = "0%";
+        loading();
+        const url = new URL(
+            "http://localhost/SWE/dev/captcha/public/api/v1/generate"
+            //"https://swe.gdr00.it/api/v1/generate"
+        );
+        const headers = {
+            "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        };
+        
+        let response = await fetch(url, {
+            method: "GET",
+            headers,
+        });
+        data = await response.json();
+        stopLoading();
+        document.getElementById("progress-bar").style.visibility = "visible";
+        document.getElementById("resetForm").style.visibility = "visible";
+        document.getElementById("submit").style.visibility = "visible";
+        document.getElementById("captcha-images").style.display = "grid";
+        
+        
+        console.log(data);
+        document.getElementById("target-class").textContent=data["data"]["captchaImg"]["target"];
+        let images_array = [];
+        let images = document.querySelectorAll("img");
+        
+        
+        for(let i = 0;i < 10;i++){
+            images_array.push(data["data"]["captchaImg"]["images"][i]["src"]);
+            images[i].src = "data:image/png;base64," + images_array[i];
+        }
+        let fs_array = [];
+        for(let i = 0; i < 3;i++){
+            fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
+        }
+        
+        sessionStorage.clear();
+        
+        sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
+        sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
+        sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
+        sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
+        pow(); 
+          
+    }else{
+        document.getElementById("error").innerHTML = "Credenziali non valide";  
     }
-    let fs_array = [];
-    for(let i = 0; i < 3;i++){
-        fs_array.push(data["data"]["proofOfWorkDetails"]["fixedStrings"][i]);
-    }
-    
-    sessionStorage.clear();
-    
-    sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
-    sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
-    sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
-    sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
-    
-    pow();    
-    
-    //document.getElementById("error").innerHTML = "Credenziali non valide";  
 }
 
 function pow(){
@@ -98,6 +106,7 @@ function workerDone(e){
     document.querySelector(".percentage").innerHTML = progress+1 + "%";
     if(running === 0){
         console.log("All workers complete");
+        document.getElementById("generate").style.visibility = "visible"; 
     }
     sessionStorage.setItem("nonces", JSON.stringify(nonces));
 }
@@ -119,8 +128,8 @@ async function verify(){
         }
     }
     const url = new URL(
-        //"http://localhost/SWE/dev/captcha/public/api/v1/verify"
-        "https://swe.gdr00.it/api/v1/verify"
+        "http://localhost/SWE/dev/captcha/public/api/v1/verify"
+        //"https://swe.gdr00.it/api/v1/verify"
     );
                     
     const headers = {
