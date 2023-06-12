@@ -22,7 +22,7 @@ async function getCaptcha(){
     if(verifyCredential()){
         document.getElementById("form2").reset();
         document.getElementById("error").innerHTML = "";
-        document.getElementById("generate").style.display = "hidden"; 
+        document.getElementById("generate").style.display = "none"; 
         document.getElementById("generate").innerHTML = "Rigenera captcha"; 
         document.querySelector(".pow").setAttribute("style","width:0%");
         document.querySelector(".percentage").innerHTML = "0%";
@@ -106,15 +106,15 @@ function workerDone(e){
     document.querySelector(".percentage").innerHTML = progress+1 + "%";
     if(running === 0){
         console.log("All workers complete");
-        document.getElementById("generate").style.visibility = "visible"; 
+        document.getElementById("generate").style.display = "inline"; 
     }
     sessionStorage.setItem("nonces", JSON.stringify(nonces));
 }
 
 async function verify(){
-    const form = document.getElementById('form');
+    const form = document.getElementById('form2');
 
-    form.addEventListener('submit', async function(e) {
+    form2.addEventListener('submit', async function(e) {
     e.preventDefault();
     let response = "";
     let fixedStrings = JSON.parse(sessionStorage.getItem("fixedStrings"));
@@ -147,11 +147,12 @@ async function verify(){
     };
             
     result = await fetch(url, {
-        method: "post",
+        method: "POST",
         headers,
         body: JSON.stringify(body),
     })
-    console.log(await result);
+    data = await result.json();
+    console.log(data);
     });
 }
 

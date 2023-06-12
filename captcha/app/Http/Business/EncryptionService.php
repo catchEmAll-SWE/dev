@@ -14,7 +14,7 @@ class EncryptionService {
     }
 
     public function encryptWithActiveKey(string $data): string {
-        $key = $this->keyManager->getActiveKeyValue();
+        $key = $this->keyManager->getKey($this->keyManager->getActiveKeyNumber());
         return $this->algortith->encrypt($data, $key);
     }
 
@@ -27,6 +27,6 @@ class EncryptionService {
     }
 
     public function decryptWithKeyNumber (string $data, int $key_number) : string {
-        return $this->decrypt($data, $this->keyManager->getKeyValue($key_number));
+        return $this->decrypt($data, $this->keyManager->getKey($key_number));
     }
 }
