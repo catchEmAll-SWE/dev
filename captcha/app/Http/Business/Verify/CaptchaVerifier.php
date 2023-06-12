@@ -2,7 +2,6 @@
 
 namespace App\Http\Business\Verify;
 
-use App\Http\Requests\VerifyCaptchaRequest;
 use InvalidArgumentException;
 
 class CaptchaVerifier {

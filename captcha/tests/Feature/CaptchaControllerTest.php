@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Http\Business\Ecryption\AES256Cipher;
 use App\Http\Business\EncryptionService;

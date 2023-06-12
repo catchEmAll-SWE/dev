@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Business\Verify\CaptchaImgVerifier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VerifyCaptchaRequest;
@@ -9,6 +10,7 @@ use App\Http\Resources\V1\CaptchaResource;
 use App\Models\Captcha;
 use App\Http\Business\Verify\CaptchaVerifier;
 use App\Http\Business\Verify\CaptchaJsonResultGenerator;
+use App\Http\Business\Verify\POWVerifier;
 
 class CaptchaController extends Controller
 {
@@ -30,6 +32,15 @@ class CaptchaController extends Controller
         $captcha->save();
         return new CaptchaResource($captcha);
     }
+
+    private function getNewCaptcha () : Captcha {
+        $captcha = new Captcha();
+        $max_attemps = 5;
+        while(Captcha::find($captcha->id) && $max_attemps-- > 0)
+            $captcha = new Captcha();
+
+        return $captcha;
+    }
     
 
     /**
@@ -41,23 +52,30 @@ class CaptchaController extends Controller
      */
     public function verify(VerifyCaptchaRequest $request)
     {
-        $verifier = new CaptchaVerifier($request);
-        $captcha_to_verify_id = $verifier->getIdOfCaptchaToVerify();
-        if (Captcha::select('hashed_id')->where('hashed_id', $captcha_to_verify_id)->get()->count() == 1){
-            if ($verifier->verify())
+        $fixed_strings = $request->get('fixedStrings');
+
+        $verifier = new CaptchaVerifier([
+            new POWVerifier($fixed_strings, $request->get('nonces')),
+            new CaptchaImgVerifier($request->get('solution'), $request->get('response'), $request->get('keyNumber'))
+        ]);
+
+        if ($this->isActiveCaptcha($this->captchaIdFromFixedStrings($fixed_strings))){
+            if ($verifier->isUserResponseRight())
                 return CaptchaJsonResultGenerator::createHumanResult();
             return CaptchaJsonResultGenerator::createBotResult();
         }
         
+        //otherwise
         return response()->json(['message' => 'Captcha not found or invalid'], 404);
     }
 
-    private function getNewCaptcha () : Captcha {
-        $captcha = new Captcha();
-        $max_attemps = 5;
-        while(Captcha::find($captcha->id) && $max_attemps-- > 0)
-            $captcha = new Captcha();
-
-        return $captcha;
+    private function captchaIdFromFixedStrings (array $fixed_strings) : string {
+        return implode('', $fixed_strings);
     }
+
+    private function isActiveCaptcha (string $captcha_id) : bool {
+        return Captcha::select('hashed_id')->where('hashed_id', $captcha_id)->get()->count() == 1;
+    }
+
+
 }
