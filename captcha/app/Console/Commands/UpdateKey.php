@@ -27,7 +27,6 @@ class UpdateKey extends Command
      */
     public function handle()
     {
-        $key_controller = new KeyManager();
-        $key_controller->updateKey();
+        KeyManager::updateKey();
     }
 }

@@ -3,18 +3,17 @@
 namespace App\Http\Business;
 
 use App\Http\Business\Ecryption\IEncryptionAlgorithm;
+use App\Models\Key;
 
 class EncryptionService {
     private IEncryptionAlgorithm $algortith;
-    private KeyManager $keyManager;
 
     public function __construct(IEncryptionAlgorithm $algortith) {
         $this->algortith = $algortith;
-        $this->keyManager = new KeyManager();
     }
 
     public function encryptWithActiveKey(string $data): string {
-        $key = $this->keyManager->getActiveKeyValue();
+        $key = KeyManager::getKey(KeyManager::getActiveKeyNumber());
         return $this->algortith->encrypt($data, $key);
     }
 
@@ -27,6 +26,6 @@ class EncryptionService {
     }
 
     public function decryptWithKeyNumber (string $data, int $key_number) : string {
-        return $this->decrypt($data, $this->keyManager->getKeyValue($key_number));
+        return $this->decrypt($data, KeyManager::getKey($key_number));
     }
 }
