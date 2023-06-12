@@ -1,0 +1,7 @@
+<?php
+
+namespace App\Http\Business;
+
+interface IComponentVerifier {
+    public function verify () : bool;
+}
