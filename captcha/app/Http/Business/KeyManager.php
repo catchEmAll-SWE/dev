@@ -8,55 +8,39 @@ use Illuminate\Support\Facades\DB;
 
 class KeyManager {
 
-    public function updateKey() : void {
-        $active_key = KeyManager::getActiveKey();
+    public static function updateKey() : void {
+        $active_key_number = KeyManager::getActiveKeyNumber();
 
-        if (!$active_key) {
-            $this->insertNewActiveKeyWithId(0);
-            return;
+        if ($active_key_number == -1) 
+            self::insertNewActiveKeyWithId(0);
+
+        else {
+
+            $new_key_id = $active_key_number + 1 % 20;
+
+            $oldest_key = Key::where('id', $new_key_id)->first();
+            if ($oldest_key) 
+                $oldest_key->delete();
+                
+            DB::table('keys')->where('id', $active_key_number)->update(['active' => 0]);
+            self::insertNewActiveKeyWithId($new_key_id);
         }
-
-        $new_key_id = ($active_key->id + 1 < 20) ? $active_key->id + 1 : 0;
-
-        $oldest_key = Key::where('id', $new_key_id)->first();
-        if ($oldest_key) 
-            $oldest_key->delete();
-            
-        $this->disableActiveKey($active_key);
-        $this->insertNewActiveKeyWithId($new_key_id);
     }
 
-    private static function getActiveKey() : Key {
-        $active_key = Key::where('active', true)->first();
-        return ($active_key) ? $active_key : null;
-    }
-
-    private function disableActiveKey (Key $active_key) : void {
-        $active_key->active = false;
-        $active_key->save();
-    }
-
-    private function insertNewActiveKeyWithId(int $new_key_id) : void {
+    private static function insertNewActiveKeyWithId(int $key_number) : void {
         DB::table('keys')->insert([
-            'id' => $new_key_id,
+            'id' => $key_number,
             'key' => Crypt::generateKey('AES-256-CBC'),
             'active' => 1,
         ]);
     }
 
-    public static function getActiveKeyValue() : string {
-        return KeyManager::getActiveKey()->key;
-    }
-
-    public function getKeyValue(int $key_number) : string {
+    public static function getKey(int $key_number) : string {
         return Key::where('id', $key_number)->first()->key;
     }
 
     public static function getActiveKeyNumber() : int {
-        return KeyManager::getActiveKey()->id;
-    }
-
-    public static function getKey(int $key_number) : string {
-        return Key::where('id', $key_number)->first()->key;
+        $key = Key::where('active', true)->first();
+        return ($key == null) ? -1 : $key->id;
     }
 }
