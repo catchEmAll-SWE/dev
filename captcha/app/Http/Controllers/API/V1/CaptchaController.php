@@ -52,6 +52,10 @@ class CaptchaController extends Controller
      */
     public function verify(VerifyCaptchaRequest $request)
     {
+        if (isset($request->validator) && $request->validator->fails()) {
+            return response()->json(['message' => 'Invalid response'], 400);
+        }
+
         $fixed_strings = $request->get('fixedStrings');
 
         $verifier = new CaptchaVerifier([

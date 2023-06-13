@@ -24,6 +24,7 @@ class ResponseController extends Controller
         $fixed_strings = explode(",",$request->input('fixedStrings'));
         $nonces = explode(",",$request->input('nonces'));
         //http://localhost/SWE/dev/captcha/public/api/v1/verify
+        //https://swe.gdr00.it/api/v1/verify
         $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("https://swe.gdr00.it/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
@@ -31,6 +32,10 @@ class ResponseController extends Controller
                 "fixedStrings" => $fixed_strings,
                 "nonces" => $nonces,
             ]);
+        if($response->status()==400)
+            return redirect('docs');
+        elseif($response->status()==404)
+            return view('login');
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
         if($response["userClass"] == "bot"){

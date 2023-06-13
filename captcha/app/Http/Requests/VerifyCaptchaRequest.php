@@ -13,6 +13,8 @@ class VerifyCaptchaRequest extends FormRequest
      * @var string
      */
     protected $redirect = '/docs';
+    //validator
+    public $validator = null;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -55,4 +57,10 @@ class VerifyCaptchaRequest extends FormRequest
             ]
         ];
     }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $this->validator = $validator;
+    }
+
 }
