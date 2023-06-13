@@ -10,7 +10,6 @@ class CaptchaImgVerifier implements IComponentVerifier {
     private string $solution;
     private array $target_class_images;
     private string $user_answer;
-    private ImageService $service;
 
     public function __construct(string $encrypted_solution, string $user_answer, int $key_number) 
     {
@@ -18,7 +17,6 @@ class CaptchaImgVerifier implements IComponentVerifier {
         $this->solution = $captcha_img_solution->getSolution();
         $this->target_class_images = $captcha_img_solution->getTargetClassImages();
         $this->user_answer = $user_answer;
-        $this->service = new ImageService();
     }
 
     //PRECONDITION: $user_response is a string of 10 digits, each digit is 0 or 1, key_number is an integer between 0 and 19 and target_class_images is an array of 10 strings
@@ -44,22 +42,21 @@ class CaptchaImgVerifier implements IComponentVerifier {
             if ($single_image_solution == '0'){
                 $uncertain_target_images++;
                 if ($this->user_answer[$index] == '1'){
-                    $this->service->updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta);
+                    ImageService::updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta);
                     $uncertain_target_images_selected++;
                 }
                 else
-                    $this->service->updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta * -1);
+                    ImageService::updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta * -1);
                 $target_img_counter++;
             }
 
             // image target and certain
             else if ($single_image_solution == '1'){
                 if ($this->user_answer[$index] == '0'){
-                    $this->service->updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta * -1);    
+                    ImageService::updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta * -1);    
                     return false;
                 }
-                $this->service->updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta);
-
+                ImageService::updateImageReliability($this->target_class_images[$target_img_counter], self::$reliability_delta);
                 $target_img_counter++;
             }
 

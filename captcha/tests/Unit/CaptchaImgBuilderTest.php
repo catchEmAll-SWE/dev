@@ -17,7 +17,7 @@ class CaptchaImgBuilderTest extends TestCase
     }
 
     public function test_build_captcha_with_correct_target_images_reliability() : void {
-        $images = $this->captcha_img_builder->getCaptchaImg()->getImages();
+        $images = $this->captcha_img_builder->createCaptchaImg()->getImages();
         $target_class = $images[9]->getField('class');
         $target_images = 0;
         $reliable_image = 0;
@@ -32,7 +32,7 @@ class CaptchaImgBuilderTest extends TestCase
     }
 
     public function test_build_captcha_with_correct_images_reliability() : void {
-        $images = $this->captcha_img_builder->getCaptchaImg()->getImages();
+        $images = $this->captcha_img_builder->createCaptchaImg()->getImages();
         $simple_class = $images[0]->getField('class');
         $images_of_class = 0;
         $reliable_image_of_class = 0;

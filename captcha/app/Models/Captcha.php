@@ -14,23 +14,20 @@ class Captcha extends Model {
     protected $fillable = ['hashed_id'];
     public $incrementing = false;
 
-
+ 
     private CaptchaImg $captcha_img;
     private ProofOfWorkDetails $proof_of_work_details;
 
     public function __construct()
     {
-        $this->captcha_img = CaptchaImgBuilder::getGenerator()->getCaptchaImg();
-        $this->proof_of_work_details = new ProofOfWorkDetails($this->captcha_img->getId());
-        $this->setAttribute('hashed_id', $this->captcha_img->getId());
+        $this->captcha_img = CaptchaImgBuilder::getGenerator()->createCaptchaImg();
+        $id = $this->captcha_img->getId();
+        $this->proof_of_work_details = new ProofOfWorkDetails($id);
+        $this->setAttribute('hashed_id', $id);
     }
 
     public function getField (string $field) : string {
         return $this->{$field};
-    }
-
-    public function getId () : string {
-        return $this->captcha_img->getId();
     }
 
     public function getCaptchaImg() : CaptchaImg {

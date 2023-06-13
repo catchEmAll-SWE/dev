@@ -23,7 +23,7 @@ class ImageServiceTest extends TestCase
     public function test_classes_returned_are_in_not_empty_string_array() : void
     {
         $num_of_classes = 3;
-        $classes = $this->controller->getCaptchaClasses($num_of_classes);
+        $classes = $this->controller->getAvailableClasses($num_of_classes);
         $this->assertNotEmpty($classes);
         $this->assertIsArray($classes);
         $this->assertContainsOnly('string', $classes);
@@ -33,7 +33,7 @@ class ImageServiceTest extends TestCase
     public function test_get_negative_num_of_classes() : void
     {
         $this->expectException(OutOfBoundsException::class);
-        $this->controller->getCaptchaClasses(-1);
+        $this->controller->getAvailableClasses(-1);
     }
 
     public function test_update_reliability() : void

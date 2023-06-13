@@ -8,18 +8,18 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 
 class ImageService {
-    public function getCaptchaClasses(int $num_of_classes) : array {
+    public static function getAvailableClasses(int $num_of_classes) : array {
         if ($num_of_classes <= 0)
             throw new OutOfBoundsException("Number of classes must be positive");
         return Image::select('class')->distinct()->inRandomOrder()->limit($num_of_classes)->pluck('class')->toArray();
     }
 
-    public function updateImageReliability(string $id, float $offset) : void {
+    public static function updateImageReliability(string $id, float $offset) : void {
         $reliability_updated = Image::select('reliability')->where('id', $id)->pluck('reliability')->first() + $offset;
         Image::where('id', $id)->update(['reliability' => $reliability_updated]);
     }
 
-    public function getImagesOfClass (string $class, int $num_of_images, Reliability $reliability) : Collection {
+    public static function getImagesOfClass (string $class, int $num_of_images, Reliability $reliability) : Collection {
         if ($reliability == Reliability::Reliable) 
             $images = Image::where('class', $class)->where('reliability', '>=', 80)->inRandomOrder()->limit($num_of_images)->get();
         else
