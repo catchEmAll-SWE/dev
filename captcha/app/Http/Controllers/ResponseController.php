@@ -23,7 +23,7 @@ class ResponseController extends Controller
         $key = intval($request->input('key'));
         $fixed_strings = explode(",",$request->input('fixedStrings'));
         $nonces = explode(",",$request->input('nonces'));
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("http://localhost/SWE/dev/captcha/public/api/v1/verify",[ 
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("https://swe.gdr00.it/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
                 "keyNumber" => $key,
@@ -33,7 +33,7 @@ class ResponseController extends Controller
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
         if($response["userClass"] == "bot"){
-            return view('bot');
+            return view('login');
         }else if($response["userClass"] == "human")
             return view('human');
     }
