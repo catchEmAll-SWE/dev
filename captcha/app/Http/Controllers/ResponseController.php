@@ -11,6 +11,7 @@ class ResponseController extends Controller
 {
     public function manageResponse(Request $request) {
         $response = $request->input('image');
+        $response = ($response == null) ? [] : $response;
         $user_response = "";
         for($i = 0; $i<10; $i++){
             if($response && in_array($i, $response)){
@@ -35,7 +36,7 @@ class ResponseController extends Controller
         if($response->status()==400)
             return redirect('docs');
         elseif($response->status()==404)
-            return view('login');
+            return view('login', ["error" => "Captcha fallito, ritenta!"]);
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
         if($response["userClass"] == "bot"){
