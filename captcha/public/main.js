@@ -66,8 +66,9 @@ async function getCaptcha(){
         
         sessionStorage.clear();
         
-        sessionStorage.setItem('solution',data["data"]["captchaImg"]["solution"]);
-        sessionStorage.setItem('keyNumber',data["data"]["captchaImg"]["keyNumber"]);
+        document.getElementById("key").value = data["data"]["captchaImg"]["keyNumber"];
+        document.getElementById("solution").value = data["data"]["captchaImg"]["solution"];
+       
         sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
         sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
         pow(); 
@@ -106,55 +107,13 @@ function workerDone(e){
     document.querySelector(".percentage").innerHTML = progress+1 + "%";
     if(running === 0){
         console.log("All workers complete");
-        document.getElementById("generate").style.display = "inline"; 
-    }
-    sessionStorage.setItem("nonces", JSON.stringify(nonces));
-}
-
-async function verify(){
-    const form = document.getElementById('form2');
-
-    form2.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    let response = "";
-    let fixedStrings = JSON.parse(sessionStorage.getItem("fixedStrings"));
-    let nonces = JSON.parse(sessionStorage.getItem("nonces"));
-
-    for(let i=0; i < 10; i++){
-        if(document.getElementById("img"+i).checked){
-            response += "1";
-        }else{
-            response+= "0";
+        document.getElementById("generate").style.display = "inline";   
         }
-    }
-    const url = new URL(
-        "http://localhost/SWE/dev/captcha/public/api/v1/verify"
-        //"https://swe.gdr00.it/api/v1/verify"
-    );
-                    
-    const headers = {
-        "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    };
-                    
-    let body = {
-        "response": response,
-        "solution": sessionStorage.getItem('solution'),
-        "keyNumber": parseInt(sessionStorage.getItem('keyNumber')),
-        "fixedStrings": fixedStrings,
-        "nonces": nonces
-    };
-            
-    result = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-    })
-    data = await result.json();
-    console.log(data);
-    });
+    sessionStorage.setItem("nonces", JSON.stringify(nonces));
+    document.getElementById("fixedStrings").value = JSON.parse(sessionStorage.getItem("fixedStrings"));  
+    document.getElementById("nonces").value = JSON.parse(sessionStorage.getItem("nonces"));
 }
+
 
 
 

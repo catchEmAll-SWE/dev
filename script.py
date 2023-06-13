@@ -60,7 +60,7 @@ class ImageDatabaseService:
     @staticmethod
     def insertImage(id, img_class):
         try:
-            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability,isBanned) VALUES(?,?,?,?)", (id,img_class,50,0))
+            ImageDatabaseService.cursor.execute("INSERT INTO images (id,class,reliability) VALUES(?,?,?)", (id,img_class,50))
             ImageDatabaseService.connection.commit()
         except mysql.connector.Error as error:
             print("Failed to insert new image into MySQL table {}".format(error))
@@ -70,8 +70,24 @@ class ImageDatabaseService:
         ImageDatabaseService.cursor.execute("SELECT * FROM images where id = ?", (img_id,))
         return (len(ImageDatabaseService.cursor.fetchall())) == 1
     
-    def banImage():
-        ImageDatabaseService.cursor.execute("UPDATE images SET isBanned = 1 where reliability <= 0 and isBanned = 0")
+    @staticmethod
+    def isImageBanned(img_id) -> bool:
+        ImageDatabaseService.cursor.execute("SELECT * FROM banned_images where id = ?", (img_id,))
+        return (len(ImageDatabaseService.cursor.fetchall())) == 1
+    
+    @staticmethod
+    def banImages():
+        try:
+            ImageDatabaseService.cursor.execute("SELECT id,class FROM images where reliability <= 35")
+            for id,img_class in ImageDatabaseService.cursor:
+                insert_id = tuple([id])
+                ImageDatabaseService.cursor.execute("INSERT INTO banned_images (id) VALUES(?)", (insert_id))
+                ImageDatabaseService.cursor.execute("DELETE FROM images where id = ?", (id,))
+                ImageDatabaseService.connection.commit()
+                dir = os.path.join("captcha/database/DB_Images/", img_class)
+                os.remove(dir + "/" + id)
+        except mysql.connector.Error as error:
+            print("Failed to insert new banned image into MySQL table {}".format(error))
         
 
 # This class provide service for storing images in base64 format in the file system
@@ -96,22 +112,18 @@ class StoreImageInBase64Service:
 def main():
     # list of classes
     
-    ImageDatabaseService.banImage()
+    ImageDatabaseService.banImages()
     
-    classes = ["car", "ball", "umbrella", "book", "laptop"]
-    #classes_db = ["macchina", "palla", "ombrello", "libro", "laptop"]
+    classes = [("car","macchina"), ("ball", "palla"), ("umbrella", "ombrello"), ("book", "libro"), ("laptop", "laptop")]
     
     unsplash = UnsplashService()
     outlining = OutliningService(OutliningAlgorithm())
-    #counter = 0
-    for img_class in classes:
+    for img_class,img_class_db in classes:
         img, id = unsplash.retriveImage(img_class)
-        if(ImageDatabaseService.isImageRedundant(id) == False):
+        if(ImageDatabaseService.isImageRedundant(id) == False and ImageDatabaseService.isImageBanned(id) == False):
             outliningImage = outlining.elaborate(img)
             StoreImageInBase64Service.storeImage(outliningImage, img_class, id)
-            ImageDatabaseService.insertImage(id,img_class)
-        #classes_db[counter]
-        #counter+=1
+            ImageDatabaseService.insertImage(id,img_class_db)
 
 # ----------------------------------------------------------------------------------------------------------------
 
