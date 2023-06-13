@@ -27,10 +27,7 @@ async function getCaptcha(){
         document.querySelector(".pow").setAttribute("style","width:0%");
         document.querySelector(".percentage").innerHTML = "0%";
         loading();
-        const url = new URL(
-            "http://localhost/SWE/dev/captcha/public/api/v1/generate"
-            //"https://swe.gdr00.it/api/v1/generate"
-        );
+        const url = new URL("https://swe.gdr00.it/api/v1/generate");
         const headers = {
             "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
             "Content-Type": "application/json",
