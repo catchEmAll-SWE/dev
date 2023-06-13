@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Business\EncryptionService;
 use App\Http\Business\Ecryption\AES256Cipher;
 
-class ResponseController extends Controller
+class RequestController extends Controller
 {
     public function manageResponse(Request $request) {
         $response = $request->input('image');
@@ -44,4 +44,10 @@ class ResponseController extends Controller
         }else if($response["userClass"] == "human")
             return view('human');
     }
+
+    public function manageGenerate(){
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("http://localhost/SWE/dev/captcha/public/api/v1/generate");
+        return $response->json();
+    }
+
 }

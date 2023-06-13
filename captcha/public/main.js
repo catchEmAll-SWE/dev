@@ -28,6 +28,7 @@ function verifyCredential(){
         return false;
 }
 
+
 async function getCaptcha(){
     if(verifyCredential()){
         document.getElementById("form2").reset();
@@ -39,26 +40,21 @@ async function getCaptcha(){
         loading();
         //http://localhost/SWE/dev/captcha/public/api/v1/generate
         //https://swe.gdr00.it/api/v1/generate
-        const url = new URL("https://swe.gdr00.it/api/v1/generate");
-        const headers = {
-            "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        };
+
+        let data = await $.ajax({ 
+                 url: "generate",
+                 type: 'get',
+                 dataType: "json",
+                 success: await function(result){
+                    return result;
+                 }
+                });
         
-        let response = await fetch(url, {
-            method: "GET",
-            headers,
-        });
-        data = await response.json();
         stopLoading();
         document.getElementById("progress-bar").style.visibility = "visible";
-        document.getElementById("resetForm").style.visibility = "visible";
         document.getElementById("submit").style.visibility = "visible";
         document.getElementById("captcha-images").style.display = "grid";
         
-        
-        console.log(data);
         document.getElementById("target-class").textContent=data["data"]["captchaImg"]["target"];
         let images_array = [];
         let images = document.querySelectorAll("img");
@@ -80,7 +76,7 @@ async function getCaptcha(){
        
         sessionStorage.setItem('difficulty',data["data"]["proofOfWorkDetails"]["difficulty"]);
         sessionStorage.setItem("fixedStrings", JSON.stringify(fs_array));
-        pow(); 
+        pow();
           
     }else{
         document.getElementById("error").innerHTML = "Credenziali non valide";  

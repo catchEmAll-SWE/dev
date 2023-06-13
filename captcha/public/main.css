@@ -200,7 +200,7 @@ label img {
     justify-self: center;
 }
 
-input[type="submit"], input[type="reset"]{
+input[type="submit"]{
     margin-top: 1em;
     padding: .5em 1em;
     border: none;

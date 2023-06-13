@@ -80,10 +80,9 @@
             <div class="progress-bar" id="progress-bar">
                 <div class="pow"><span class="percentage">0%</span></div>
             </div>
-            <input type="reset" id="resetForm" value="Annulla">
             <input type="submit" id="submit" value="Login">
         </form>
-        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </body>
     
 </html>

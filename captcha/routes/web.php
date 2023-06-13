@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::post('/response', [ResponseController::class, 'manageResponse']);
+Route::post('/response', [RequestController::class, 'manageResponse']);
+Route::get('/generate', [RequestController::class, 'manageGenerate']);
 
 
