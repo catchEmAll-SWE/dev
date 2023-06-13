@@ -40,13 +40,13 @@ class RequestController extends Controller
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
         if($response["userClass"] == "bot"){
-            return view('login');
+            return view('login', ["error" => "Captcha fallito, ritenta!"]);
         }else if($response["userClass"] == "human")
             return view('human');
     }
 
     public function manageGenerate(){
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("http://localhost/SWE/dev/captcha/public/api/v1/generate");
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("https://swe.gdr00.it/api/v1/generate");
         return $response->json();
     }
 

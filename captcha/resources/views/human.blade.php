@@ -6,4 +6,7 @@
             Loggato
         </title>
     </head>
+    <body>
+        <h1>Loggato</h1>
+    </body>
 </html>
