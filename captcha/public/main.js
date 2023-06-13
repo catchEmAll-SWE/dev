@@ -1,6 +1,16 @@
 let running = 0;
 let nonces = [];
 
+window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted || 
+                           ( typeof window.performance != "undefined" && 
+                                window.performance.getEntriesByType("navigation") == "back_forward");
+    if ( historyTraversal ) {
+      // Handle page restore.
+      window.location.reload();
+    }
+});
+
 function loading(){
     document.getElementById("loading").style.visibility = "visible";
 }
@@ -27,6 +37,7 @@ async function getCaptcha(){
         document.querySelector(".pow").setAttribute("style","width:0%");
         document.querySelector(".percentage").innerHTML = "0%";
         loading();
+        //http://localhost/SWE/dev/captcha/public/api/v1/generate
         const url = new URL("https://swe.gdr00.it/api/v1/generate");
         const headers = {
             "Authorization": "Bearer 4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff",

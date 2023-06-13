@@ -13,7 +13,7 @@ class ResponseController extends Controller
         $response = $request->input('image');
         $user_response = "";
         for($i = 0; $i<10; $i++){
-            if(in_array($i, $response)){
+            if($response && in_array($i, $response)){
                 $user_response .= "1";
             }else{
                 $user_response .= "0";
@@ -23,6 +23,7 @@ class ResponseController extends Controller
         $key = intval($request->input('key'));
         $fixed_strings = explode(",",$request->input('fixedStrings'));
         $nonces = explode(",",$request->input('nonces'));
+        //http://localhost/SWE/dev/captcha/public/api/v1/verify
         $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("https://swe.gdr00.it/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
