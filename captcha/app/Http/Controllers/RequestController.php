@@ -10,11 +10,11 @@ use App\Http\Business\Ecryption\AES256Cipher;
 class RequestController extends Controller
 {
     public function manageResponse(Request $request) {
-        $response = $request->input('image');
-        $response = ($response == null) ? [] : $response;
+        $selected_images_indexes = $request->input('image');
+        $selected_images_indexes = ($selected_images_indexes == null) ? [] : $selected_images_indexes;
         $user_response = "";
         for($i = 0; $i<10; $i++){
-            if($response && in_array($i, $response)){
+            if(in_array($i, $selected_images_indexes)){
                 $user_response .= "1";
             }else{
                 $user_response .= "0";
@@ -26,7 +26,7 @@ class RequestController extends Controller
         $nonces = explode(",",$request->input('nonces'));
         //http://localhost/SWE/dev/captcha/public/api/v1/verify
         //https://swe.gdr00.it/api/v1/verify
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("https://swe.gdr00.it/api/v1/verify",[ 
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("//http://localhost/SWE/dev/captcha/public/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
                 "keyNumber" => $key,
@@ -39,6 +39,7 @@ class RequestController extends Controller
             return view('login', ["error" => "Captcha fallito, ritenta!"]);
         $service = new EncryptionService(new AES256Cipher());
         $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
+        dd($response);
         if($response["userClass"] == "bot"){
             return view('login', ["error" => "Captcha fallito, ritenta!"]);
         }else if($response["userClass"] == "human")
@@ -46,7 +47,7 @@ class RequestController extends Controller
     }
 
     public function manageGenerate(){
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("https://swe.gdr00.it/api/v1/generate");
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("//http://localhost/SWE/dev/captcha/public/api/v1/generate");
         return $response->json();
     }
 

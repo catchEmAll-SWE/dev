@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::post('/response', [RequestController::class, 'manageResponse']);
+Route::post('/', [RequestController::class, 'manageResponse']);
 Route::get('/generate', [RequestController::class, 'manageGenerate']);
 
 

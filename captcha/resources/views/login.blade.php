@@ -28,7 +28,7 @@
         </form>
         <button id="generate" onclick="getCaptcha();">Genera captcha</button>
         <div id="loading"></div>
-        <form id="form2" method="POST" action="response">
+        <form id="form2" method="POST">
         @csrf
             <input type="hidden" name="fixedStrings" id="fixedStrings" value="">
             <input type="hidden" name="nonces" id="nonces" value="">
