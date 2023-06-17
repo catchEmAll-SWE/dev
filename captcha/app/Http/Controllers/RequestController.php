@@ -26,7 +26,7 @@ class RequestController extends Controller
         $nonces = explode(",",$request->input('nonces'));
         //http://localhost/SWE/dev/captcha/public/api/v1/verify
         //https://swe.gdr00.it/api/v1/verify
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("//http://localhost/SWE/dev/captcha/public/api/v1/verify",[ 
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("//https://swe.gdr00.it/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
                 "keyNumber" => $key,
@@ -47,7 +47,7 @@ class RequestController extends Controller
     }
 
     public function manageGenerate(){
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("//http://localhost/SWE/dev/captcha/public/api/v1/generate");
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("//https://swe.gdr00.it/api/v1/generate");
         return $response->json();
     }
 
