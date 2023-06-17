@@ -58,7 +58,7 @@ class VerifyCaptchaRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator):void
     {
         $this->validator = $validator;
     }

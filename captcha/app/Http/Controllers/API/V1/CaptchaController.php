@@ -26,7 +26,7 @@ class CaptchaController extends Controller
     * @responseField fixedString string[] Array of string to be used in proof of work as fixed part
     * @responseField difficulty int Number of diffulty's zeros
     */
-    public function generate(Request $request) : CaptchaResource
+    public function generate() : CaptchaResource
     {
         $captcha = $this->getNewCaptcha();
         $captcha->save();
