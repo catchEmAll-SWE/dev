@@ -33,17 +33,21 @@ class RequestController extends Controller
                 "fixedStrings" => $fixed_strings,
                 "nonces" => $nonces,
             ]);
-        if($response->status()==400)
-            return redirect('docs');
-        elseif($response->status()==404)
-            return view('login', ["error" => "Captcha fallito, ritenta!"]);
-        $service = new EncryptionService(new AES256Cipher());
-        $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
-        dd($response);
-        if($response["userClass"] == "bot"){
-            return view('login', ["error" => "Captcha fallito, ritenta!"]);
-        }else if($response["userClass"] == "human")
-            return view('human');
+        switch ($response->status()) {
+            case 400:
+                return redirect('docs');
+            case 404:
+                return view('login', ["error" => "Captcha fallito, ritenta!"]);
+            case 429:
+                return redirect('docs');
+            default:
+            $service = new EncryptionService(new AES256Cipher());
+            $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
+            if($response["userClass"] == "bot"){
+                return view('login', ["error" => "Captcha fallito, ritenta!"]);
+            }else if($response["userClass"] == "human")
+                return view('human');
+        }
     }
 
     public function manageGenerate(){
