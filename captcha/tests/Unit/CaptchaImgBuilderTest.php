@@ -13,7 +13,7 @@ class CaptchaImgBuilderTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->captcha_img_builder = CaptchaImgBuilder::getGenerator();
+        $this->captcha_img_builder = new CaptchaImgBuilder();
     }
 
     public function test_build_captcha_with_correct_target_images_reliability() : void {

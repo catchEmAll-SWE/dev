@@ -10,17 +10,14 @@ use App\Models\CaptchaImg;
 use App\Http\Business\ImageService;
 
 class CaptchaImgBuilder {
-    private static ?CaptchaImgBuilder $instance = NULL;
-
-    public static function getGenerator(): CaptchaImgBuilder{
-        if(self::$instance == NULL){
-            self::$instance = new CaptchaImgBuilder();
-        }
-        return self::$instance;
+    
+    private ImageDetails $details;
+    public function __construct() {
+        $this->details = new ImageDetails();
     }
 
     public function createCaptchaImg() : CaptchaImg {
-        return $this->buildCaptchaImg(new ImageDetails());
+        return $this->buildCaptchaImg($this->details);
     }
 
     private function buildCaptchaImg(ImageDetails $imageDetails) : CaptchaImg {

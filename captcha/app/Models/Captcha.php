@@ -20,7 +20,7 @@ class Captcha extends Model {
 
     public function __construct()
     {
-        $this->captcha_img = CaptchaImgBuilder::getGenerator()->createCaptchaImg();
+        $this->captcha_img = (new CaptchaImgBuilder())->createCaptchaImg();
         $id = $this->captcha_img->getId();
         $this->proof_of_work_details = new ProofOfWorkDetails($id);
         $this->setAttribute('hashed_id', $id);
