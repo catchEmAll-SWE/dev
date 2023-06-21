@@ -27,6 +27,6 @@ class DeleteOldActiveCaptchas extends Command
     public function handle()
     {
         //delete captcha if it is older than 5 minutes
-        DB::table('active_captchas')->where('created_at', '<', now()->subMinutes(20))->delete();
+        DB::table('active_captchas')->where('created_at', '<', now()->subMinutes(5))->delete();
     }
 }

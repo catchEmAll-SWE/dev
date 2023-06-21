@@ -14,7 +14,7 @@
     </head>
     <body>
         @if (session()->has('error'))
-            <div x-data="{show:true}" x-init="setTimeout(()=> show = false, 3000)" x-show="show" id="error">{{session()->get('error')}}</div>
+            <div x-data="{show:true}" x-init="setTimeout(()=> show = false, 3000)" x-show="show" id="error-captcha">{{session()->get('error')}}</div>
         @endif
         <h1>
             <span lang="en">Login</span>
