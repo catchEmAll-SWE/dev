@@ -13,6 +13,9 @@
         <script src="main.js"></script>
     </head>
     <body>
+        @if (session()->has('error'))
+            <div x-data="{show:true}" x-init="setTimeout(()=> show = false, 3000)" x-show="show" id="error">{{session()->get('error')}}</div>
+        @endif
         <h1>
             <span lang="en">Login</span>
         </h1>
@@ -82,6 +85,7 @@
             </div>
             <input type="submit" id="submit" value="Login">
         </form>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </body>
     

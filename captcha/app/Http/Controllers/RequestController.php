@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 use App\Http\Business\EncryptionService;
 use App\Http\Business\Ecryption\AES256Cipher;
 
@@ -37,15 +38,15 @@ class RequestController extends Controller
             case 400:
                 return redirect('docs');
             case 404:
-                return view('login', ["error" => "Captcha fallito, ritenta!"]);
+                return redirect('/')->with('error', 'Captcha fallito ritenta');
             case 429:
                 return redirect('docs');
             default:
             $service = new EncryptionService(new AES256Cipher());
             $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
-            if($response["userClass"] == "bot"){
-                return view('login', ["error" => "Captcha fallito, ritenta!"]);
-            }else if($response["userClass"] == "human")
+            if($response["userClass"] == "bot")
+                return redirect('/')->with('error', 'Captcha fallito ritenta');
+            else if($response["userClass"] == "human")
                 return view('human');
         }
     }
