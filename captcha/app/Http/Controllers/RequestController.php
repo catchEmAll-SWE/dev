@@ -27,7 +27,7 @@ class RequestController extends Controller
         $nonces = explode(",",$request->input('nonces'));
         //http://localhost/SWE/dev/captcha/public/api/v1/verify
         //https://swe.gdr00.it/api/v1/verify
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("//https://swe.gdr00.it/api/v1/verify",[ 
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->post("https://swe.gdr00.it/api/v1/verify",[ 
                 "response" => $user_response,
                 "solution" => $solution,
                 "keyNumber" => $key,
@@ -40,7 +40,7 @@ class RequestController extends Controller
             case 404:
                 return redirect('/')->with('error', 'Captcha fallito ritenta');
             case 429:
-                return redirect('docs');
+                return redirect('/')->with('error', 'Sono state fatte troppi tentativi di login');
             default:
             $service = new EncryptionService(new AES256Cipher());
             $response = json_decode($service->decrypt($response->body(), base64_decode("NJdmUbLdI6qZkDhqENZ2tA+zO48SksBEXAS5raDJ8VE=")),true);
@@ -52,8 +52,11 @@ class RequestController extends Controller
     }
 
     public function manageGenerate(){
-        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("//https://swe.gdr00.it/api/v1/generate");
-        return $response->json();
+        $response = Http::withToken("4|Ag86uaVLYDvQP306TAA0TXawe68LPTkTtVhN8cff")->get("https://swe.gdr00.it/api/v1/generate");
+        if($response->status() != 429)
+            return $response->json();
+        else
+            return redirect('/')->with('error', 'Sono state fatte troppe richieste di captcha');
     }
 
 }
