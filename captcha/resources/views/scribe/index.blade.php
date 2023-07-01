@@ -8,8 +8,8 @@
     
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     
-        <link rel="stylesheet" href="../../public/vendor/scribe/css/theme-default.style.css" media="screen">
-        <link rel="stylesheet" href="../../public/vendor/scribe/css/theme-default.print.css" media="print">
+        <link rel="stylesheet" href="public/vendor/scribe/css/theme-default.style.css" media="screen">
+        <link rel="stylesheet" href="public/vendor/scribe/css/theme-default.print.css" media="print">
     
         <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     
@@ -25,7 +25,7 @@
                 </style>
     
     
-        <script src="../public/vendor/scribe/js/theme-default-4.21.0.js"></script>
+        <script src="public/vendor/scribe/js/theme-default-4.21.0.js"></script>
     
     </head>
 
