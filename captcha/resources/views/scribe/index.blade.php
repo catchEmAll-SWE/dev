@@ -1,33 +1,33 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>CatchEmAll Captcha API</title>
-    
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    
-        <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.style.css")}} media="screen">
-        <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.print.css")}} media="print">
-    
-        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    
-        <link rel="stylesheet"
-              href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
-        <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
-    
-        <style id="language-style">
-            /* starts out as display none and is replaced with js later  */
-                        body .content .javascript-example code { display: none; }
-                </style>
-    
-    
-        <script src="{{ asset("/vendor/scribe/js/theme-default-4.21.0.js") }}></script>
-    
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>CatchEmAll Captcha API</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.style.css") }}" media="screen">
+    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.print.css") }}" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+
+    <script src="{{ asset("/vendor/scribe/js/theme-default-4.21.0.js") }}"></script>
+
+</head>
 
 <body data-languages="[&quot;javascript&quot;]">
 
@@ -131,8 +131,8 @@ const headers = {
 };
 
 let body = {
-    "email": "mupton@example.net",
-    "password": "inventore"
+    "email": "mikayla.morissette@example.org",
+    "password": "aperiam"
 };
 
 fetch(url, {
@@ -204,10 +204,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="email"                data-endpoint="POSTapi-getToken"
-               value="mupton@example.net"
+               value="mikayla.morissette@example.org"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>mupton@example.net</code></p>
+<p>Must be a valid email address. Example: <code>mikayla.morissette@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -215,10 +215,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="password"                data-endpoint="POSTapi-getToken"
-               value="inventore"
+               value="aperiam"
                data-component="body">
     <br>
-<p>Example: <code>inventore</code></p>
+<p>Example: <code>aperiam</code></p>
         </div>
         </form>
 
@@ -449,9 +449,9 @@ const headers = {
 };
 
 let body = {
-    "response": "1011000101",
+    "response": "1000100000",
     "solution": "eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h",
-    "keyNumber": 6,
+    "keyNumber": 18,
     "fixedStrings": [
         "961fa7b4bc6af6f447ecd0",
         "0635c63aadef1d4a1fd13",
@@ -554,10 +554,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                name="response"                data-endpoint="POSTapi-v1-verify"
-               value="1011000101"
+               value="1000100000"
                data-component="body">
     <br>
-<p>The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/. Example: <code>1011000101</code></p>
+<p>The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/. Example: <code>1000100000</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>solution</code></b>&nbsp;&nbsp;
@@ -576,10 +576,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                name="keyNumber"                data-endpoint="POSTapi-v1-verify"
-               value="6"
+               value="18"
                data-component="body">
     <br>
-<p>The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19. Example: <code>6</code></p>
+<p>The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19. Example: <code>18</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>fixedStrings</code></b>&nbsp;&nbsp;

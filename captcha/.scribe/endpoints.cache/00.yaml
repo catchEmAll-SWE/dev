@@ -28,19 +28,19 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: mupton@example.net
+        example: mikayla.morissette@example.org
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: inventore
+        example: aperiam
         type: string
         custom: []
     cleanBodyParameters:
-      email: mupton@example.net
-      password: inventore
+      email: mikayla.morissette@example.org
+      password: aperiam
     fileParameters: []
     responses: []
     responseFields: []
@@ -182,7 +182,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer a6ched18ZaP45bgED6fkVv3'
+      - 'Bearer vhZE3aPka616gV5Ddbe4c8f'
     controller: null
     method: null
     route: null
@@ -213,7 +213,7 @@ endpoints:
         name: response
         description: 'The user response to the captcha challenge: 0 to the images unclicked, 1 to the images clicked. Must match the regex /^(0|1){10}$/.'
         required: true
-        example: '1011000101'
+        example: '1000100000'
         type: string
         custom: []
       solution:
@@ -227,7 +227,7 @@ endpoints:
         name: keyNumber
         description: 'The number of the key used to encrypt the solution, passed as api/v1/generate response . Must be at least 0. Must not be greater than 19.'
         required: true
-        example: 6
+        example: 18
         type: integer
         custom: []
       fixedStrings:
@@ -251,9 +251,9 @@ endpoints:
         type: 'string[]'
         custom: []
     cleanBodyParameters:
-      response: '1011000101'
+      response: '1000100000'
       solution: eyJpdiI6InNqNU9Fd0NkVUtEMDVsSDUyMjh5c1E9PSIsInZhbHVlIjoib3lqb2dNY0NBWjNYSWhsWUJZeVJXNTcreEVURkdZamovbWVIb3h
-      keyNumber: 6
+      keyNumber: 18
       fixedStrings:
         - 961fa7b4bc6af6f447ecd0
         - 0635c63aadef1d4a1fd13
@@ -278,7 +278,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer aDkEZhdc615vfVg36e8baP4'
+      - 'Bearer 1Z5D4hk3cgaEe6fPd6vV8ab'
     controller: null
     method: null
     route: null
